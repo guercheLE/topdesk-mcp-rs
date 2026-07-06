@@ -1,0 +1,23 @@
+services:
+  topdesk-mcp:
+    build: .
+    image: topdesk-mcp:latest
+    env_file:
+      - .env
+    volumes:
+      - ~/.topdesk-mcp:/root/.topdesk-mcp
+    stdin_open: true
+    tty: true
+
+  topdesk-mcp-http:
+    build: .
+    image: topdesk-mcp:latest
+    env_file:
+      - .env
+    environment:
+      TOPDESK_MCP_TRANSPORT: http
+      TOPDESK_MCP_PORT: "3000"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ~/.topdesk-mcp:/root/.topdesk-mcp
