@@ -22,7 +22,7 @@ use serde::Serialize;
 static REGISTER_VEC_EXTENSION: Once = Once::new();
 
 // mcpify:versions:begin
-const VERSION_STORE_FILES: &[(&str, &str)] = &[
+pub const VERSION_STORE_FILES: &[(&str, &str)] = &[
     ("general-1.2.0", "mcp_store.db"),
     ("general-1.1.1", "mcp_store_vgeneral-1.1.1.db"),
     ("general-1.1.0", "mcp_store_vgeneral-1.1.0.db"),
@@ -782,224 +782,1414 @@ const VERSION_STORE_FILES: &[(&str, &str)] = &[
 
 const VERSION_STORE_BYTES: &[(&str, &[u8])] = &[
     ("general-1.2.0", include_bytes!("../../mcp_store.db")),
-    ("general-1.1.1", include_bytes!("../../mcp_store_vgeneral-1.1.1.db")),
-    ("general-1.1.0", include_bytes!("../../mcp_store_vgeneral-1.1.0.db")),
-    ("general-1.0.0", include_bytes!("../../mcp_store_vgeneral-1.0.0.db")),
-    ("incident-4.2.6", include_bytes!("../../mcp_store_vincident-4.2.6.db")),
-    ("incident-4.2.5", include_bytes!("../../mcp_store_vincident-4.2.5.db")),
-    ("incident-4.2.4", include_bytes!("../../mcp_store_vincident-4.2.4.db")),
-    ("incident-4.2.3", include_bytes!("../../mcp_store_vincident-4.2.3.db")),
-    ("incident-4.2.2", include_bytes!("../../mcp_store_vincident-4.2.2.db")),
-    ("incident-4.2.1", include_bytes!("../../mcp_store_vincident-4.2.1.db")),
-    ("incident-4.2.0", include_bytes!("../../mcp_store_vincident-4.2.0.db")),
-    ("incident-4.1.0", include_bytes!("../../mcp_store_vincident-4.1.0.db")),
-    ("incident-4.0.0", include_bytes!("../../mcp_store_vincident-4.0.0.db")),
-    ("incident-3.9.1", include_bytes!("../../mcp_store_vincident-3.9.1.db")),
-    ("incident-3.9.0", include_bytes!("../../mcp_store_vincident-3.9.0.db")),
-    ("incident-3.8.5", include_bytes!("../../mcp_store_vincident-3.8.5.db")),
-    ("incident-3.8.4", include_bytes!("../../mcp_store_vincident-3.8.4.db")),
-    ("incident-3.8.3", include_bytes!("../../mcp_store_vincident-3.8.3.db")),
-    ("incident-3.8.2", include_bytes!("../../mcp_store_vincident-3.8.2.db")),
-    ("incident-3.8.1", include_bytes!("../../mcp_store_vincident-3.8.1.db")),
-    ("incident-3.8.0", include_bytes!("../../mcp_store_vincident-3.8.0.db")),
-    ("incident-3.7.1", include_bytes!("../../mcp_store_vincident-3.7.1.db")),
-    ("reservations-2.0.0", include_bytes!("../../mcp_store_vreservations-2.0.0.db")),
-    ("reservations-1.23.0", include_bytes!("../../mcp_store_vreservations-1.23.0.db")),
-    ("reservations-1.22.0", include_bytes!("../../mcp_store_vreservations-1.22.0.db")),
-    ("reservations-1.21.1", include_bytes!("../../mcp_store_vreservations-1.21.1.db")),
-    ("reservations-1.21.0", include_bytes!("../../mcp_store_vreservations-1.21.0.db")),
-    ("reservations-1.20.0", include_bytes!("../../mcp_store_vreservations-1.20.0.db")),
-    ("reservations-1.19.0", include_bytes!("../../mcp_store_vreservations-1.19.0.db")),
-    ("reservations-1.18.0", include_bytes!("../../mcp_store_vreservations-1.18.0.db")),
-    ("reservations-1.17.0", include_bytes!("../../mcp_store_vreservations-1.17.0.db")),
-    ("reservations-1.16.0", include_bytes!("../../mcp_store_vreservations-1.16.0.db")),
-    ("reservations-1.15.0", include_bytes!("../../mcp_store_vreservations-1.15.0.db")),
-    ("reservations-1.14.0", include_bytes!("../../mcp_store_vreservations-1.14.0.db")),
-    ("reservations-1.13.0", include_bytes!("../../mcp_store_vreservations-1.13.0.db")),
-    ("reservations-1.12.0", include_bytes!("../../mcp_store_vreservations-1.12.0.db")),
-    ("reservations-1.11.0", include_bytes!("../../mcp_store_vreservations-1.11.0.db")),
-    ("reservations-1.10.0", include_bytes!("../../mcp_store_vreservations-1.10.0.db")),
-    ("reservations-1.9.0", include_bytes!("../../mcp_store_vreservations-1.9.0.db")),
-    ("reservations-1.8.0", include_bytes!("../../mcp_store_vreservations-1.8.0.db")),
-    ("reservations-1.7.0", include_bytes!("../../mcp_store_vreservations-1.7.0.db")),
-    ("reservations-1.6.0", include_bytes!("../../mcp_store_vreservations-1.6.0.db")),
-    ("reservations-1.5.0", include_bytes!("../../mcp_store_vreservations-1.5.0.db")),
-    ("reservations-1.4.0", include_bytes!("../../mcp_store_vreservations-1.4.0.db")),
-    ("reservations-1.3.0", include_bytes!("../../mcp_store_vreservations-1.3.0.db")),
-    ("reservations-1.2.0", include_bytes!("../../mcp_store_vreservations-1.2.0.db")),
-    ("reservations-1.1.0", include_bytes!("../../mcp_store_vreservations-1.1.0.db")),
-    ("reservations-1.0.0", include_bytes!("../../mcp_store_vreservations-1.0.0.db")),
-    ("services-1.3.7", include_bytes!("../../mcp_store_vservices-1.3.7.db")),
-    ("services-1.3.6", include_bytes!("../../mcp_store_vservices-1.3.6.db")),
-    ("services-1.3.5", include_bytes!("../../mcp_store_vservices-1.3.5.db")),
-    ("services-1.3.4", include_bytes!("../../mcp_store_vservices-1.3.4.db")),
-    ("services-1.3.3", include_bytes!("../../mcp_store_vservices-1.3.3.db")),
-    ("services-1.3.2", include_bytes!("../../mcp_store_vservices-1.3.2.db")),
-    ("services-1.3.1", include_bytes!("../../mcp_store_vservices-1.3.1.db")),
-    ("services-1.3.0", include_bytes!("../../mcp_store_vservices-1.3.0.db")),
-    ("services-1.2.0", include_bytes!("../../mcp_store_vservices-1.2.0.db")),
-    ("services-1.1.0", include_bytes!("../../mcp_store_vservices-1.1.0.db")),
-    ("services-1.0.0", include_bytes!("../../mcp_store_vservices-1.0.0.db")),
-    ("change-1.4.0", include_bytes!("../../mcp_store_vchange-1.4.0.db")),
-    ("change-1.3.7", include_bytes!("../../mcp_store_vchange-1.3.7.db")),
-    ("change-1.3.6", include_bytes!("../../mcp_store_vchange-1.3.6.db")),
-    ("change-1.3.5", include_bytes!("../../mcp_store_vchange-1.3.5.db")),
-    ("change-1.3.4", include_bytes!("../../mcp_store_vchange-1.3.4.db")),
-    ("change-1.3.3", include_bytes!("../../mcp_store_vchange-1.3.3.db")),
-    ("change-1.3.2", include_bytes!("../../mcp_store_vchange-1.3.2.db")),
-    ("change-1.3.1", include_bytes!("../../mcp_store_vchange-1.3.1.db")),
-    ("change-1.3.0", include_bytes!("../../mcp_store_vchange-1.3.0.db")),
-    ("change-1.2.5", include_bytes!("../../mcp_store_vchange-1.2.5.db")),
-    ("change-1.2.4", include_bytes!("../../mcp_store_vchange-1.2.4.db")),
-    ("change-1.2.3", include_bytes!("../../mcp_store_vchange-1.2.3.db")),
-    ("change-1.2.2", include_bytes!("../../mcp_store_vchange-1.2.2.db")),
-    ("change-1.2.1", include_bytes!("../../mcp_store_vchange-1.2.1.db")),
-    ("change-1.2.0", include_bytes!("../../mcp_store_vchange-1.2.0.db")),
-    ("change-1.1.4", include_bytes!("../../mcp_store_vchange-1.1.4.db")),
-    ("change-1.1.3", include_bytes!("../../mcp_store_vchange-1.1.3.db")),
-    ("change-1.1.2", include_bytes!("../../mcp_store_vchange-1.1.2.db")),
-    ("change-1.1.1", include_bytes!("../../mcp_store_vchange-1.1.1.db")),
-    ("change-1.1.0", include_bytes!("../../mcp_store_vchange-1.1.0.db")),
-    ("change-1.0.2", include_bytes!("../../mcp_store_vchange-1.0.2.db")),
-    ("change-1.0.1", include_bytes!("../../mcp_store_vchange-1.0.1.db")),
-    ("change-1.0.0", include_bytes!("../../mcp_store_vchange-1.0.0.db")),
-    ("assets-1.91.1", include_bytes!("../../mcp_store_vassets-1.91.1.db")),
-    ("assets-1.91.0", include_bytes!("../../mcp_store_vassets-1.91.0.db")),
-    ("assets-1.90.0", include_bytes!("../../mcp_store_vassets-1.90.0.db")),
-    ("assets-1.89.0", include_bytes!("../../mcp_store_vassets-1.89.0.db")),
-    ("assets-1.88.0", include_bytes!("../../mcp_store_vassets-1.88.0.db")),
-    ("assets-1.87.0", include_bytes!("../../mcp_store_vassets-1.87.0.db")),
-    ("assets-1.86.0", include_bytes!("../../mcp_store_vassets-1.86.0.db")),
-    ("assets-1.85.0", include_bytes!("../../mcp_store_vassets-1.85.0.db")),
-    ("assets-1.84.0", include_bytes!("../../mcp_store_vassets-1.84.0.db")),
-    ("assets-1.83.0", include_bytes!("../../mcp_store_vassets-1.83.0.db")),
-    ("assets-1.82.0", include_bytes!("../../mcp_store_vassets-1.82.0.db")),
-    ("assets-1.81.5", include_bytes!("../../mcp_store_vassets-1.81.5.db")),
-    ("assets-1.81.4", include_bytes!("../../mcp_store_vassets-1.81.4.db")),
-    ("assets-1.81.3", include_bytes!("../../mcp_store_vassets-1.81.3.db")),
-    ("assets-1.81.2", include_bytes!("../../mcp_store_vassets-1.81.2.db")),
-    ("assets-1.81.1", include_bytes!("../../mcp_store_vassets-1.81.1.db")),
-    ("assets-1.81.0", include_bytes!("../../mcp_store_vassets-1.81.0.db")),
-    ("assets-1.80.0", include_bytes!("../../mcp_store_vassets-1.80.0.db")),
-    ("assets-1.79.1", include_bytes!("../../mcp_store_vassets-1.79.1.db")),
-    ("assets-1.79.0", include_bytes!("../../mcp_store_vassets-1.79.0.db")),
-    ("assets-1.78.0", include_bytes!("../../mcp_store_vassets-1.78.0.db")),
-    ("assets-1.77.0", include_bytes!("../../mcp_store_vassets-1.77.0.db")),
-    ("assets-1.76.0", include_bytes!("../../mcp_store_vassets-1.76.0.db")),
-    ("assets-1.75.0", include_bytes!("../../mcp_store_vassets-1.75.0.db")),
-    ("assets-1.74.0", include_bytes!("../../mcp_store_vassets-1.74.0.db")),
-    ("assets-1.73.0", include_bytes!("../../mcp_store_vassets-1.73.0.db")),
-    ("assets-1.72.0", include_bytes!("../../mcp_store_vassets-1.72.0.db")),
-    ("assets-1.71.0", include_bytes!("../../mcp_store_vassets-1.71.0.db")),
-    ("assets-1.70.0", include_bytes!("../../mcp_store_vassets-1.70.0.db")),
-    ("assets-1.69.0", include_bytes!("../../mcp_store_vassets-1.69.0.db")),
-    ("assets-1.68.0", include_bytes!("../../mcp_store_vassets-1.68.0.db")),
-    ("assets-1.67.1", include_bytes!("../../mcp_store_vassets-1.67.1.db")),
-    ("assets-1.67.0", include_bytes!("../../mcp_store_vassets-1.67.0.db")),
-    ("assets-1.66.0", include_bytes!("../../mcp_store_vassets-1.66.0.db")),
-    ("assets-1.65.0", include_bytes!("../../mcp_store_vassets-1.65.0.db")),
-    ("assets-1.64.0", include_bytes!("../../mcp_store_vassets-1.64.0.db")),
-    ("assets-1.63.2", include_bytes!("../../mcp_store_vassets-1.63.2.db")),
-    ("assets-1.63.1", include_bytes!("../../mcp_store_vassets-1.63.1.db")),
-    ("assets-1.63.0", include_bytes!("../../mcp_store_vassets-1.63.0.db")),
-    ("assets-1.62.0", include_bytes!("../../mcp_store_vassets-1.62.0.db")),
-    ("assets-1.61.0", include_bytes!("../../mcp_store_vassets-1.61.0.db")),
-    ("assets-1.60.0", include_bytes!("../../mcp_store_vassets-1.60.0.db")),
-    ("assets-1.59.1", include_bytes!("../../mcp_store_vassets-1.59.1.db")),
-    ("assets-1.59.0", include_bytes!("../../mcp_store_vassets-1.59.0.db")),
-    ("assets-1.58.0", include_bytes!("../../mcp_store_vassets-1.58.0.db")),
-    ("assets-1.57.0", include_bytes!("../../mcp_store_vassets-1.57.0.db")),
-    ("assets-1.56.0", include_bytes!("../../mcp_store_vassets-1.56.0.db")),
-    ("assets-1.55.0", include_bytes!("../../mcp_store_vassets-1.55.0.db")),
-    ("assets-1.54.0", include_bytes!("../../mcp_store_vassets-1.54.0.db")),
-    ("assets-1.53.0", include_bytes!("../../mcp_store_vassets-1.53.0.db")),
-    ("assets-1.52.1", include_bytes!("../../mcp_store_vassets-1.52.1.db")),
-    ("assets-1.52.0", include_bytes!("../../mcp_store_vassets-1.52.0.db")),
-    ("assets-1.51.3", include_bytes!("../../mcp_store_vassets-1.51.3.db")),
-    ("assets-1.51.2", include_bytes!("../../mcp_store_vassets-1.51.2.db")),
-    ("assets-1.51.1", include_bytes!("../../mcp_store_vassets-1.51.1.db")),
-    ("assets-1.51.0", include_bytes!("../../mcp_store_vassets-1.51.0.db")),
-    ("assets-1.50.1", include_bytes!("../../mcp_store_vassets-1.50.1.db")),
-    ("assets-1.50.0", include_bytes!("../../mcp_store_vassets-1.50.0.db")),
-    ("assets-1.49.2", include_bytes!("../../mcp_store_vassets-1.49.2.db")),
-    ("assets-1.49.1", include_bytes!("../../mcp_store_vassets-1.49.1.db")),
-    ("assets-1.49.0", include_bytes!("../../mcp_store_vassets-1.49.0.db")),
-    ("assets-1.48.0", include_bytes!("../../mcp_store_vassets-1.48.0.db")),
-    ("assets-1.47.0", include_bytes!("../../mcp_store_vassets-1.47.0.db")),
-    ("assets-1.46.1", include_bytes!("../../mcp_store_vassets-1.46.1.db")),
-    ("assets-1.46.0", include_bytes!("../../mcp_store_vassets-1.46.0.db")),
-    ("assets-1.45.0", include_bytes!("../../mcp_store_vassets-1.45.0.db")),
-    ("assets-1.44.0", include_bytes!("../../mcp_store_vassets-1.44.0.db")),
-    ("assets-1.43.0", include_bytes!("../../mcp_store_vassets-1.43.0.db")),
-    ("assets-1.42.0", include_bytes!("../../mcp_store_vassets-1.42.0.db")),
-    ("assets-1.41.0", include_bytes!("../../mcp_store_vassets-1.41.0.db")),
-    ("assets-1.40.0", include_bytes!("../../mcp_store_vassets-1.40.0.db")),
-    ("assets-1.39.0", include_bytes!("../../mcp_store_vassets-1.39.0.db")),
-    ("assets-1.38.0", include_bytes!("../../mcp_store_vassets-1.38.0.db")),
-    ("assets-1.37.0", include_bytes!("../../mcp_store_vassets-1.37.0.db")),
-    ("assets-1.36.1", include_bytes!("../../mcp_store_vassets-1.36.1.db")),
-    ("assets-1.36.0", include_bytes!("../../mcp_store_vassets-1.36.0.db")),
-    ("assets-1.35.1", include_bytes!("../../mcp_store_vassets-1.35.1.db")),
-    ("assets-1.35.0", include_bytes!("../../mcp_store_vassets-1.35.0.db")),
-    ("assets-1.34.0", include_bytes!("../../mcp_store_vassets-1.34.0.db")),
-    ("assets-1.33.0", include_bytes!("../../mcp_store_vassets-1.33.0.db")),
-    ("assets-1.32.2", include_bytes!("../../mcp_store_vassets-1.32.2.db")),
-    ("assets-1.32.1", include_bytes!("../../mcp_store_vassets-1.32.1.db")),
-    ("assets-1.32.0", include_bytes!("../../mcp_store_vassets-1.32.0.db")),
-    ("assets-1.31.0", include_bytes!("../../mcp_store_vassets-1.31.0.db")),
-    ("assets-1.30.0", include_bytes!("../../mcp_store_vassets-1.30.0.db")),
-    ("assets-1.29.0", include_bytes!("../../mcp_store_vassets-1.29.0.db")),
-    ("assets-1.28.0", include_bytes!("../../mcp_store_vassets-1.28.0.db")),
-    ("assets-1.27.0", include_bytes!("../../mcp_store_vassets-1.27.0.db")),
-    ("assets-1.26.0", include_bytes!("../../mcp_store_vassets-1.26.0.db")),
-    ("assets-1.25.1", include_bytes!("../../mcp_store_vassets-1.25.1.db")),
-    ("assets-1.25.0", include_bytes!("../../mcp_store_vassets-1.25.0.db")),
-    ("assets-1.24.0", include_bytes!("../../mcp_store_vassets-1.24.0.db")),
-    ("assets-1.23.0", include_bytes!("../../mcp_store_vassets-1.23.0.db")),
-    ("assets-1.22.1", include_bytes!("../../mcp_store_vassets-1.22.1.db")),
-    ("assets-1.22.0", include_bytes!("../../mcp_store_vassets-1.22.0.db")),
-    ("assets-1.21.0", include_bytes!("../../mcp_store_vassets-1.21.0.db")),
-    ("assets-1.20.0", include_bytes!("../../mcp_store_vassets-1.20.0.db")),
-    ("assets-1.19.0", include_bytes!("../../mcp_store_vassets-1.19.0.db")),
-    ("assets-1.18.0", include_bytes!("../../mcp_store_vassets-1.18.0.db")),
-    ("assets-1.17.0", include_bytes!("../../mcp_store_vassets-1.17.0.db")),
-    ("assets-1.16.0", include_bytes!("../../mcp_store_vassets-1.16.0.db")),
-    ("assets-1.15.0", include_bytes!("../../mcp_store_vassets-1.15.0.db")),
-    ("assets-1.14.0", include_bytes!("../../mcp_store_vassets-1.14.0.db")),
-    ("assets-1.13.0", include_bytes!("../../mcp_store_vassets-1.13.0.db")),
-    ("assets-1.12.0", include_bytes!("../../mcp_store_vassets-1.12.0.db")),
-    ("assets-1.11.0", include_bytes!("../../mcp_store_vassets-1.11.0.db")),
-    ("assets-1.10.0", include_bytes!("../../mcp_store_vassets-1.10.0.db")),
-    ("assets-1.9.1", include_bytes!("../../mcp_store_vassets-1.9.1.db")),
-    ("assets-1.9.0", include_bytes!("../../mcp_store_vassets-1.9.0.db")),
-    ("assets-1.8.2", include_bytes!("../../mcp_store_vassets-1.8.2.db")),
-    ("assets-1.8.1", include_bytes!("../../mcp_store_vassets-1.8.1.db")),
-    ("assets-1.8.0", include_bytes!("../../mcp_store_vassets-1.8.0.db")),
-    ("assets-1.7.0", include_bytes!("../../mcp_store_vassets-1.7.0.db")),
-    ("assets-1.6.0", include_bytes!("../../mcp_store_vassets-1.6.0.db")),
-    ("assets-1.5.1", include_bytes!("../../mcp_store_vassets-1.5.1.db")),
-    ("assets-1.5.0", include_bytes!("../../mcp_store_vassets-1.5.0.db")),
-    ("assets-1.4.2", include_bytes!("../../mcp_store_vassets-1.4.2.db")),
-    ("assets-1.4.1", include_bytes!("../../mcp_store_vassets-1.4.1.db")),
-    ("assets-1.4.0", include_bytes!("../../mcp_store_vassets-1.4.0.db")),
-    ("assets-1.3.3", include_bytes!("../../mcp_store_vassets-1.3.3.db")),
-    ("assets-1.3.2", include_bytes!("../../mcp_store_vassets-1.3.2.db")),
-    ("assets-1.3.1", include_bytes!("../../mcp_store_vassets-1.3.1.db")),
-    ("assets-1.3.0", include_bytes!("../../mcp_store_vassets-1.3.0.db")),
-    ("assets-1.2.1", include_bytes!("../../mcp_store_vassets-1.2.1.db")),
-    ("assets-1.2.0", include_bytes!("../../mcp_store_vassets-1.2.0.db")),
-    ("assets-1.1.0", include_bytes!("../../mcp_store_vassets-1.1.0.db")),
-    ("assets-1.0.1", include_bytes!("../../mcp_store_vassets-1.0.1.db")),
-    ("assets-1.0.0", include_bytes!("../../mcp_store_vassets-1.0.0.db")),
-    ("visitors-2.0.0", include_bytes!("../../mcp_store_vvisitors-2.0.0.db")),
-    ("visitors-1.2.0", include_bytes!("../../mcp_store_vvisitors-1.2.0.db")),
-    ("visitors-1.1.0", include_bytes!("../../mcp_store_vvisitors-1.1.0.db")),
-    ("visitors-1.0.1", include_bytes!("../../mcp_store_vvisitors-1.0.1.db")),
-    ("visitors-1.0.0", include_bytes!("../../mcp_store_vvisitors-1.0.0.db")),
-    ("access-roles-saas", include_bytes!("../../mcp_store_vaccess-roles-saas.db")),
-    ("lookandfeel-1.0.0", include_bytes!("../../mcp_store_vlookandfeel-1.0.0.db")),
-    ("settings-1.1.0", include_bytes!("../../mcp_store_vsettings-1.1.0.db")),
-    ("settings-1.0.0", include_bytes!("../../mcp_store_vsettings-1.0.0.db")),
+    (
+        "general-1.1.1",
+        include_bytes!("../../mcp_store_vgeneral-1.1.1.db"),
+    ),
+    (
+        "general-1.1.0",
+        include_bytes!("../../mcp_store_vgeneral-1.1.0.db"),
+    ),
+    (
+        "general-1.0.0",
+        include_bytes!("../../mcp_store_vgeneral-1.0.0.db"),
+    ),
+    (
+        "incident-4.2.6",
+        include_bytes!("../../mcp_store_vincident-4.2.6.db"),
+    ),
+    (
+        "incident-4.2.5",
+        include_bytes!("../../mcp_store_vincident-4.2.5.db"),
+    ),
+    (
+        "incident-4.2.4",
+        include_bytes!("../../mcp_store_vincident-4.2.4.db"),
+    ),
+    (
+        "incident-4.2.3",
+        include_bytes!("../../mcp_store_vincident-4.2.3.db"),
+    ),
+    (
+        "incident-4.2.2",
+        include_bytes!("../../mcp_store_vincident-4.2.2.db"),
+    ),
+    (
+        "incident-4.2.1",
+        include_bytes!("../../mcp_store_vincident-4.2.1.db"),
+    ),
+    (
+        "incident-4.2.0",
+        include_bytes!("../../mcp_store_vincident-4.2.0.db"),
+    ),
+    (
+        "incident-4.1.0",
+        include_bytes!("../../mcp_store_vincident-4.1.0.db"),
+    ),
+    (
+        "incident-4.0.0",
+        include_bytes!("../../mcp_store_vincident-4.0.0.db"),
+    ),
+    (
+        "incident-3.9.1",
+        include_bytes!("../../mcp_store_vincident-3.9.1.db"),
+    ),
+    (
+        "incident-3.9.0",
+        include_bytes!("../../mcp_store_vincident-3.9.0.db"),
+    ),
+    (
+        "incident-3.8.5",
+        include_bytes!("../../mcp_store_vincident-3.8.5.db"),
+    ),
+    (
+        "incident-3.8.4",
+        include_bytes!("../../mcp_store_vincident-3.8.4.db"),
+    ),
+    (
+        "incident-3.8.3",
+        include_bytes!("../../mcp_store_vincident-3.8.3.db"),
+    ),
+    (
+        "incident-3.8.2",
+        include_bytes!("../../mcp_store_vincident-3.8.2.db"),
+    ),
+    (
+        "incident-3.8.1",
+        include_bytes!("../../mcp_store_vincident-3.8.1.db"),
+    ),
+    (
+        "incident-3.8.0",
+        include_bytes!("../../mcp_store_vincident-3.8.0.db"),
+    ),
+    (
+        "incident-3.7.1",
+        include_bytes!("../../mcp_store_vincident-3.7.1.db"),
+    ),
+    (
+        "knowledge-base-before-explorer-migration",
+        include_bytes!("../../mcp_store_vknowledge-base-before-explorer-migration.db"),
+    ),
+    (
+        "knowledge-base-after-explorer-migration",
+        include_bytes!("../../mcp_store_vknowledge-base-after-explorer-migration.db"),
+    ),
+    (
+        "knowledgebase-graphql-1.0.0",
+        include_bytes!("../../mcp_store_vknowledgebase-graphql-1.0.0.db"),
+    ),
+    (
+        "reservations-2.0.0",
+        include_bytes!("../../mcp_store_vreservations-2.0.0.db"),
+    ),
+    (
+        "reservations-1.23.0",
+        include_bytes!("../../mcp_store_vreservations-1.23.0.db"),
+    ),
+    (
+        "reservations-1.22.0",
+        include_bytes!("../../mcp_store_vreservations-1.22.0.db"),
+    ),
+    (
+        "reservations-1.21.1",
+        include_bytes!("../../mcp_store_vreservations-1.21.1.db"),
+    ),
+    (
+        "reservations-1.21.0",
+        include_bytes!("../../mcp_store_vreservations-1.21.0.db"),
+    ),
+    (
+        "reservations-1.20.0",
+        include_bytes!("../../mcp_store_vreservations-1.20.0.db"),
+    ),
+    (
+        "reservations-1.19.0",
+        include_bytes!("../../mcp_store_vreservations-1.19.0.db"),
+    ),
+    (
+        "reservations-1.18.0",
+        include_bytes!("../../mcp_store_vreservations-1.18.0.db"),
+    ),
+    (
+        "reservations-1.17.0",
+        include_bytes!("../../mcp_store_vreservations-1.17.0.db"),
+    ),
+    (
+        "reservations-1.16.0",
+        include_bytes!("../../mcp_store_vreservations-1.16.0.db"),
+    ),
+    (
+        "reservations-1.15.0",
+        include_bytes!("../../mcp_store_vreservations-1.15.0.db"),
+    ),
+    (
+        "reservations-1.14.0",
+        include_bytes!("../../mcp_store_vreservations-1.14.0.db"),
+    ),
+    (
+        "reservations-1.13.0",
+        include_bytes!("../../mcp_store_vreservations-1.13.0.db"),
+    ),
+    (
+        "reservations-1.12.0",
+        include_bytes!("../../mcp_store_vreservations-1.12.0.db"),
+    ),
+    (
+        "reservations-1.11.0",
+        include_bytes!("../../mcp_store_vreservations-1.11.0.db"),
+    ),
+    (
+        "reservations-1.10.0",
+        include_bytes!("../../mcp_store_vreservations-1.10.0.db"),
+    ),
+    (
+        "reservations-1.9.0",
+        include_bytes!("../../mcp_store_vreservations-1.9.0.db"),
+    ),
+    (
+        "reservations-1.8.0",
+        include_bytes!("../../mcp_store_vreservations-1.8.0.db"),
+    ),
+    (
+        "reservations-1.7.0",
+        include_bytes!("../../mcp_store_vreservations-1.7.0.db"),
+    ),
+    (
+        "reservations-1.6.0",
+        include_bytes!("../../mcp_store_vreservations-1.6.0.db"),
+    ),
+    (
+        "reservations-1.5.0",
+        include_bytes!("../../mcp_store_vreservations-1.5.0.db"),
+    ),
+    (
+        "reservations-1.4.0",
+        include_bytes!("../../mcp_store_vreservations-1.4.0.db"),
+    ),
+    (
+        "reservations-1.3.0",
+        include_bytes!("../../mcp_store_vreservations-1.3.0.db"),
+    ),
+    (
+        "reservations-1.2.0",
+        include_bytes!("../../mcp_store_vreservations-1.2.0.db"),
+    ),
+    (
+        "reservations-1.1.0",
+        include_bytes!("../../mcp_store_vreservations-1.1.0.db"),
+    ),
+    (
+        "reservations-1.0.0",
+        include_bytes!("../../mcp_store_vreservations-1.0.0.db"),
+    ),
+    (
+        "services-1.3.7",
+        include_bytes!("../../mcp_store_vservices-1.3.7.db"),
+    ),
+    (
+        "services-1.3.6",
+        include_bytes!("../../mcp_store_vservices-1.3.6.db"),
+    ),
+    (
+        "services-1.3.5",
+        include_bytes!("../../mcp_store_vservices-1.3.5.db"),
+    ),
+    (
+        "services-1.3.4",
+        include_bytes!("../../mcp_store_vservices-1.3.4.db"),
+    ),
+    (
+        "services-1.3.3",
+        include_bytes!("../../mcp_store_vservices-1.3.3.db"),
+    ),
+    (
+        "services-1.3.2",
+        include_bytes!("../../mcp_store_vservices-1.3.2.db"),
+    ),
+    (
+        "services-1.3.1",
+        include_bytes!("../../mcp_store_vservices-1.3.1.db"),
+    ),
+    (
+        "services-1.3.0",
+        include_bytes!("../../mcp_store_vservices-1.3.0.db"),
+    ),
+    (
+        "services-1.2.0",
+        include_bytes!("../../mcp_store_vservices-1.2.0.db"),
+    ),
+    (
+        "services-1.1.0",
+        include_bytes!("../../mcp_store_vservices-1.1.0.db"),
+    ),
+    (
+        "services-1.0.0",
+        include_bytes!("../../mcp_store_vservices-1.0.0.db"),
+    ),
+    (
+        "change-1.4.0",
+        include_bytes!("../../mcp_store_vchange-1.4.0.db"),
+    ),
+    (
+        "change-1.3.7",
+        include_bytes!("../../mcp_store_vchange-1.3.7.db"),
+    ),
+    (
+        "change-1.3.6",
+        include_bytes!("../../mcp_store_vchange-1.3.6.db"),
+    ),
+    (
+        "change-1.3.5",
+        include_bytes!("../../mcp_store_vchange-1.3.5.db"),
+    ),
+    (
+        "change-1.3.4",
+        include_bytes!("../../mcp_store_vchange-1.3.4.db"),
+    ),
+    (
+        "change-1.3.3",
+        include_bytes!("../../mcp_store_vchange-1.3.3.db"),
+    ),
+    (
+        "change-1.3.2",
+        include_bytes!("../../mcp_store_vchange-1.3.2.db"),
+    ),
+    (
+        "change-1.3.1",
+        include_bytes!("../../mcp_store_vchange-1.3.1.db"),
+    ),
+    (
+        "change-1.3.0",
+        include_bytes!("../../mcp_store_vchange-1.3.0.db"),
+    ),
+    (
+        "change-1.2.5",
+        include_bytes!("../../mcp_store_vchange-1.2.5.db"),
+    ),
+    (
+        "change-1.2.4",
+        include_bytes!("../../mcp_store_vchange-1.2.4.db"),
+    ),
+    (
+        "change-1.2.3",
+        include_bytes!("../../mcp_store_vchange-1.2.3.db"),
+    ),
+    (
+        "change-1.2.2",
+        include_bytes!("../../mcp_store_vchange-1.2.2.db"),
+    ),
+    (
+        "change-1.2.1",
+        include_bytes!("../../mcp_store_vchange-1.2.1.db"),
+    ),
+    (
+        "change-1.2.0",
+        include_bytes!("../../mcp_store_vchange-1.2.0.db"),
+    ),
+    (
+        "change-1.1.4",
+        include_bytes!("../../mcp_store_vchange-1.1.4.db"),
+    ),
+    (
+        "change-1.1.3",
+        include_bytes!("../../mcp_store_vchange-1.1.3.db"),
+    ),
+    (
+        "change-1.1.2",
+        include_bytes!("../../mcp_store_vchange-1.1.2.db"),
+    ),
+    (
+        "change-1.1.1",
+        include_bytes!("../../mcp_store_vchange-1.1.1.db"),
+    ),
+    (
+        "change-1.1.0",
+        include_bytes!("../../mcp_store_vchange-1.1.0.db"),
+    ),
+    (
+        "change-1.0.2",
+        include_bytes!("../../mcp_store_vchange-1.0.2.db"),
+    ),
+    (
+        "change-1.0.1",
+        include_bytes!("../../mcp_store_vchange-1.0.1.db"),
+    ),
+    (
+        "change-1.0.0",
+        include_bytes!("../../mcp_store_vchange-1.0.0.db"),
+    ),
+    (
+        "assets-1.91.1",
+        include_bytes!("../../mcp_store_vassets-1.91.1.db"),
+    ),
+    (
+        "assets-1.91.0",
+        include_bytes!("../../mcp_store_vassets-1.91.0.db"),
+    ),
+    (
+        "assets-1.90.0",
+        include_bytes!("../../mcp_store_vassets-1.90.0.db"),
+    ),
+    (
+        "assets-1.89.0",
+        include_bytes!("../../mcp_store_vassets-1.89.0.db"),
+    ),
+    (
+        "assets-1.88.0",
+        include_bytes!("../../mcp_store_vassets-1.88.0.db"),
+    ),
+    (
+        "assets-1.87.0",
+        include_bytes!("../../mcp_store_vassets-1.87.0.db"),
+    ),
+    (
+        "assets-1.86.0",
+        include_bytes!("../../mcp_store_vassets-1.86.0.db"),
+    ),
+    (
+        "assets-1.85.0",
+        include_bytes!("../../mcp_store_vassets-1.85.0.db"),
+    ),
+    (
+        "assets-1.84.0",
+        include_bytes!("../../mcp_store_vassets-1.84.0.db"),
+    ),
+    (
+        "assets-1.83.0",
+        include_bytes!("../../mcp_store_vassets-1.83.0.db"),
+    ),
+    (
+        "assets-1.82.0",
+        include_bytes!("../../mcp_store_vassets-1.82.0.db"),
+    ),
+    (
+        "assets-1.81.5",
+        include_bytes!("../../mcp_store_vassets-1.81.5.db"),
+    ),
+    (
+        "assets-1.81.4",
+        include_bytes!("../../mcp_store_vassets-1.81.4.db"),
+    ),
+    (
+        "assets-1.81.3",
+        include_bytes!("../../mcp_store_vassets-1.81.3.db"),
+    ),
+    (
+        "assets-1.81.2",
+        include_bytes!("../../mcp_store_vassets-1.81.2.db"),
+    ),
+    (
+        "assets-1.81.1",
+        include_bytes!("../../mcp_store_vassets-1.81.1.db"),
+    ),
+    (
+        "assets-1.81.0",
+        include_bytes!("../../mcp_store_vassets-1.81.0.db"),
+    ),
+    (
+        "assets-1.80.0",
+        include_bytes!("../../mcp_store_vassets-1.80.0.db"),
+    ),
+    (
+        "assets-1.79.1",
+        include_bytes!("../../mcp_store_vassets-1.79.1.db"),
+    ),
+    (
+        "assets-1.79.0",
+        include_bytes!("../../mcp_store_vassets-1.79.0.db"),
+    ),
+    (
+        "assets-1.78.0",
+        include_bytes!("../../mcp_store_vassets-1.78.0.db"),
+    ),
+    (
+        "assets-1.77.0",
+        include_bytes!("../../mcp_store_vassets-1.77.0.db"),
+    ),
+    (
+        "assets-1.76.0",
+        include_bytes!("../../mcp_store_vassets-1.76.0.db"),
+    ),
+    (
+        "assets-1.75.0",
+        include_bytes!("../../mcp_store_vassets-1.75.0.db"),
+    ),
+    (
+        "assets-1.74.0",
+        include_bytes!("../../mcp_store_vassets-1.74.0.db"),
+    ),
+    (
+        "assets-1.73.0",
+        include_bytes!("../../mcp_store_vassets-1.73.0.db"),
+    ),
+    (
+        "assets-1.72.0",
+        include_bytes!("../../mcp_store_vassets-1.72.0.db"),
+    ),
+    (
+        "assets-1.71.0",
+        include_bytes!("../../mcp_store_vassets-1.71.0.db"),
+    ),
+    (
+        "assets-1.70.0",
+        include_bytes!("../../mcp_store_vassets-1.70.0.db"),
+    ),
+    (
+        "assets-1.69.0",
+        include_bytes!("../../mcp_store_vassets-1.69.0.db"),
+    ),
+    (
+        "assets-1.68.0",
+        include_bytes!("../../mcp_store_vassets-1.68.0.db"),
+    ),
+    (
+        "assets-1.67.1",
+        include_bytes!("../../mcp_store_vassets-1.67.1.db"),
+    ),
+    (
+        "assets-1.67.0",
+        include_bytes!("../../mcp_store_vassets-1.67.0.db"),
+    ),
+    (
+        "assets-1.66.0",
+        include_bytes!("../../mcp_store_vassets-1.66.0.db"),
+    ),
+    (
+        "assets-1.65.0",
+        include_bytes!("../../mcp_store_vassets-1.65.0.db"),
+    ),
+    (
+        "assets-1.64.0",
+        include_bytes!("../../mcp_store_vassets-1.64.0.db"),
+    ),
+    (
+        "assets-1.63.2",
+        include_bytes!("../../mcp_store_vassets-1.63.2.db"),
+    ),
+    (
+        "assets-1.63.1",
+        include_bytes!("../../mcp_store_vassets-1.63.1.db"),
+    ),
+    (
+        "assets-1.63.0",
+        include_bytes!("../../mcp_store_vassets-1.63.0.db"),
+    ),
+    (
+        "assets-1.62.0",
+        include_bytes!("../../mcp_store_vassets-1.62.0.db"),
+    ),
+    (
+        "assets-1.61.0",
+        include_bytes!("../../mcp_store_vassets-1.61.0.db"),
+    ),
+    (
+        "assets-1.60.0",
+        include_bytes!("../../mcp_store_vassets-1.60.0.db"),
+    ),
+    (
+        "assets-1.59.1",
+        include_bytes!("../../mcp_store_vassets-1.59.1.db"),
+    ),
+    (
+        "assets-1.59.0",
+        include_bytes!("../../mcp_store_vassets-1.59.0.db"),
+    ),
+    (
+        "assets-1.58.0",
+        include_bytes!("../../mcp_store_vassets-1.58.0.db"),
+    ),
+    (
+        "assets-1.57.0",
+        include_bytes!("../../mcp_store_vassets-1.57.0.db"),
+    ),
+    (
+        "assets-1.56.0",
+        include_bytes!("../../mcp_store_vassets-1.56.0.db"),
+    ),
+    (
+        "assets-1.55.0",
+        include_bytes!("../../mcp_store_vassets-1.55.0.db"),
+    ),
+    (
+        "assets-1.54.0",
+        include_bytes!("../../mcp_store_vassets-1.54.0.db"),
+    ),
+    (
+        "assets-1.53.0",
+        include_bytes!("../../mcp_store_vassets-1.53.0.db"),
+    ),
+    (
+        "assets-1.52.1",
+        include_bytes!("../../mcp_store_vassets-1.52.1.db"),
+    ),
+    (
+        "assets-1.52.0",
+        include_bytes!("../../mcp_store_vassets-1.52.0.db"),
+    ),
+    (
+        "assets-1.51.3",
+        include_bytes!("../../mcp_store_vassets-1.51.3.db"),
+    ),
+    (
+        "assets-1.51.2",
+        include_bytes!("../../mcp_store_vassets-1.51.2.db"),
+    ),
+    (
+        "assets-1.51.1",
+        include_bytes!("../../mcp_store_vassets-1.51.1.db"),
+    ),
+    (
+        "assets-1.51.0",
+        include_bytes!("../../mcp_store_vassets-1.51.0.db"),
+    ),
+    (
+        "assets-1.50.1",
+        include_bytes!("../../mcp_store_vassets-1.50.1.db"),
+    ),
+    (
+        "assets-1.50.0",
+        include_bytes!("../../mcp_store_vassets-1.50.0.db"),
+    ),
+    (
+        "assets-1.49.2",
+        include_bytes!("../../mcp_store_vassets-1.49.2.db"),
+    ),
+    (
+        "assets-1.49.1",
+        include_bytes!("../../mcp_store_vassets-1.49.1.db"),
+    ),
+    (
+        "assets-1.49.0",
+        include_bytes!("../../mcp_store_vassets-1.49.0.db"),
+    ),
+    (
+        "assets-1.48.0",
+        include_bytes!("../../mcp_store_vassets-1.48.0.db"),
+    ),
+    (
+        "assets-1.47.0",
+        include_bytes!("../../mcp_store_vassets-1.47.0.db"),
+    ),
+    (
+        "assets-1.46.1",
+        include_bytes!("../../mcp_store_vassets-1.46.1.db"),
+    ),
+    (
+        "assets-1.46.0",
+        include_bytes!("../../mcp_store_vassets-1.46.0.db"),
+    ),
+    (
+        "assets-1.45.0",
+        include_bytes!("../../mcp_store_vassets-1.45.0.db"),
+    ),
+    (
+        "assets-1.44.0",
+        include_bytes!("../../mcp_store_vassets-1.44.0.db"),
+    ),
+    (
+        "assets-1.43.0",
+        include_bytes!("../../mcp_store_vassets-1.43.0.db"),
+    ),
+    (
+        "assets-1.42.0",
+        include_bytes!("../../mcp_store_vassets-1.42.0.db"),
+    ),
+    (
+        "assets-1.41.0",
+        include_bytes!("../../mcp_store_vassets-1.41.0.db"),
+    ),
+    (
+        "assets-1.40.0",
+        include_bytes!("../../mcp_store_vassets-1.40.0.db"),
+    ),
+    (
+        "assets-1.39.0",
+        include_bytes!("../../mcp_store_vassets-1.39.0.db"),
+    ),
+    (
+        "assets-1.38.0",
+        include_bytes!("../../mcp_store_vassets-1.38.0.db"),
+    ),
+    (
+        "assets-1.37.0",
+        include_bytes!("../../mcp_store_vassets-1.37.0.db"),
+    ),
+    (
+        "assets-1.36.1",
+        include_bytes!("../../mcp_store_vassets-1.36.1.db"),
+    ),
+    (
+        "assets-1.36.0",
+        include_bytes!("../../mcp_store_vassets-1.36.0.db"),
+    ),
+    (
+        "assets-1.35.1",
+        include_bytes!("../../mcp_store_vassets-1.35.1.db"),
+    ),
+    (
+        "assets-1.35.0",
+        include_bytes!("../../mcp_store_vassets-1.35.0.db"),
+    ),
+    (
+        "assets-1.34.0",
+        include_bytes!("../../mcp_store_vassets-1.34.0.db"),
+    ),
+    (
+        "assets-1.33.0",
+        include_bytes!("../../mcp_store_vassets-1.33.0.db"),
+    ),
+    (
+        "assets-1.32.2",
+        include_bytes!("../../mcp_store_vassets-1.32.2.db"),
+    ),
+    (
+        "assets-1.32.1",
+        include_bytes!("../../mcp_store_vassets-1.32.1.db"),
+    ),
+    (
+        "assets-1.32.0",
+        include_bytes!("../../mcp_store_vassets-1.32.0.db"),
+    ),
+    (
+        "assets-1.31.0",
+        include_bytes!("../../mcp_store_vassets-1.31.0.db"),
+    ),
+    (
+        "assets-1.30.0",
+        include_bytes!("../../mcp_store_vassets-1.30.0.db"),
+    ),
+    (
+        "assets-1.29.0",
+        include_bytes!("../../mcp_store_vassets-1.29.0.db"),
+    ),
+    (
+        "assets-1.28.0",
+        include_bytes!("../../mcp_store_vassets-1.28.0.db"),
+    ),
+    (
+        "assets-1.27.0",
+        include_bytes!("../../mcp_store_vassets-1.27.0.db"),
+    ),
+    (
+        "assets-1.26.0",
+        include_bytes!("../../mcp_store_vassets-1.26.0.db"),
+    ),
+    (
+        "assets-1.25.1",
+        include_bytes!("../../mcp_store_vassets-1.25.1.db"),
+    ),
+    (
+        "assets-1.25.0",
+        include_bytes!("../../mcp_store_vassets-1.25.0.db"),
+    ),
+    (
+        "assets-1.24.0",
+        include_bytes!("../../mcp_store_vassets-1.24.0.db"),
+    ),
+    (
+        "assets-1.23.0",
+        include_bytes!("../../mcp_store_vassets-1.23.0.db"),
+    ),
+    (
+        "assets-1.22.1",
+        include_bytes!("../../mcp_store_vassets-1.22.1.db"),
+    ),
+    (
+        "assets-1.22.0",
+        include_bytes!("../../mcp_store_vassets-1.22.0.db"),
+    ),
+    (
+        "assets-1.21.0",
+        include_bytes!("../../mcp_store_vassets-1.21.0.db"),
+    ),
+    (
+        "assets-1.20.0",
+        include_bytes!("../../mcp_store_vassets-1.20.0.db"),
+    ),
+    (
+        "assets-1.19.0",
+        include_bytes!("../../mcp_store_vassets-1.19.0.db"),
+    ),
+    (
+        "assets-1.18.0",
+        include_bytes!("../../mcp_store_vassets-1.18.0.db"),
+    ),
+    (
+        "assets-1.17.0",
+        include_bytes!("../../mcp_store_vassets-1.17.0.db"),
+    ),
+    (
+        "assets-1.16.0",
+        include_bytes!("../../mcp_store_vassets-1.16.0.db"),
+    ),
+    (
+        "assets-1.15.0",
+        include_bytes!("../../mcp_store_vassets-1.15.0.db"),
+    ),
+    (
+        "assets-1.14.0",
+        include_bytes!("../../mcp_store_vassets-1.14.0.db"),
+    ),
+    (
+        "assets-1.13.0",
+        include_bytes!("../../mcp_store_vassets-1.13.0.db"),
+    ),
+    (
+        "assets-1.12.0",
+        include_bytes!("../../mcp_store_vassets-1.12.0.db"),
+    ),
+    (
+        "assets-1.11.0",
+        include_bytes!("../../mcp_store_vassets-1.11.0.db"),
+    ),
+    (
+        "assets-1.10.0",
+        include_bytes!("../../mcp_store_vassets-1.10.0.db"),
+    ),
+    (
+        "assets-1.9.1",
+        include_bytes!("../../mcp_store_vassets-1.9.1.db"),
+    ),
+    (
+        "assets-1.9.0",
+        include_bytes!("../../mcp_store_vassets-1.9.0.db"),
+    ),
+    (
+        "assets-1.8.2",
+        include_bytes!("../../mcp_store_vassets-1.8.2.db"),
+    ),
+    (
+        "assets-1.8.1",
+        include_bytes!("../../mcp_store_vassets-1.8.1.db"),
+    ),
+    (
+        "assets-1.8.0",
+        include_bytes!("../../mcp_store_vassets-1.8.0.db"),
+    ),
+    (
+        "assets-1.7.0",
+        include_bytes!("../../mcp_store_vassets-1.7.0.db"),
+    ),
+    (
+        "assets-1.6.0",
+        include_bytes!("../../mcp_store_vassets-1.6.0.db"),
+    ),
+    (
+        "assets-1.5.1",
+        include_bytes!("../../mcp_store_vassets-1.5.1.db"),
+    ),
+    (
+        "assets-1.5.0",
+        include_bytes!("../../mcp_store_vassets-1.5.0.db"),
+    ),
+    (
+        "assets-1.4.2",
+        include_bytes!("../../mcp_store_vassets-1.4.2.db"),
+    ),
+    (
+        "assets-1.4.1",
+        include_bytes!("../../mcp_store_vassets-1.4.1.db"),
+    ),
+    (
+        "assets-1.4.0",
+        include_bytes!("../../mcp_store_vassets-1.4.0.db"),
+    ),
+    (
+        "assets-1.3.3",
+        include_bytes!("../../mcp_store_vassets-1.3.3.db"),
+    ),
+    (
+        "assets-1.3.2",
+        include_bytes!("../../mcp_store_vassets-1.3.2.db"),
+    ),
+    (
+        "assets-1.3.1",
+        include_bytes!("../../mcp_store_vassets-1.3.1.db"),
+    ),
+    (
+        "assets-1.3.0",
+        include_bytes!("../../mcp_store_vassets-1.3.0.db"),
+    ),
+    (
+        "assets-1.2.1",
+        include_bytes!("../../mcp_store_vassets-1.2.1.db"),
+    ),
+    (
+        "assets-1.2.0",
+        include_bytes!("../../mcp_store_vassets-1.2.0.db"),
+    ),
+    (
+        "assets-1.1.0",
+        include_bytes!("../../mcp_store_vassets-1.1.0.db"),
+    ),
+    (
+        "assets-1.0.1",
+        include_bytes!("../../mcp_store_vassets-1.0.1.db"),
+    ),
+    (
+        "assets-1.0.0",
+        include_bytes!("../../mcp_store_vassets-1.0.0.db"),
+    ),
+    (
+        "operations-management-1.10.0",
+        include_bytes!("../../mcp_store_voperations-management-1.10.0.db"),
+    ),
+    (
+        "operations-management-1.9.0",
+        include_bytes!("../../mcp_store_voperations-management-1.9.0.db"),
+    ),
+    (
+        "operations-management-1.8.1",
+        include_bytes!("../../mcp_store_voperations-management-1.8.1.db"),
+    ),
+    (
+        "operations-management-1.8.0",
+        include_bytes!("../../mcp_store_voperations-management-1.8.0.db"),
+    ),
+    (
+        "operations-management-1.7.0",
+        include_bytes!("../../mcp_store_voperations-management-1.7.0.db"),
+    ),
+    (
+        "operations-management-1.6.0",
+        include_bytes!("../../mcp_store_voperations-management-1.6.0.db"),
+    ),
+    (
+        "operations-management-1.5.0",
+        include_bytes!("../../mcp_store_voperations-management-1.5.0.db"),
+    ),
+    (
+        "operations-management-1.4.0",
+        include_bytes!("../../mcp_store_voperations-management-1.4.0.db"),
+    ),
+    (
+        "operations-management-1.3.0",
+        include_bytes!("../../mcp_store_voperations-management-1.3.0.db"),
+    ),
+    (
+        "operations-management-1.2.0",
+        include_bytes!("../../mcp_store_voperations-management-1.2.0.db"),
+    ),
+    (
+        "operations-management-1.1.0",
+        include_bytes!("../../mcp_store_voperations-management-1.1.0.db"),
+    ),
+    (
+        "operations-management-1.0.0",
+        include_bytes!("../../mcp_store_voperations-management-1.0.0.db"),
+    ),
+    (
+        "operations-management-0.2.2",
+        include_bytes!("../../mcp_store_voperations-management-0.2.2.db"),
+    ),
+    (
+        "operations-management-0.2.1",
+        include_bytes!("../../mcp_store_voperations-management-0.2.1.db"),
+    ),
+    (
+        "operations-management-0.2.0",
+        include_bytes!("../../mcp_store_voperations-management-0.2.0.db"),
+    ),
+    (
+        "operations-management-0.1.0",
+        include_bytes!("../../mcp_store_voperations-management-0.1.0.db"),
+    ),
+    (
+        "operations-management-0.0.2",
+        include_bytes!("../../mcp_store_voperations-management-0.0.2.db"),
+    ),
+    (
+        "operations-management-0.0.1",
+        include_bytes!("../../mcp_store_voperations-management-0.0.1.db"),
+    ),
+    (
+        "visitors-2.0.0",
+        include_bytes!("../../mcp_store_vvisitors-2.0.0.db"),
+    ),
+    (
+        "visitors-1.2.0",
+        include_bytes!("../../mcp_store_vvisitors-1.2.0.db"),
+    ),
+    (
+        "visitors-1.1.0",
+        include_bytes!("../../mcp_store_vvisitors-1.1.0.db"),
+    ),
+    (
+        "visitors-1.0.1",
+        include_bytes!("../../mcp_store_vvisitors-1.0.1.db"),
+    ),
+    (
+        "visitors-1.0.0",
+        include_bytes!("../../mcp_store_vvisitors-1.0.0.db"),
+    ),
+    (
+        "supporting-files-2.7.11",
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.11.db"),
+    ),
+    (
+        "supporting-files-2.7.10",
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.10.db"),
+    ),
+    (
+        "supporting-files-2.7.9",
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.9.db"),
+    ),
+    (
+        "supporting-files-2.7.8",
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.8.db"),
+    ),
+    (
+        "supporting-files-2.7.7",
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.7.db"),
+    ),
+    (
+        "supporting-files-2.7.6",
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.6.db"),
+    ),
+    (
+        "supporting-files-2.7.5",
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.5.db"),
+    ),
+    (
+        "supporting-files-2.7.4",
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.4.db"),
+    ),
+    (
+        "supporting-files-2.7.3",
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.3.db"),
+    ),
+    (
+        "supporting-files-2.7.2",
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.2.db"),
+    ),
+    (
+        "supporting-files-2.7.1",
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.1.db"),
+    ),
+    (
+        "supporting-files-2.7.0",
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.0.db"),
+    ),
+    (
+        "supporting-files-2.6.0",
+        include_bytes!("../../mcp_store_vsupporting-files-2.6.0.db"),
+    ),
+    (
+        "supporting-files-2.5.2",
+        include_bytes!("../../mcp_store_vsupporting-files-2.5.2.db"),
+    ),
+    (
+        "supporting-files-2.5.1",
+        include_bytes!("../../mcp_store_vsupporting-files-2.5.1.db"),
+    ),
+    (
+        "supporting-files-2.5.0",
+        include_bytes!("../../mcp_store_vsupporting-files-2.5.0.db"),
+    ),
+    (
+        "supporting-files-1.58.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.58.0.db"),
+    ),
+    (
+        "supporting-files-1.57.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.57.0.db"),
+    ),
+    (
+        "supporting-files-1.56.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.56.0.db"),
+    ),
+    (
+        "supporting-files-1.55.1",
+        include_bytes!("../../mcp_store_vsupporting-files-1.55.1.db"),
+    ),
+    (
+        "supporting-files-1.55.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.55.0.db"),
+    ),
+    (
+        "supporting-files-1.54.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.54.0.db"),
+    ),
+    (
+        "supporting-files-1.53.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.53.0.db"),
+    ),
+    (
+        "supporting-files-1.52.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.52.0.db"),
+    ),
+    (
+        "supporting-files-1.51.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.51.0.db"),
+    ),
+    (
+        "supporting-files-1.50.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.50.0.db"),
+    ),
+    (
+        "supporting-files-1.49.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.49.0.db"),
+    ),
+    (
+        "supporting-files-1.48.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.48.0.db"),
+    ),
+    (
+        "supporting-files-1.47.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.47.0.db"),
+    ),
+    (
+        "supporting-files-1.46.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.46.0.db"),
+    ),
+    (
+        "supporting-files-1.45.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.45.0.db"),
+    ),
+    (
+        "supporting-files-1.44.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.44.0.db"),
+    ),
+    (
+        "supporting-files-1.43.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.43.0.db"),
+    ),
+    (
+        "supporting-files-1.42.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.42.0.db"),
+    ),
+    (
+        "supporting-files-1.41.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.41.0.db"),
+    ),
+    (
+        "supporting-files-1.40.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.40.0.db"),
+    ),
+    (
+        "supporting-files-1.39.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.39.0.db"),
+    ),
+    (
+        "supporting-files-1.38.1",
+        include_bytes!("../../mcp_store_vsupporting-files-1.38.1.db"),
+    ),
+    (
+        "supporting-files-1.38.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.38.0.db"),
+    ),
+    (
+        "supporting-files-1.37.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.37.0.db"),
+    ),
+    (
+        "supporting-files-1.36.1",
+        include_bytes!("../../mcp_store_vsupporting-files-1.36.1.db"),
+    ),
+    (
+        "supporting-files-1.36.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.36.0.db"),
+    ),
+    (
+        "supporting-files-1.35.1",
+        include_bytes!("../../mcp_store_vsupporting-files-1.35.1.db"),
+    ),
+    (
+        "supporting-files-1.35.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.35.0.db"),
+    ),
+    (
+        "supporting-files-1.34.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.34.0.db"),
+    ),
+    (
+        "supporting-files-1.33.1",
+        include_bytes!("../../mcp_store_vsupporting-files-1.33.1.db"),
+    ),
+    (
+        "supporting-files-1.33.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.33.0.db"),
+    ),
+    (
+        "supporting-files-1.32.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.32.0.db"),
+    ),
+    (
+        "supporting-files-1.31.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.31.0.db"),
+    ),
+    (
+        "supporting-files-1.30.1",
+        include_bytes!("../../mcp_store_vsupporting-files-1.30.1.db"),
+    ),
+    (
+        "supporting-files-1.30.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.30.0.db"),
+    ),
+    (
+        "supporting-files-1.29.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.29.0.db"),
+    ),
+    (
+        "supporting-files-1.28.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.28.0.db"),
+    ),
+    (
+        "supporting-files-1.27.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.27.0.db"),
+    ),
+    (
+        "supporting-files-1.26.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.26.0.db"),
+    ),
+    (
+        "supporting-files-1.25.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.25.0.db"),
+    ),
+    (
+        "supporting-files-1.24.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.24.0.db"),
+    ),
+    (
+        "supporting-files-1.23.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.23.0.db"),
+    ),
+    (
+        "supporting-files-1.22.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.22.0.db"),
+    ),
+    (
+        "supporting-files-1.21.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.21.0.db"),
+    ),
+    (
+        "supporting-files-1.20.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.20.0.db"),
+    ),
+    (
+        "supporting-files-1.19.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.19.0.db"),
+    ),
+    (
+        "supporting-files-1.18.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.18.0.db"),
+    ),
+    (
+        "supporting-files-1.17.1",
+        include_bytes!("../../mcp_store_vsupporting-files-1.17.1.db"),
+    ),
+    (
+        "supporting-files-1.17.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.17.0.db"),
+    ),
+    (
+        "supporting-files-1.16.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.16.0.db"),
+    ),
+    (
+        "supporting-files-1.15.1",
+        include_bytes!("../../mcp_store_vsupporting-files-1.15.1.db"),
+    ),
+    (
+        "supporting-files-1.15.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.15.0.db"),
+    ),
+    (
+        "supporting-files-1.14.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.14.0.db"),
+    ),
+    (
+        "supporting-files-1.13.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.13.0.db"),
+    ),
+    (
+        "supporting-files-1.12.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.12.0.db"),
+    ),
+    (
+        "supporting-files-1.11.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.11.0.db"),
+    ),
+    (
+        "supporting-files-1.10.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.10.0.db"),
+    ),
+    (
+        "supporting-files-1.9.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.9.0.db"),
+    ),
+    (
+        "supporting-files-1.8.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.8.0.db"),
+    ),
+    (
+        "supporting-files-1.7.3",
+        include_bytes!("../../mcp_store_vsupporting-files-1.7.3.db"),
+    ),
+    (
+        "supporting-files-1.7.2",
+        include_bytes!("../../mcp_store_vsupporting-files-1.7.2.db"),
+    ),
+    (
+        "supporting-files-1.7.1",
+        include_bytes!("../../mcp_store_vsupporting-files-1.7.1.db"),
+    ),
+    (
+        "supporting-files-1.7.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.7.0.db"),
+    ),
+    (
+        "supporting-files-1.6.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.6.0.db"),
+    ),
+    (
+        "supporting-files-1.5.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.5.0.db"),
+    ),
+    (
+        "supporting-files-1.4.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.4.0.db"),
+    ),
+    (
+        "supporting-files-1.3.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.3.0.db"),
+    ),
+    (
+        "supporting-files-1.2.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.2.0.db"),
+    ),
+    (
+        "supporting-files-1.1.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.1.0.db"),
+    ),
+    (
+        "supporting-files-1.0.0",
+        include_bytes!("../../mcp_store_vsupporting-files-1.0.0.db"),
+    ),
+    (
+        "supporting-files-0.0.2",
+        include_bytes!("../../mcp_store_vsupporting-files-0.0.2.db"),
+    ),
+    (
+        "supporting-files-0.0.1",
+        include_bytes!("../../mcp_store_vsupporting-files-0.0.1.db"),
+    ),
+    (
+        "access-roles-saas",
+        include_bytes!("../../mcp_store_vaccess-roles-saas.db"),
+    ),
+    (
+        "access-roles-va-release-1-2022",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-1-2022.db"),
+    ),
+    (
+        "access-roles-va-release-2-2022",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-2-2022.db"),
+    ),
+    (
+        "access-roles-va-release-3-2022",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-3-2022.db"),
+    ),
+    (
+        "access-roles-va-release-1-2023",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-1-2023.db"),
+    ),
+    (
+        "access-roles-va-release-2-2023",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-2-2023.db"),
+    ),
+    (
+        "access-roles-va-release-3-2023",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-3-2023.db"),
+    ),
+    (
+        "access-roles-va-release-1-2024",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-1-2024.db"),
+    ),
+    (
+        "access-roles-va-release-2-2024",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-2-2024.db"),
+    ),
+    (
+        "access-roles-va-release-3-2024",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-3-2024.db"),
+    ),
+    (
+        "access-roles-va-release-4-2024",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-4-2024.db"),
+    ),
+    (
+        "access-roles-va-release-1-2025",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-1-2025.db"),
+    ),
+    (
+        "access-roles-va-release-2-2025",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-2-2025.db"),
+    ),
+    (
+        "access-roles-va-release-3-2025",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-3-2025.db"),
+    ),
+    (
+        "access-roles-va-release-4-2025",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-4-2025.db"),
+    ),
+    (
+        "access-roles-va-release-1-2026",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-1-2026.db"),
+    ),
+    (
+        "lookandfeel-1.0.0",
+        include_bytes!("../../mcp_store_vlookandfeel-1.0.0.db"),
+    ),
+    (
+        "task-notifications-1.0.0",
+        include_bytes!("../../mcp_store_vtask-notifications-1.0.0.db"),
+    ),
+    (
+        "settings-1.1.0",
+        include_bytes!("../../mcp_store_vsettings-1.1.0.db"),
+    ),
+    (
+        "settings-1.0.0",
+        include_bytes!("../../mcp_store_vsettings-1.0.0.db"),
+    ),
+    (
+        "custom-action-support-saas",
+        include_bytes!("../../mcp_store_vcustom-action-support-saas.db"),
+    ),
+    (
+        "custom-action-support-va-release-1-2021",
+        include_bytes!("../../mcp_store_vcustom-action-support-va-release-1-2021.db"),
+    ),
+    (
+        "custom-action-support-va-release-2-2021",
+        include_bytes!("../../mcp_store_vcustom-action-support-va-release-2-2021.db"),
+    ),
+    (
+        "custom-action-support-va-release-3-2021",
+        include_bytes!("../../mcp_store_vcustom-action-support-va-release-3-2021.db"),
+    ),
+    (
+        "custom-action-support-va-release-4-2021",
+        include_bytes!("../../mcp_store_vcustom-action-support-va-release-4-2021.db"),
+    ),
+    (
+        "custom-action-support-va-release-1-2022",
+        include_bytes!("../../mcp_store_vcustom-action-support-va-release-1-2022.db"),
+    ),
+    (
+        "custom-action-support-va-release-2-2022",
+        include_bytes!("../../mcp_store_vcustom-action-support-va-release-2-2022.db"),
+    ),
+    (
+        "custom-action-support-va-release-3-2022",
+        include_bytes!("../../mcp_store_vcustom-action-support-va-release-3-2022.db"),
+    ),
+    (
+        "custom-action-support-va-release-1-2023-or-newer",
+        include_bytes!("../../mcp_store_vcustom-action-support-va-release-1-2023-or-newer.db"),
+    ),
 ];
 // mcpify:versions:end
 
@@ -1012,10 +2202,11 @@ const VERSION_STORE_BYTES: &[(&str, &[u8])] = &[
 /// `cargo install`. The one difference from a schema lookup: SQLite
 /// needs a real file to open a `Connection` against (unlike a `&[u8]`
 /// JSON schema, read directly from memory), so this extracts the
-/// embedded bytes to the OS temp dir once and reuses that path on every
-/// subsequent call — the embedded bytes for a given `api_version` never
-/// change within a single compiled binary, so the file only ever needs
-/// writing once.
+/// embedded bytes to a fixed path in the OS temp dir on every call —
+/// cheap, since it only runs once per process start, and it means a
+/// rebuilt binary with different embedded bytes (a `populate_embeddings`
+/// re-run, an `add-version` update) can never be shadowed by a stale
+/// leftover from a previous install at that same path.
 pub fn resolve_store_path(api_version: &str) -> Result<PathBuf> {
     let file = VERSION_STORE_FILES
         .iter()
@@ -1034,14 +2225,18 @@ pub fn resolve_store_path(api_version: &str) -> Result<PathBuf> {
         .with_context(|| format!("failed to create temp dir '{}'", dir.display()))?;
 
     let path = dir.join(file);
-    if !path.exists() {
-        std::fs::write(&path, bytes).with_context(|| {
-            format!(
-                "failed to extract embedded store data to '{}'",
-                path.display()
-            )
-        })?;
-    }
+    // Always (re)writes rather than skipping when the path already
+    // exists: the extraction path doesn't vary by build, so a stale copy
+    // from a previous install (older embedded bytes, e.g. before a
+    // `populate_embeddings` re-run or an `add-version` update) would
+    // otherwise linger forever, silently serving outdated data. The
+    // write is cheap — this runs once per process start, not per query.
+    std::fs::write(&path, bytes).with_context(|| {
+        format!(
+            "failed to extract embedded store data to '{}'",
+            path.display()
+        )
+    })?;
 
     Ok(path)
 }
@@ -1225,6 +2420,20 @@ pub fn search_endpoints(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Guards against `VERSION_STORE_FILES` and `VERSION_STORE_BYTES`
+    /// silently drifting apart — every `api_version` this crate lists must
+    /// resolve to embedded bytes, or `resolve_store_path` fails at runtime
+    /// for exactly that version and nothing else, which is easy to miss in
+    /// review since the two arrays are edited in different places.
+    #[test]
+    fn every_version_store_file_has_embedded_bytes() {
+        let file_labels: std::collections::HashSet<_> =
+            VERSION_STORE_FILES.iter().map(|(label, _)| *label).collect();
+        let byte_labels: std::collections::HashSet<_> =
+            VERSION_STORE_BYTES.iter().map(|(label, _)| *label).collect();
+        assert_eq!(file_labels, byte_labels);
+    }
 
     /// Builds a read-write connection with the same schema mcpify's shared
     /// pipeline writes, and seeds it with one row — real usage never
