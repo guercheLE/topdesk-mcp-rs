@@ -4573,7 +4573,7 @@ dependencies = [
 
 [[package]]
 name = "topdesk-mcp"
-version = "0.1.6"
+version = "0.1.7"
 dependencies = [
  "aes-gcm",
  "anyhow",
@@ -4596,6 +4596,7 @@ dependencies = [
  "rmcp",
  "rsa",
  "rusqlite",
+ "rustls",
  "serde",
  "serde_json",
  "serde_yaml",
