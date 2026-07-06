@@ -45,9 +45,18 @@ const VERSION_STORE_FILES: &[(&str, &str)] = &[
     ("incident-3.8.1", "mcp_store_vincident-3.8.1.db"),
     ("incident-3.8.0", "mcp_store_vincident-3.8.0.db"),
     ("incident-3.7.1", "mcp_store_vincident-3.7.1.db"),
-    ("knowledge-base-before-explorer-migration", "mcp_store_vknowledge-base-before-explorer-migration.db"),
-    ("knowledge-base-after-explorer-migration", "mcp_store_vknowledge-base-after-explorer-migration.db"),
-    ("knowledgebase-graphql-1.0.0", "mcp_store_vknowledgebase-graphql-1.0.0.db"),
+    (
+        "knowledge-base-before-explorer-migration",
+        "mcp_store_vknowledge-base-before-explorer-migration.db",
+    ),
+    (
+        "knowledge-base-after-explorer-migration",
+        "mcp_store_vknowledge-base-after-explorer-migration.db",
+    ),
+    (
+        "knowledgebase-graphql-1.0.0",
+        "mcp_store_vknowledgebase-graphql-1.0.0.db",
+    ),
     ("reservations-2.0.0", "mcp_store_vreservations-2.0.0.db"),
     ("reservations-1.23.0", "mcp_store_vreservations-1.23.0.db"),
     ("reservations-1.22.0", "mcp_store_vreservations-1.22.0.db"),
@@ -236,146 +245,539 @@ const VERSION_STORE_FILES: &[(&str, &str)] = &[
     ("assets-1.1.0", "mcp_store_vassets-1.1.0.db"),
     ("assets-1.0.1", "mcp_store_vassets-1.0.1.db"),
     ("assets-1.0.0", "mcp_store_vassets-1.0.0.db"),
-    ("operations-management-1.10.0", "mcp_store_voperations-management-1.10.0.db"),
-    ("operations-management-1.9.0", "mcp_store_voperations-management-1.9.0.db"),
-    ("operations-management-1.8.1", "mcp_store_voperations-management-1.8.1.db"),
-    ("operations-management-1.8.0", "mcp_store_voperations-management-1.8.0.db"),
-    ("operations-management-1.7.0", "mcp_store_voperations-management-1.7.0.db"),
-    ("operations-management-1.6.0", "mcp_store_voperations-management-1.6.0.db"),
-    ("operations-management-1.5.0", "mcp_store_voperations-management-1.5.0.db"),
-    ("operations-management-1.4.0", "mcp_store_voperations-management-1.4.0.db"),
-    ("operations-management-1.3.0", "mcp_store_voperations-management-1.3.0.db"),
-    ("operations-management-1.2.0", "mcp_store_voperations-management-1.2.0.db"),
-    ("operations-management-1.1.0", "mcp_store_voperations-management-1.1.0.db"),
-    ("operations-management-1.0.0", "mcp_store_voperations-management-1.0.0.db"),
-    ("operations-management-0.2.2", "mcp_store_voperations-management-0.2.2.db"),
-    ("operations-management-0.2.1", "mcp_store_voperations-management-0.2.1.db"),
-    ("operations-management-0.2.0", "mcp_store_voperations-management-0.2.0.db"),
-    ("operations-management-0.1.0", "mcp_store_voperations-management-0.1.0.db"),
-    ("operations-management-0.0.2", "mcp_store_voperations-management-0.0.2.db"),
-    ("operations-management-0.0.1", "mcp_store_voperations-management-0.0.1.db"),
+    (
+        "operations-management-1.10.0",
+        "mcp_store_voperations-management-1.10.0.db",
+    ),
+    (
+        "operations-management-1.9.0",
+        "mcp_store_voperations-management-1.9.0.db",
+    ),
+    (
+        "operations-management-1.8.1",
+        "mcp_store_voperations-management-1.8.1.db",
+    ),
+    (
+        "operations-management-1.8.0",
+        "mcp_store_voperations-management-1.8.0.db",
+    ),
+    (
+        "operations-management-1.7.0",
+        "mcp_store_voperations-management-1.7.0.db",
+    ),
+    (
+        "operations-management-1.6.0",
+        "mcp_store_voperations-management-1.6.0.db",
+    ),
+    (
+        "operations-management-1.5.0",
+        "mcp_store_voperations-management-1.5.0.db",
+    ),
+    (
+        "operations-management-1.4.0",
+        "mcp_store_voperations-management-1.4.0.db",
+    ),
+    (
+        "operations-management-1.3.0",
+        "mcp_store_voperations-management-1.3.0.db",
+    ),
+    (
+        "operations-management-1.2.0",
+        "mcp_store_voperations-management-1.2.0.db",
+    ),
+    (
+        "operations-management-1.1.0",
+        "mcp_store_voperations-management-1.1.0.db",
+    ),
+    (
+        "operations-management-1.0.0",
+        "mcp_store_voperations-management-1.0.0.db",
+    ),
+    (
+        "operations-management-0.2.2",
+        "mcp_store_voperations-management-0.2.2.db",
+    ),
+    (
+        "operations-management-0.2.1",
+        "mcp_store_voperations-management-0.2.1.db",
+    ),
+    (
+        "operations-management-0.2.0",
+        "mcp_store_voperations-management-0.2.0.db",
+    ),
+    (
+        "operations-management-0.1.0",
+        "mcp_store_voperations-management-0.1.0.db",
+    ),
+    (
+        "operations-management-0.0.2",
+        "mcp_store_voperations-management-0.0.2.db",
+    ),
+    (
+        "operations-management-0.0.1",
+        "mcp_store_voperations-management-0.0.1.db",
+    ),
     ("visitors-2.0.0", "mcp_store_vvisitors-2.0.0.db"),
     ("visitors-1.2.0", "mcp_store_vvisitors-1.2.0.db"),
     ("visitors-1.1.0", "mcp_store_vvisitors-1.1.0.db"),
     ("visitors-1.0.1", "mcp_store_vvisitors-1.0.1.db"),
     ("visitors-1.0.0", "mcp_store_vvisitors-1.0.0.db"),
-    ("supporting-files-2.7.11", "mcp_store_vsupporting-files-2.7.11.db"),
-    ("supporting-files-2.7.10", "mcp_store_vsupporting-files-2.7.10.db"),
-    ("supporting-files-2.7.9", "mcp_store_vsupporting-files-2.7.9.db"),
-    ("supporting-files-2.7.8", "mcp_store_vsupporting-files-2.7.8.db"),
-    ("supporting-files-2.7.7", "mcp_store_vsupporting-files-2.7.7.db"),
-    ("supporting-files-2.7.6", "mcp_store_vsupporting-files-2.7.6.db"),
-    ("supporting-files-2.7.5", "mcp_store_vsupporting-files-2.7.5.db"),
-    ("supporting-files-2.7.4", "mcp_store_vsupporting-files-2.7.4.db"),
-    ("supporting-files-2.7.3", "mcp_store_vsupporting-files-2.7.3.db"),
-    ("supporting-files-2.7.2", "mcp_store_vsupporting-files-2.7.2.db"),
-    ("supporting-files-2.7.1", "mcp_store_vsupporting-files-2.7.1.db"),
-    ("supporting-files-2.7.0", "mcp_store_vsupporting-files-2.7.0.db"),
-    ("supporting-files-2.6.0", "mcp_store_vsupporting-files-2.6.0.db"),
-    ("supporting-files-2.5.2", "mcp_store_vsupporting-files-2.5.2.db"),
-    ("supporting-files-2.5.1", "mcp_store_vsupporting-files-2.5.1.db"),
-    ("supporting-files-2.5.0", "mcp_store_vsupporting-files-2.5.0.db"),
-    ("supporting-files-1.58.0", "mcp_store_vsupporting-files-1.58.0.db"),
-    ("supporting-files-1.57.0", "mcp_store_vsupporting-files-1.57.0.db"),
-    ("supporting-files-1.56.0", "mcp_store_vsupporting-files-1.56.0.db"),
-    ("supporting-files-1.55.1", "mcp_store_vsupporting-files-1.55.1.db"),
-    ("supporting-files-1.55.0", "mcp_store_vsupporting-files-1.55.0.db"),
-    ("supporting-files-1.54.0", "mcp_store_vsupporting-files-1.54.0.db"),
-    ("supporting-files-1.53.0", "mcp_store_vsupporting-files-1.53.0.db"),
-    ("supporting-files-1.52.0", "mcp_store_vsupporting-files-1.52.0.db"),
-    ("supporting-files-1.51.0", "mcp_store_vsupporting-files-1.51.0.db"),
-    ("supporting-files-1.50.0", "mcp_store_vsupporting-files-1.50.0.db"),
-    ("supporting-files-1.49.0", "mcp_store_vsupporting-files-1.49.0.db"),
-    ("supporting-files-1.48.0", "mcp_store_vsupporting-files-1.48.0.db"),
-    ("supporting-files-1.47.0", "mcp_store_vsupporting-files-1.47.0.db"),
-    ("supporting-files-1.46.0", "mcp_store_vsupporting-files-1.46.0.db"),
-    ("supporting-files-1.45.0", "mcp_store_vsupporting-files-1.45.0.db"),
-    ("supporting-files-1.44.0", "mcp_store_vsupporting-files-1.44.0.db"),
-    ("supporting-files-1.43.0", "mcp_store_vsupporting-files-1.43.0.db"),
-    ("supporting-files-1.42.0", "mcp_store_vsupporting-files-1.42.0.db"),
-    ("supporting-files-1.41.0", "mcp_store_vsupporting-files-1.41.0.db"),
-    ("supporting-files-1.40.0", "mcp_store_vsupporting-files-1.40.0.db"),
-    ("supporting-files-1.39.0", "mcp_store_vsupporting-files-1.39.0.db"),
-    ("supporting-files-1.38.1", "mcp_store_vsupporting-files-1.38.1.db"),
-    ("supporting-files-1.38.0", "mcp_store_vsupporting-files-1.38.0.db"),
-    ("supporting-files-1.37.0", "mcp_store_vsupporting-files-1.37.0.db"),
-    ("supporting-files-1.36.1", "mcp_store_vsupporting-files-1.36.1.db"),
-    ("supporting-files-1.36.0", "mcp_store_vsupporting-files-1.36.0.db"),
-    ("supporting-files-1.35.1", "mcp_store_vsupporting-files-1.35.1.db"),
-    ("supporting-files-1.35.0", "mcp_store_vsupporting-files-1.35.0.db"),
-    ("supporting-files-1.34.0", "mcp_store_vsupporting-files-1.34.0.db"),
-    ("supporting-files-1.33.1", "mcp_store_vsupporting-files-1.33.1.db"),
-    ("supporting-files-1.33.0", "mcp_store_vsupporting-files-1.33.0.db"),
-    ("supporting-files-1.32.0", "mcp_store_vsupporting-files-1.32.0.db"),
-    ("supporting-files-1.31.0", "mcp_store_vsupporting-files-1.31.0.db"),
-    ("supporting-files-1.30.1", "mcp_store_vsupporting-files-1.30.1.db"),
-    ("supporting-files-1.30.0", "mcp_store_vsupporting-files-1.30.0.db"),
-    ("supporting-files-1.29.0", "mcp_store_vsupporting-files-1.29.0.db"),
-    ("supporting-files-1.28.0", "mcp_store_vsupporting-files-1.28.0.db"),
-    ("supporting-files-1.27.0", "mcp_store_vsupporting-files-1.27.0.db"),
-    ("supporting-files-1.26.0", "mcp_store_vsupporting-files-1.26.0.db"),
-    ("supporting-files-1.25.0", "mcp_store_vsupporting-files-1.25.0.db"),
-    ("supporting-files-1.24.0", "mcp_store_vsupporting-files-1.24.0.db"),
-    ("supporting-files-1.23.0", "mcp_store_vsupporting-files-1.23.0.db"),
-    ("supporting-files-1.22.0", "mcp_store_vsupporting-files-1.22.0.db"),
-    ("supporting-files-1.21.0", "mcp_store_vsupporting-files-1.21.0.db"),
-    ("supporting-files-1.20.0", "mcp_store_vsupporting-files-1.20.0.db"),
-    ("supporting-files-1.19.0", "mcp_store_vsupporting-files-1.19.0.db"),
-    ("supporting-files-1.18.0", "mcp_store_vsupporting-files-1.18.0.db"),
-    ("supporting-files-1.17.1", "mcp_store_vsupporting-files-1.17.1.db"),
-    ("supporting-files-1.17.0", "mcp_store_vsupporting-files-1.17.0.db"),
-    ("supporting-files-1.16.0", "mcp_store_vsupporting-files-1.16.0.db"),
-    ("supporting-files-1.15.1", "mcp_store_vsupporting-files-1.15.1.db"),
-    ("supporting-files-1.15.0", "mcp_store_vsupporting-files-1.15.0.db"),
-    ("supporting-files-1.14.0", "mcp_store_vsupporting-files-1.14.0.db"),
-    ("supporting-files-1.13.0", "mcp_store_vsupporting-files-1.13.0.db"),
-    ("supporting-files-1.12.0", "mcp_store_vsupporting-files-1.12.0.db"),
-    ("supporting-files-1.11.0", "mcp_store_vsupporting-files-1.11.0.db"),
-    ("supporting-files-1.10.0", "mcp_store_vsupporting-files-1.10.0.db"),
-    ("supporting-files-1.9.0", "mcp_store_vsupporting-files-1.9.0.db"),
-    ("supporting-files-1.8.0", "mcp_store_vsupporting-files-1.8.0.db"),
-    ("supporting-files-1.7.3", "mcp_store_vsupporting-files-1.7.3.db"),
-    ("supporting-files-1.7.2", "mcp_store_vsupporting-files-1.7.2.db"),
-    ("supporting-files-1.7.1", "mcp_store_vsupporting-files-1.7.1.db"),
-    ("supporting-files-1.7.0", "mcp_store_vsupporting-files-1.7.0.db"),
-    ("supporting-files-1.6.0", "mcp_store_vsupporting-files-1.6.0.db"),
-    ("supporting-files-1.5.0", "mcp_store_vsupporting-files-1.5.0.db"),
-    ("supporting-files-1.4.0", "mcp_store_vsupporting-files-1.4.0.db"),
-    ("supporting-files-1.3.0", "mcp_store_vsupporting-files-1.3.0.db"),
-    ("supporting-files-1.2.0", "mcp_store_vsupporting-files-1.2.0.db"),
-    ("supporting-files-1.1.0", "mcp_store_vsupporting-files-1.1.0.db"),
-    ("supporting-files-1.0.0", "mcp_store_vsupporting-files-1.0.0.db"),
-    ("supporting-files-0.0.2", "mcp_store_vsupporting-files-0.0.2.db"),
-    ("supporting-files-0.0.1", "mcp_store_vsupporting-files-0.0.1.db"),
+    (
+        "supporting-files-2.7.11",
+        "mcp_store_vsupporting-files-2.7.11.db",
+    ),
+    (
+        "supporting-files-2.7.10",
+        "mcp_store_vsupporting-files-2.7.10.db",
+    ),
+    (
+        "supporting-files-2.7.9",
+        "mcp_store_vsupporting-files-2.7.9.db",
+    ),
+    (
+        "supporting-files-2.7.8",
+        "mcp_store_vsupporting-files-2.7.8.db",
+    ),
+    (
+        "supporting-files-2.7.7",
+        "mcp_store_vsupporting-files-2.7.7.db",
+    ),
+    (
+        "supporting-files-2.7.6",
+        "mcp_store_vsupporting-files-2.7.6.db",
+    ),
+    (
+        "supporting-files-2.7.5",
+        "mcp_store_vsupporting-files-2.7.5.db",
+    ),
+    (
+        "supporting-files-2.7.4",
+        "mcp_store_vsupporting-files-2.7.4.db",
+    ),
+    (
+        "supporting-files-2.7.3",
+        "mcp_store_vsupporting-files-2.7.3.db",
+    ),
+    (
+        "supporting-files-2.7.2",
+        "mcp_store_vsupporting-files-2.7.2.db",
+    ),
+    (
+        "supporting-files-2.7.1",
+        "mcp_store_vsupporting-files-2.7.1.db",
+    ),
+    (
+        "supporting-files-2.7.0",
+        "mcp_store_vsupporting-files-2.7.0.db",
+    ),
+    (
+        "supporting-files-2.6.0",
+        "mcp_store_vsupporting-files-2.6.0.db",
+    ),
+    (
+        "supporting-files-2.5.2",
+        "mcp_store_vsupporting-files-2.5.2.db",
+    ),
+    (
+        "supporting-files-2.5.1",
+        "mcp_store_vsupporting-files-2.5.1.db",
+    ),
+    (
+        "supporting-files-2.5.0",
+        "mcp_store_vsupporting-files-2.5.0.db",
+    ),
+    (
+        "supporting-files-1.58.0",
+        "mcp_store_vsupporting-files-1.58.0.db",
+    ),
+    (
+        "supporting-files-1.57.0",
+        "mcp_store_vsupporting-files-1.57.0.db",
+    ),
+    (
+        "supporting-files-1.56.0",
+        "mcp_store_vsupporting-files-1.56.0.db",
+    ),
+    (
+        "supporting-files-1.55.1",
+        "mcp_store_vsupporting-files-1.55.1.db",
+    ),
+    (
+        "supporting-files-1.55.0",
+        "mcp_store_vsupporting-files-1.55.0.db",
+    ),
+    (
+        "supporting-files-1.54.0",
+        "mcp_store_vsupporting-files-1.54.0.db",
+    ),
+    (
+        "supporting-files-1.53.0",
+        "mcp_store_vsupporting-files-1.53.0.db",
+    ),
+    (
+        "supporting-files-1.52.0",
+        "mcp_store_vsupporting-files-1.52.0.db",
+    ),
+    (
+        "supporting-files-1.51.0",
+        "mcp_store_vsupporting-files-1.51.0.db",
+    ),
+    (
+        "supporting-files-1.50.0",
+        "mcp_store_vsupporting-files-1.50.0.db",
+    ),
+    (
+        "supporting-files-1.49.0",
+        "mcp_store_vsupporting-files-1.49.0.db",
+    ),
+    (
+        "supporting-files-1.48.0",
+        "mcp_store_vsupporting-files-1.48.0.db",
+    ),
+    (
+        "supporting-files-1.47.0",
+        "mcp_store_vsupporting-files-1.47.0.db",
+    ),
+    (
+        "supporting-files-1.46.0",
+        "mcp_store_vsupporting-files-1.46.0.db",
+    ),
+    (
+        "supporting-files-1.45.0",
+        "mcp_store_vsupporting-files-1.45.0.db",
+    ),
+    (
+        "supporting-files-1.44.0",
+        "mcp_store_vsupporting-files-1.44.0.db",
+    ),
+    (
+        "supporting-files-1.43.0",
+        "mcp_store_vsupporting-files-1.43.0.db",
+    ),
+    (
+        "supporting-files-1.42.0",
+        "mcp_store_vsupporting-files-1.42.0.db",
+    ),
+    (
+        "supporting-files-1.41.0",
+        "mcp_store_vsupporting-files-1.41.0.db",
+    ),
+    (
+        "supporting-files-1.40.0",
+        "mcp_store_vsupporting-files-1.40.0.db",
+    ),
+    (
+        "supporting-files-1.39.0",
+        "mcp_store_vsupporting-files-1.39.0.db",
+    ),
+    (
+        "supporting-files-1.38.1",
+        "mcp_store_vsupporting-files-1.38.1.db",
+    ),
+    (
+        "supporting-files-1.38.0",
+        "mcp_store_vsupporting-files-1.38.0.db",
+    ),
+    (
+        "supporting-files-1.37.0",
+        "mcp_store_vsupporting-files-1.37.0.db",
+    ),
+    (
+        "supporting-files-1.36.1",
+        "mcp_store_vsupporting-files-1.36.1.db",
+    ),
+    (
+        "supporting-files-1.36.0",
+        "mcp_store_vsupporting-files-1.36.0.db",
+    ),
+    (
+        "supporting-files-1.35.1",
+        "mcp_store_vsupporting-files-1.35.1.db",
+    ),
+    (
+        "supporting-files-1.35.0",
+        "mcp_store_vsupporting-files-1.35.0.db",
+    ),
+    (
+        "supporting-files-1.34.0",
+        "mcp_store_vsupporting-files-1.34.0.db",
+    ),
+    (
+        "supporting-files-1.33.1",
+        "mcp_store_vsupporting-files-1.33.1.db",
+    ),
+    (
+        "supporting-files-1.33.0",
+        "mcp_store_vsupporting-files-1.33.0.db",
+    ),
+    (
+        "supporting-files-1.32.0",
+        "mcp_store_vsupporting-files-1.32.0.db",
+    ),
+    (
+        "supporting-files-1.31.0",
+        "mcp_store_vsupporting-files-1.31.0.db",
+    ),
+    (
+        "supporting-files-1.30.1",
+        "mcp_store_vsupporting-files-1.30.1.db",
+    ),
+    (
+        "supporting-files-1.30.0",
+        "mcp_store_vsupporting-files-1.30.0.db",
+    ),
+    (
+        "supporting-files-1.29.0",
+        "mcp_store_vsupporting-files-1.29.0.db",
+    ),
+    (
+        "supporting-files-1.28.0",
+        "mcp_store_vsupporting-files-1.28.0.db",
+    ),
+    (
+        "supporting-files-1.27.0",
+        "mcp_store_vsupporting-files-1.27.0.db",
+    ),
+    (
+        "supporting-files-1.26.0",
+        "mcp_store_vsupporting-files-1.26.0.db",
+    ),
+    (
+        "supporting-files-1.25.0",
+        "mcp_store_vsupporting-files-1.25.0.db",
+    ),
+    (
+        "supporting-files-1.24.0",
+        "mcp_store_vsupporting-files-1.24.0.db",
+    ),
+    (
+        "supporting-files-1.23.0",
+        "mcp_store_vsupporting-files-1.23.0.db",
+    ),
+    (
+        "supporting-files-1.22.0",
+        "mcp_store_vsupporting-files-1.22.0.db",
+    ),
+    (
+        "supporting-files-1.21.0",
+        "mcp_store_vsupporting-files-1.21.0.db",
+    ),
+    (
+        "supporting-files-1.20.0",
+        "mcp_store_vsupporting-files-1.20.0.db",
+    ),
+    (
+        "supporting-files-1.19.0",
+        "mcp_store_vsupporting-files-1.19.0.db",
+    ),
+    (
+        "supporting-files-1.18.0",
+        "mcp_store_vsupporting-files-1.18.0.db",
+    ),
+    (
+        "supporting-files-1.17.1",
+        "mcp_store_vsupporting-files-1.17.1.db",
+    ),
+    (
+        "supporting-files-1.17.0",
+        "mcp_store_vsupporting-files-1.17.0.db",
+    ),
+    (
+        "supporting-files-1.16.0",
+        "mcp_store_vsupporting-files-1.16.0.db",
+    ),
+    (
+        "supporting-files-1.15.1",
+        "mcp_store_vsupporting-files-1.15.1.db",
+    ),
+    (
+        "supporting-files-1.15.0",
+        "mcp_store_vsupporting-files-1.15.0.db",
+    ),
+    (
+        "supporting-files-1.14.0",
+        "mcp_store_vsupporting-files-1.14.0.db",
+    ),
+    (
+        "supporting-files-1.13.0",
+        "mcp_store_vsupporting-files-1.13.0.db",
+    ),
+    (
+        "supporting-files-1.12.0",
+        "mcp_store_vsupporting-files-1.12.0.db",
+    ),
+    (
+        "supporting-files-1.11.0",
+        "mcp_store_vsupporting-files-1.11.0.db",
+    ),
+    (
+        "supporting-files-1.10.0",
+        "mcp_store_vsupporting-files-1.10.0.db",
+    ),
+    (
+        "supporting-files-1.9.0",
+        "mcp_store_vsupporting-files-1.9.0.db",
+    ),
+    (
+        "supporting-files-1.8.0",
+        "mcp_store_vsupporting-files-1.8.0.db",
+    ),
+    (
+        "supporting-files-1.7.3",
+        "mcp_store_vsupporting-files-1.7.3.db",
+    ),
+    (
+        "supporting-files-1.7.2",
+        "mcp_store_vsupporting-files-1.7.2.db",
+    ),
+    (
+        "supporting-files-1.7.1",
+        "mcp_store_vsupporting-files-1.7.1.db",
+    ),
+    (
+        "supporting-files-1.7.0",
+        "mcp_store_vsupporting-files-1.7.0.db",
+    ),
+    (
+        "supporting-files-1.6.0",
+        "mcp_store_vsupporting-files-1.6.0.db",
+    ),
+    (
+        "supporting-files-1.5.0",
+        "mcp_store_vsupporting-files-1.5.0.db",
+    ),
+    (
+        "supporting-files-1.4.0",
+        "mcp_store_vsupporting-files-1.4.0.db",
+    ),
+    (
+        "supporting-files-1.3.0",
+        "mcp_store_vsupporting-files-1.3.0.db",
+    ),
+    (
+        "supporting-files-1.2.0",
+        "mcp_store_vsupporting-files-1.2.0.db",
+    ),
+    (
+        "supporting-files-1.1.0",
+        "mcp_store_vsupporting-files-1.1.0.db",
+    ),
+    (
+        "supporting-files-1.0.0",
+        "mcp_store_vsupporting-files-1.0.0.db",
+    ),
+    (
+        "supporting-files-0.0.2",
+        "mcp_store_vsupporting-files-0.0.2.db",
+    ),
+    (
+        "supporting-files-0.0.1",
+        "mcp_store_vsupporting-files-0.0.1.db",
+    ),
     ("access-roles-saas", "mcp_store_vaccess-roles-saas.db"),
-    ("access-roles-va-release-1-2022", "mcp_store_vaccess-roles-va-release-1-2022.db"),
-    ("access-roles-va-release-2-2022", "mcp_store_vaccess-roles-va-release-2-2022.db"),
-    ("access-roles-va-release-3-2022", "mcp_store_vaccess-roles-va-release-3-2022.db"),
-    ("access-roles-va-release-1-2023", "mcp_store_vaccess-roles-va-release-1-2023.db"),
-    ("access-roles-va-release-2-2023", "mcp_store_vaccess-roles-va-release-2-2023.db"),
-    ("access-roles-va-release-3-2023", "mcp_store_vaccess-roles-va-release-3-2023.db"),
-    ("access-roles-va-release-1-2024", "mcp_store_vaccess-roles-va-release-1-2024.db"),
-    ("access-roles-va-release-2-2024", "mcp_store_vaccess-roles-va-release-2-2024.db"),
-    ("access-roles-va-release-3-2024", "mcp_store_vaccess-roles-va-release-3-2024.db"),
-    ("access-roles-va-release-4-2024", "mcp_store_vaccess-roles-va-release-4-2024.db"),
-    ("access-roles-va-release-1-2025", "mcp_store_vaccess-roles-va-release-1-2025.db"),
-    ("access-roles-va-release-2-2025", "mcp_store_vaccess-roles-va-release-2-2025.db"),
-    ("access-roles-va-release-3-2025", "mcp_store_vaccess-roles-va-release-3-2025.db"),
-    ("access-roles-va-release-4-2025", "mcp_store_vaccess-roles-va-release-4-2025.db"),
-    ("access-roles-va-release-1-2026", "mcp_store_vaccess-roles-va-release-1-2026.db"),
+    (
+        "access-roles-va-release-1-2022",
+        "mcp_store_vaccess-roles-va-release-1-2022.db",
+    ),
+    (
+        "access-roles-va-release-2-2022",
+        "mcp_store_vaccess-roles-va-release-2-2022.db",
+    ),
+    (
+        "access-roles-va-release-3-2022",
+        "mcp_store_vaccess-roles-va-release-3-2022.db",
+    ),
+    (
+        "access-roles-va-release-1-2023",
+        "mcp_store_vaccess-roles-va-release-1-2023.db",
+    ),
+    (
+        "access-roles-va-release-2-2023",
+        "mcp_store_vaccess-roles-va-release-2-2023.db",
+    ),
+    (
+        "access-roles-va-release-3-2023",
+        "mcp_store_vaccess-roles-va-release-3-2023.db",
+    ),
+    (
+        "access-roles-va-release-1-2024",
+        "mcp_store_vaccess-roles-va-release-1-2024.db",
+    ),
+    (
+        "access-roles-va-release-2-2024",
+        "mcp_store_vaccess-roles-va-release-2-2024.db",
+    ),
+    (
+        "access-roles-va-release-3-2024",
+        "mcp_store_vaccess-roles-va-release-3-2024.db",
+    ),
+    (
+        "access-roles-va-release-4-2024",
+        "mcp_store_vaccess-roles-va-release-4-2024.db",
+    ),
+    (
+        "access-roles-va-release-1-2025",
+        "mcp_store_vaccess-roles-va-release-1-2025.db",
+    ),
+    (
+        "access-roles-va-release-2-2025",
+        "mcp_store_vaccess-roles-va-release-2-2025.db",
+    ),
+    (
+        "access-roles-va-release-3-2025",
+        "mcp_store_vaccess-roles-va-release-3-2025.db",
+    ),
+    (
+        "access-roles-va-release-4-2025",
+        "mcp_store_vaccess-roles-va-release-4-2025.db",
+    ),
+    (
+        "access-roles-va-release-1-2026",
+        "mcp_store_vaccess-roles-va-release-1-2026.db",
+    ),
     ("lookandfeel-1.0.0", "mcp_store_vlookandfeel-1.0.0.db"),
-    ("task-notifications-1.0.0", "mcp_store_vtask-notifications-1.0.0.db"),
+    (
+        "task-notifications-1.0.0",
+        "mcp_store_vtask-notifications-1.0.0.db",
+    ),
     ("settings-1.1.0", "mcp_store_vsettings-1.1.0.db"),
     ("settings-1.0.0", "mcp_store_vsettings-1.0.0.db"),
-    ("custom-action-support-saas", "mcp_store_vcustom-action-support-saas.db"),
-    ("custom-action-support-va-release-1-2021", "mcp_store_vcustom-action-support-va-release-1-2021.db"),
-    ("custom-action-support-va-release-2-2021", "mcp_store_vcustom-action-support-va-release-2-2021.db"),
-    ("custom-action-support-va-release-3-2021", "mcp_store_vcustom-action-support-va-release-3-2021.db"),
-    ("custom-action-support-va-release-4-2021", "mcp_store_vcustom-action-support-va-release-4-2021.db"),
-    ("custom-action-support-va-release-1-2022", "mcp_store_vcustom-action-support-va-release-1-2022.db"),
-    ("custom-action-support-va-release-2-2022", "mcp_store_vcustom-action-support-va-release-2-2022.db"),
-    ("custom-action-support-va-release-3-2022", "mcp_store_vcustom-action-support-va-release-3-2022.db"),
-    ("custom-action-support-va-release-1-2023-or-newer", "mcp_store_vcustom-action-support-va-release-1-2023-or-newer.db"),
+    (
+        "custom-action-support-saas",
+        "mcp_store_vcustom-action-support-saas.db",
+    ),
+    (
+        "custom-action-support-va-release-1-2021",
+        "mcp_store_vcustom-action-support-va-release-1-2021.db",
+    ),
+    (
+        "custom-action-support-va-release-2-2021",
+        "mcp_store_vcustom-action-support-va-release-2-2021.db",
+    ),
+    (
+        "custom-action-support-va-release-3-2021",
+        "mcp_store_vcustom-action-support-va-release-3-2021.db",
+    ),
+    (
+        "custom-action-support-va-release-4-2021",
+        "mcp_store_vcustom-action-support-va-release-4-2021.db",
+    ),
+    (
+        "custom-action-support-va-release-1-2022",
+        "mcp_store_vcustom-action-support-va-release-1-2022.db",
+    ),
+    (
+        "custom-action-support-va-release-2-2022",
+        "mcp_store_vcustom-action-support-va-release-2-2022.db",
+    ),
+    (
+        "custom-action-support-va-release-3-2022",
+        "mcp_store_vcustom-action-support-va-release-3-2022.db",
+    ),
+    (
+        "custom-action-support-va-release-1-2023-or-newer",
+        "mcp_store_vcustom-action-support-va-release-1-2023-or-newer.db",
+    ),
 ];
 // mcpify:versions:end
 

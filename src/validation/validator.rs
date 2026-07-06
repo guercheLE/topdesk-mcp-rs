@@ -60,35 +60,93 @@ fn schemas_zst_for(api_version: &str) -> Option<&'static [u8]> {
         "incident-3.8.1" => Some(include_bytes!("generated_schemas_vincident-3.8.1.json.zst")),
         "incident-3.8.0" => Some(include_bytes!("generated_schemas_vincident-3.8.0.json.zst")),
         "incident-3.7.1" => Some(include_bytes!("generated_schemas_vincident-3.7.1.json.zst")),
-        "knowledge-base-before-explorer-migration" => Some(include_bytes!("generated_schemas_vknowledge-base-before-explorer-migration.json.zst")),
-        "knowledge-base-after-explorer-migration" => Some(include_bytes!("generated_schemas_vknowledge-base-after-explorer-migration.json.zst")),
-        "knowledgebase-graphql-1.0.0" => Some(include_bytes!("generated_schemas_vknowledgebase-graphql-1.0.0.json.zst")),
-        "reservations-2.0.0" => Some(include_bytes!("generated_schemas_vreservations-2.0.0.json.zst")),
-        "reservations-1.23.0" => Some(include_bytes!("generated_schemas_vreservations-1.23.0.json.zst")),
-        "reservations-1.22.0" => Some(include_bytes!("generated_schemas_vreservations-1.22.0.json.zst")),
-        "reservations-1.21.1" => Some(include_bytes!("generated_schemas_vreservations-1.21.1.json.zst")),
-        "reservations-1.21.0" => Some(include_bytes!("generated_schemas_vreservations-1.21.0.json.zst")),
-        "reservations-1.20.0" => Some(include_bytes!("generated_schemas_vreservations-1.20.0.json.zst")),
-        "reservations-1.19.0" => Some(include_bytes!("generated_schemas_vreservations-1.19.0.json.zst")),
-        "reservations-1.18.0" => Some(include_bytes!("generated_schemas_vreservations-1.18.0.json.zst")),
-        "reservations-1.17.0" => Some(include_bytes!("generated_schemas_vreservations-1.17.0.json.zst")),
-        "reservations-1.16.0" => Some(include_bytes!("generated_schemas_vreservations-1.16.0.json.zst")),
-        "reservations-1.15.0" => Some(include_bytes!("generated_schemas_vreservations-1.15.0.json.zst")),
-        "reservations-1.14.0" => Some(include_bytes!("generated_schemas_vreservations-1.14.0.json.zst")),
-        "reservations-1.13.0" => Some(include_bytes!("generated_schemas_vreservations-1.13.0.json.zst")),
-        "reservations-1.12.0" => Some(include_bytes!("generated_schemas_vreservations-1.12.0.json.zst")),
-        "reservations-1.11.0" => Some(include_bytes!("generated_schemas_vreservations-1.11.0.json.zst")),
-        "reservations-1.10.0" => Some(include_bytes!("generated_schemas_vreservations-1.10.0.json.zst")),
-        "reservations-1.9.0" => Some(include_bytes!("generated_schemas_vreservations-1.9.0.json.zst")),
-        "reservations-1.8.0" => Some(include_bytes!("generated_schemas_vreservations-1.8.0.json.zst")),
-        "reservations-1.7.0" => Some(include_bytes!("generated_schemas_vreservations-1.7.0.json.zst")),
-        "reservations-1.6.0" => Some(include_bytes!("generated_schemas_vreservations-1.6.0.json.zst")),
-        "reservations-1.5.0" => Some(include_bytes!("generated_schemas_vreservations-1.5.0.json.zst")),
-        "reservations-1.4.0" => Some(include_bytes!("generated_schemas_vreservations-1.4.0.json.zst")),
-        "reservations-1.3.0" => Some(include_bytes!("generated_schemas_vreservations-1.3.0.json.zst")),
-        "reservations-1.2.0" => Some(include_bytes!("generated_schemas_vreservations-1.2.0.json.zst")),
-        "reservations-1.1.0" => Some(include_bytes!("generated_schemas_vreservations-1.1.0.json.zst")),
-        "reservations-1.0.0" => Some(include_bytes!("generated_schemas_vreservations-1.0.0.json.zst")),
+        "knowledge-base-before-explorer-migration" => Some(include_bytes!(
+            "generated_schemas_vknowledge-base-before-explorer-migration.json.zst"
+        )),
+        "knowledge-base-after-explorer-migration" => Some(include_bytes!(
+            "generated_schemas_vknowledge-base-after-explorer-migration.json.zst"
+        )),
+        "knowledgebase-graphql-1.0.0" => Some(include_bytes!(
+            "generated_schemas_vknowledgebase-graphql-1.0.0.json.zst"
+        )),
+        "reservations-2.0.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-2.0.0.json.zst"
+        )),
+        "reservations-1.23.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.23.0.json.zst"
+        )),
+        "reservations-1.22.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.22.0.json.zst"
+        )),
+        "reservations-1.21.1" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.21.1.json.zst"
+        )),
+        "reservations-1.21.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.21.0.json.zst"
+        )),
+        "reservations-1.20.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.20.0.json.zst"
+        )),
+        "reservations-1.19.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.19.0.json.zst"
+        )),
+        "reservations-1.18.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.18.0.json.zst"
+        )),
+        "reservations-1.17.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.17.0.json.zst"
+        )),
+        "reservations-1.16.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.16.0.json.zst"
+        )),
+        "reservations-1.15.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.15.0.json.zst"
+        )),
+        "reservations-1.14.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.14.0.json.zst"
+        )),
+        "reservations-1.13.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.13.0.json.zst"
+        )),
+        "reservations-1.12.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.12.0.json.zst"
+        )),
+        "reservations-1.11.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.11.0.json.zst"
+        )),
+        "reservations-1.10.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.10.0.json.zst"
+        )),
+        "reservations-1.9.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.9.0.json.zst"
+        )),
+        "reservations-1.8.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.8.0.json.zst"
+        )),
+        "reservations-1.7.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.7.0.json.zst"
+        )),
+        "reservations-1.6.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.6.0.json.zst"
+        )),
+        "reservations-1.5.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.5.0.json.zst"
+        )),
+        "reservations-1.4.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.4.0.json.zst"
+        )),
+        "reservations-1.3.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.3.0.json.zst"
+        )),
+        "reservations-1.2.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.2.0.json.zst"
+        )),
+        "reservations-1.1.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.1.0.json.zst"
+        )),
+        "reservations-1.0.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-1.0.0.json.zst"
+        )),
         "services-1.3.7" => Some(include_bytes!("generated_schemas_vservices-1.3.7.json.zst")),
         "services-1.3.6" => Some(include_bytes!("generated_schemas_vservices-1.3.6.json.zst")),
         "services-1.3.5" => Some(include_bytes!("generated_schemas_vservices-1.3.5.json.zst")),
@@ -251,146 +309,412 @@ fn schemas_zst_for(api_version: &str) -> Option<&'static [u8]> {
         "assets-1.1.0" => Some(include_bytes!("generated_schemas_vassets-1.1.0.json.zst")),
         "assets-1.0.1" => Some(include_bytes!("generated_schemas_vassets-1.0.1.json.zst")),
         "assets-1.0.0" => Some(include_bytes!("generated_schemas_vassets-1.0.0.json.zst")),
-        "operations-management-1.10.0" => Some(include_bytes!("generated_schemas_voperations-management-1.10.0.json.zst")),
-        "operations-management-1.9.0" => Some(include_bytes!("generated_schemas_voperations-management-1.9.0.json.zst")),
-        "operations-management-1.8.1" => Some(include_bytes!("generated_schemas_voperations-management-1.8.1.json.zst")),
-        "operations-management-1.8.0" => Some(include_bytes!("generated_schemas_voperations-management-1.8.0.json.zst")),
-        "operations-management-1.7.0" => Some(include_bytes!("generated_schemas_voperations-management-1.7.0.json.zst")),
-        "operations-management-1.6.0" => Some(include_bytes!("generated_schemas_voperations-management-1.6.0.json.zst")),
-        "operations-management-1.5.0" => Some(include_bytes!("generated_schemas_voperations-management-1.5.0.json.zst")),
-        "operations-management-1.4.0" => Some(include_bytes!("generated_schemas_voperations-management-1.4.0.json.zst")),
-        "operations-management-1.3.0" => Some(include_bytes!("generated_schemas_voperations-management-1.3.0.json.zst")),
-        "operations-management-1.2.0" => Some(include_bytes!("generated_schemas_voperations-management-1.2.0.json.zst")),
-        "operations-management-1.1.0" => Some(include_bytes!("generated_schemas_voperations-management-1.1.0.json.zst")),
-        "operations-management-1.0.0" => Some(include_bytes!("generated_schemas_voperations-management-1.0.0.json.zst")),
-        "operations-management-0.2.2" => Some(include_bytes!("generated_schemas_voperations-management-0.2.2.json.zst")),
-        "operations-management-0.2.1" => Some(include_bytes!("generated_schemas_voperations-management-0.2.1.json.zst")),
-        "operations-management-0.2.0" => Some(include_bytes!("generated_schemas_voperations-management-0.2.0.json.zst")),
-        "operations-management-0.1.0" => Some(include_bytes!("generated_schemas_voperations-management-0.1.0.json.zst")),
-        "operations-management-0.0.2" => Some(include_bytes!("generated_schemas_voperations-management-0.0.2.json.zst")),
-        "operations-management-0.0.1" => Some(include_bytes!("generated_schemas_voperations-management-0.0.1.json.zst")),
+        "operations-management-1.10.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-1.10.0.json.zst"
+        )),
+        "operations-management-1.9.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-1.9.0.json.zst"
+        )),
+        "operations-management-1.8.1" => Some(include_bytes!(
+            "generated_schemas_voperations-management-1.8.1.json.zst"
+        )),
+        "operations-management-1.8.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-1.8.0.json.zst"
+        )),
+        "operations-management-1.7.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-1.7.0.json.zst"
+        )),
+        "operations-management-1.6.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-1.6.0.json.zst"
+        )),
+        "operations-management-1.5.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-1.5.0.json.zst"
+        )),
+        "operations-management-1.4.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-1.4.0.json.zst"
+        )),
+        "operations-management-1.3.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-1.3.0.json.zst"
+        )),
+        "operations-management-1.2.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-1.2.0.json.zst"
+        )),
+        "operations-management-1.1.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-1.1.0.json.zst"
+        )),
+        "operations-management-1.0.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-1.0.0.json.zst"
+        )),
+        "operations-management-0.2.2" => Some(include_bytes!(
+            "generated_schemas_voperations-management-0.2.2.json.zst"
+        )),
+        "operations-management-0.2.1" => Some(include_bytes!(
+            "generated_schemas_voperations-management-0.2.1.json.zst"
+        )),
+        "operations-management-0.2.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-0.2.0.json.zst"
+        )),
+        "operations-management-0.1.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-0.1.0.json.zst"
+        )),
+        "operations-management-0.0.2" => Some(include_bytes!(
+            "generated_schemas_voperations-management-0.0.2.json.zst"
+        )),
+        "operations-management-0.0.1" => Some(include_bytes!(
+            "generated_schemas_voperations-management-0.0.1.json.zst"
+        )),
         "visitors-2.0.0" => Some(include_bytes!("generated_schemas_vvisitors-2.0.0.json.zst")),
         "visitors-1.2.0" => Some(include_bytes!("generated_schemas_vvisitors-1.2.0.json.zst")),
         "visitors-1.1.0" => Some(include_bytes!("generated_schemas_vvisitors-1.1.0.json.zst")),
         "visitors-1.0.1" => Some(include_bytes!("generated_schemas_vvisitors-1.0.1.json.zst")),
         "visitors-1.0.0" => Some(include_bytes!("generated_schemas_vvisitors-1.0.0.json.zst")),
-        "supporting-files-2.7.11" => Some(include_bytes!("generated_schemas_vsupporting-files-2.7.11.json.zst")),
-        "supporting-files-2.7.10" => Some(include_bytes!("generated_schemas_vsupporting-files-2.7.10.json.zst")),
-        "supporting-files-2.7.9" => Some(include_bytes!("generated_schemas_vsupporting-files-2.7.9.json.zst")),
-        "supporting-files-2.7.8" => Some(include_bytes!("generated_schemas_vsupporting-files-2.7.8.json.zst")),
-        "supporting-files-2.7.7" => Some(include_bytes!("generated_schemas_vsupporting-files-2.7.7.json.zst")),
-        "supporting-files-2.7.6" => Some(include_bytes!("generated_schemas_vsupporting-files-2.7.6.json.zst")),
-        "supporting-files-2.7.5" => Some(include_bytes!("generated_schemas_vsupporting-files-2.7.5.json.zst")),
-        "supporting-files-2.7.4" => Some(include_bytes!("generated_schemas_vsupporting-files-2.7.4.json.zst")),
-        "supporting-files-2.7.3" => Some(include_bytes!("generated_schemas_vsupporting-files-2.7.3.json.zst")),
-        "supporting-files-2.7.2" => Some(include_bytes!("generated_schemas_vsupporting-files-2.7.2.json.zst")),
-        "supporting-files-2.7.1" => Some(include_bytes!("generated_schemas_vsupporting-files-2.7.1.json.zst")),
-        "supporting-files-2.7.0" => Some(include_bytes!("generated_schemas_vsupporting-files-2.7.0.json.zst")),
-        "supporting-files-2.6.0" => Some(include_bytes!("generated_schemas_vsupporting-files-2.6.0.json.zst")),
-        "supporting-files-2.5.2" => Some(include_bytes!("generated_schemas_vsupporting-files-2.5.2.json.zst")),
-        "supporting-files-2.5.1" => Some(include_bytes!("generated_schemas_vsupporting-files-2.5.1.json.zst")),
-        "supporting-files-2.5.0" => Some(include_bytes!("generated_schemas_vsupporting-files-2.5.0.json.zst")),
-        "supporting-files-1.58.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.58.0.json.zst")),
-        "supporting-files-1.57.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.57.0.json.zst")),
-        "supporting-files-1.56.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.56.0.json.zst")),
-        "supporting-files-1.55.1" => Some(include_bytes!("generated_schemas_vsupporting-files-1.55.1.json.zst")),
-        "supporting-files-1.55.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.55.0.json.zst")),
-        "supporting-files-1.54.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.54.0.json.zst")),
-        "supporting-files-1.53.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.53.0.json.zst")),
-        "supporting-files-1.52.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.52.0.json.zst")),
-        "supporting-files-1.51.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.51.0.json.zst")),
-        "supporting-files-1.50.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.50.0.json.zst")),
-        "supporting-files-1.49.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.49.0.json.zst")),
-        "supporting-files-1.48.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.48.0.json.zst")),
-        "supporting-files-1.47.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.47.0.json.zst")),
-        "supporting-files-1.46.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.46.0.json.zst")),
-        "supporting-files-1.45.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.45.0.json.zst")),
-        "supporting-files-1.44.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.44.0.json.zst")),
-        "supporting-files-1.43.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.43.0.json.zst")),
-        "supporting-files-1.42.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.42.0.json.zst")),
-        "supporting-files-1.41.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.41.0.json.zst")),
-        "supporting-files-1.40.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.40.0.json.zst")),
-        "supporting-files-1.39.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.39.0.json.zst")),
-        "supporting-files-1.38.1" => Some(include_bytes!("generated_schemas_vsupporting-files-1.38.1.json.zst")),
-        "supporting-files-1.38.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.38.0.json.zst")),
-        "supporting-files-1.37.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.37.0.json.zst")),
-        "supporting-files-1.36.1" => Some(include_bytes!("generated_schemas_vsupporting-files-1.36.1.json.zst")),
-        "supporting-files-1.36.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.36.0.json.zst")),
-        "supporting-files-1.35.1" => Some(include_bytes!("generated_schemas_vsupporting-files-1.35.1.json.zst")),
-        "supporting-files-1.35.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.35.0.json.zst")),
-        "supporting-files-1.34.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.34.0.json.zst")),
-        "supporting-files-1.33.1" => Some(include_bytes!("generated_schemas_vsupporting-files-1.33.1.json.zst")),
-        "supporting-files-1.33.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.33.0.json.zst")),
-        "supporting-files-1.32.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.32.0.json.zst")),
-        "supporting-files-1.31.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.31.0.json.zst")),
-        "supporting-files-1.30.1" => Some(include_bytes!("generated_schemas_vsupporting-files-1.30.1.json.zst")),
-        "supporting-files-1.30.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.30.0.json.zst")),
-        "supporting-files-1.29.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.29.0.json.zst")),
-        "supporting-files-1.28.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.28.0.json.zst")),
-        "supporting-files-1.27.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.27.0.json.zst")),
-        "supporting-files-1.26.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.26.0.json.zst")),
-        "supporting-files-1.25.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.25.0.json.zst")),
-        "supporting-files-1.24.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.24.0.json.zst")),
-        "supporting-files-1.23.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.23.0.json.zst")),
-        "supporting-files-1.22.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.22.0.json.zst")),
-        "supporting-files-1.21.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.21.0.json.zst")),
-        "supporting-files-1.20.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.20.0.json.zst")),
-        "supporting-files-1.19.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.19.0.json.zst")),
-        "supporting-files-1.18.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.18.0.json.zst")),
-        "supporting-files-1.17.1" => Some(include_bytes!("generated_schemas_vsupporting-files-1.17.1.json.zst")),
-        "supporting-files-1.17.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.17.0.json.zst")),
-        "supporting-files-1.16.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.16.0.json.zst")),
-        "supporting-files-1.15.1" => Some(include_bytes!("generated_schemas_vsupporting-files-1.15.1.json.zst")),
-        "supporting-files-1.15.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.15.0.json.zst")),
-        "supporting-files-1.14.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.14.0.json.zst")),
-        "supporting-files-1.13.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.13.0.json.zst")),
-        "supporting-files-1.12.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.12.0.json.zst")),
-        "supporting-files-1.11.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.11.0.json.zst")),
-        "supporting-files-1.10.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.10.0.json.zst")),
-        "supporting-files-1.9.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.9.0.json.zst")),
-        "supporting-files-1.8.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.8.0.json.zst")),
-        "supporting-files-1.7.3" => Some(include_bytes!("generated_schemas_vsupporting-files-1.7.3.json.zst")),
-        "supporting-files-1.7.2" => Some(include_bytes!("generated_schemas_vsupporting-files-1.7.2.json.zst")),
-        "supporting-files-1.7.1" => Some(include_bytes!("generated_schemas_vsupporting-files-1.7.1.json.zst")),
-        "supporting-files-1.7.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.7.0.json.zst")),
-        "supporting-files-1.6.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.6.0.json.zst")),
-        "supporting-files-1.5.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.5.0.json.zst")),
-        "supporting-files-1.4.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.4.0.json.zst")),
-        "supporting-files-1.3.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.3.0.json.zst")),
-        "supporting-files-1.2.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.2.0.json.zst")),
-        "supporting-files-1.1.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.1.0.json.zst")),
-        "supporting-files-1.0.0" => Some(include_bytes!("generated_schemas_vsupporting-files-1.0.0.json.zst")),
-        "supporting-files-0.0.2" => Some(include_bytes!("generated_schemas_vsupporting-files-0.0.2.json.zst")),
-        "supporting-files-0.0.1" => Some(include_bytes!("generated_schemas_vsupporting-files-0.0.1.json.zst")),
-        "access-roles-saas" => Some(include_bytes!("generated_schemas_vaccess-roles-saas.json.zst")),
-        "access-roles-va-release-1-2022" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-1-2022.json.zst")),
-        "access-roles-va-release-2-2022" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-2-2022.json.zst")),
-        "access-roles-va-release-3-2022" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-3-2022.json.zst")),
-        "access-roles-va-release-1-2023" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-1-2023.json.zst")),
-        "access-roles-va-release-2-2023" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-2-2023.json.zst")),
-        "access-roles-va-release-3-2023" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-3-2023.json.zst")),
-        "access-roles-va-release-1-2024" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-1-2024.json.zst")),
-        "access-roles-va-release-2-2024" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-2-2024.json.zst")),
-        "access-roles-va-release-3-2024" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-3-2024.json.zst")),
-        "access-roles-va-release-4-2024" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-4-2024.json.zst")),
-        "access-roles-va-release-1-2025" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-1-2025.json.zst")),
-        "access-roles-va-release-2-2025" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-2-2025.json.zst")),
-        "access-roles-va-release-3-2025" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-3-2025.json.zst")),
-        "access-roles-va-release-4-2025" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-4-2025.json.zst")),
-        "access-roles-va-release-1-2026" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-1-2026.json.zst")),
-        "lookandfeel-1.0.0" => Some(include_bytes!("generated_schemas_vlookandfeel-1.0.0.json.zst")),
-        "task-notifications-1.0.0" => Some(include_bytes!("generated_schemas_vtask-notifications-1.0.0.json.zst")),
+        "supporting-files-2.7.11" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.7.11.json.zst"
+        )),
+        "supporting-files-2.7.10" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.7.10.json.zst"
+        )),
+        "supporting-files-2.7.9" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.7.9.json.zst"
+        )),
+        "supporting-files-2.7.8" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.7.8.json.zst"
+        )),
+        "supporting-files-2.7.7" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.7.7.json.zst"
+        )),
+        "supporting-files-2.7.6" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.7.6.json.zst"
+        )),
+        "supporting-files-2.7.5" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.7.5.json.zst"
+        )),
+        "supporting-files-2.7.4" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.7.4.json.zst"
+        )),
+        "supporting-files-2.7.3" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.7.3.json.zst"
+        )),
+        "supporting-files-2.7.2" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.7.2.json.zst"
+        )),
+        "supporting-files-2.7.1" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.7.1.json.zst"
+        )),
+        "supporting-files-2.7.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.7.0.json.zst"
+        )),
+        "supporting-files-2.6.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.6.0.json.zst"
+        )),
+        "supporting-files-2.5.2" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.5.2.json.zst"
+        )),
+        "supporting-files-2.5.1" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.5.1.json.zst"
+        )),
+        "supporting-files-2.5.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.5.0.json.zst"
+        )),
+        "supporting-files-1.58.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.58.0.json.zst"
+        )),
+        "supporting-files-1.57.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.57.0.json.zst"
+        )),
+        "supporting-files-1.56.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.56.0.json.zst"
+        )),
+        "supporting-files-1.55.1" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.55.1.json.zst"
+        )),
+        "supporting-files-1.55.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.55.0.json.zst"
+        )),
+        "supporting-files-1.54.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.54.0.json.zst"
+        )),
+        "supporting-files-1.53.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.53.0.json.zst"
+        )),
+        "supporting-files-1.52.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.52.0.json.zst"
+        )),
+        "supporting-files-1.51.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.51.0.json.zst"
+        )),
+        "supporting-files-1.50.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.50.0.json.zst"
+        )),
+        "supporting-files-1.49.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.49.0.json.zst"
+        )),
+        "supporting-files-1.48.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.48.0.json.zst"
+        )),
+        "supporting-files-1.47.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.47.0.json.zst"
+        )),
+        "supporting-files-1.46.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.46.0.json.zst"
+        )),
+        "supporting-files-1.45.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.45.0.json.zst"
+        )),
+        "supporting-files-1.44.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.44.0.json.zst"
+        )),
+        "supporting-files-1.43.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.43.0.json.zst"
+        )),
+        "supporting-files-1.42.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.42.0.json.zst"
+        )),
+        "supporting-files-1.41.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.41.0.json.zst"
+        )),
+        "supporting-files-1.40.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.40.0.json.zst"
+        )),
+        "supporting-files-1.39.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.39.0.json.zst"
+        )),
+        "supporting-files-1.38.1" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.38.1.json.zst"
+        )),
+        "supporting-files-1.38.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.38.0.json.zst"
+        )),
+        "supporting-files-1.37.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.37.0.json.zst"
+        )),
+        "supporting-files-1.36.1" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.36.1.json.zst"
+        )),
+        "supporting-files-1.36.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.36.0.json.zst"
+        )),
+        "supporting-files-1.35.1" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.35.1.json.zst"
+        )),
+        "supporting-files-1.35.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.35.0.json.zst"
+        )),
+        "supporting-files-1.34.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.34.0.json.zst"
+        )),
+        "supporting-files-1.33.1" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.33.1.json.zst"
+        )),
+        "supporting-files-1.33.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.33.0.json.zst"
+        )),
+        "supporting-files-1.32.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.32.0.json.zst"
+        )),
+        "supporting-files-1.31.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.31.0.json.zst"
+        )),
+        "supporting-files-1.30.1" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.30.1.json.zst"
+        )),
+        "supporting-files-1.30.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.30.0.json.zst"
+        )),
+        "supporting-files-1.29.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.29.0.json.zst"
+        )),
+        "supporting-files-1.28.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.28.0.json.zst"
+        )),
+        "supporting-files-1.27.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.27.0.json.zst"
+        )),
+        "supporting-files-1.26.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.26.0.json.zst"
+        )),
+        "supporting-files-1.25.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.25.0.json.zst"
+        )),
+        "supporting-files-1.24.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.24.0.json.zst"
+        )),
+        "supporting-files-1.23.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.23.0.json.zst"
+        )),
+        "supporting-files-1.22.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.22.0.json.zst"
+        )),
+        "supporting-files-1.21.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.21.0.json.zst"
+        )),
+        "supporting-files-1.20.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.20.0.json.zst"
+        )),
+        "supporting-files-1.19.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.19.0.json.zst"
+        )),
+        "supporting-files-1.18.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.18.0.json.zst"
+        )),
+        "supporting-files-1.17.1" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.17.1.json.zst"
+        )),
+        "supporting-files-1.17.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.17.0.json.zst"
+        )),
+        "supporting-files-1.16.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.16.0.json.zst"
+        )),
+        "supporting-files-1.15.1" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.15.1.json.zst"
+        )),
+        "supporting-files-1.15.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.15.0.json.zst"
+        )),
+        "supporting-files-1.14.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.14.0.json.zst"
+        )),
+        "supporting-files-1.13.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.13.0.json.zst"
+        )),
+        "supporting-files-1.12.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.12.0.json.zst"
+        )),
+        "supporting-files-1.11.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.11.0.json.zst"
+        )),
+        "supporting-files-1.10.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.10.0.json.zst"
+        )),
+        "supporting-files-1.9.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.9.0.json.zst"
+        )),
+        "supporting-files-1.8.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.8.0.json.zst"
+        )),
+        "supporting-files-1.7.3" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.7.3.json.zst"
+        )),
+        "supporting-files-1.7.2" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.7.2.json.zst"
+        )),
+        "supporting-files-1.7.1" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.7.1.json.zst"
+        )),
+        "supporting-files-1.7.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.7.0.json.zst"
+        )),
+        "supporting-files-1.6.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.6.0.json.zst"
+        )),
+        "supporting-files-1.5.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.5.0.json.zst"
+        )),
+        "supporting-files-1.4.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.4.0.json.zst"
+        )),
+        "supporting-files-1.3.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.3.0.json.zst"
+        )),
+        "supporting-files-1.2.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.2.0.json.zst"
+        )),
+        "supporting-files-1.1.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.1.0.json.zst"
+        )),
+        "supporting-files-1.0.0" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-1.0.0.json.zst"
+        )),
+        "supporting-files-0.0.2" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-0.0.2.json.zst"
+        )),
+        "supporting-files-0.0.1" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-0.0.1.json.zst"
+        )),
+        "access-roles-saas" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-saas.json.zst"
+        )),
+        "access-roles-va-release-1-2022" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-1-2022.json.zst"
+        )),
+        "access-roles-va-release-2-2022" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-2-2022.json.zst"
+        )),
+        "access-roles-va-release-3-2022" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-3-2022.json.zst"
+        )),
+        "access-roles-va-release-1-2023" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-1-2023.json.zst"
+        )),
+        "access-roles-va-release-2-2023" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-2-2023.json.zst"
+        )),
+        "access-roles-va-release-3-2023" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-3-2023.json.zst"
+        )),
+        "access-roles-va-release-1-2024" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-1-2024.json.zst"
+        )),
+        "access-roles-va-release-2-2024" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-2-2024.json.zst"
+        )),
+        "access-roles-va-release-3-2024" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-3-2024.json.zst"
+        )),
+        "access-roles-va-release-4-2024" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-4-2024.json.zst"
+        )),
+        "access-roles-va-release-1-2025" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-1-2025.json.zst"
+        )),
+        "access-roles-va-release-2-2025" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-2-2025.json.zst"
+        )),
+        "access-roles-va-release-3-2025" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-3-2025.json.zst"
+        )),
+        "access-roles-va-release-4-2025" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-4-2025.json.zst"
+        )),
+        "access-roles-va-release-1-2026" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-1-2026.json.zst"
+        )),
+        "lookandfeel-1.0.0" => Some(include_bytes!(
+            "generated_schemas_vlookandfeel-1.0.0.json.zst"
+        )),
+        "task-notifications-1.0.0" => Some(include_bytes!(
+            "generated_schemas_vtask-notifications-1.0.0.json.zst"
+        )),
         "settings-1.1.0" => Some(include_bytes!("generated_schemas_vsettings-1.1.0.json.zst")),
         "settings-1.0.0" => Some(include_bytes!("generated_schemas_vsettings-1.0.0.json.zst")),
-        "custom-action-support-saas" => Some(include_bytes!("generated_schemas_vcustom-action-support-saas.json.zst")),
-        "custom-action-support-va-release-1-2021" => Some(include_bytes!("generated_schemas_vcustom-action-support-va-release-1-2021.json.zst")),
-        "custom-action-support-va-release-2-2021" => Some(include_bytes!("generated_schemas_vcustom-action-support-va-release-2-2021.json.zst")),
-        "custom-action-support-va-release-3-2021" => Some(include_bytes!("generated_schemas_vcustom-action-support-va-release-3-2021.json.zst")),
-        "custom-action-support-va-release-4-2021" => Some(include_bytes!("generated_schemas_vcustom-action-support-va-release-4-2021.json.zst")),
-        "custom-action-support-va-release-1-2022" => Some(include_bytes!("generated_schemas_vcustom-action-support-va-release-1-2022.json.zst")),
-        "custom-action-support-va-release-2-2022" => Some(include_bytes!("generated_schemas_vcustom-action-support-va-release-2-2022.json.zst")),
-        "custom-action-support-va-release-3-2022" => Some(include_bytes!("generated_schemas_vcustom-action-support-va-release-3-2022.json.zst")),
-        "custom-action-support-va-release-1-2023-or-newer" => Some(include_bytes!("generated_schemas_vcustom-action-support-va-release-1-2023-or-newer.json.zst")),
+        "custom-action-support-saas" => Some(include_bytes!(
+            "generated_schemas_vcustom-action-support-saas.json.zst"
+        )),
+        "custom-action-support-va-release-1-2021" => Some(include_bytes!(
+            "generated_schemas_vcustom-action-support-va-release-1-2021.json.zst"
+        )),
+        "custom-action-support-va-release-2-2021" => Some(include_bytes!(
+            "generated_schemas_vcustom-action-support-va-release-2-2021.json.zst"
+        )),
+        "custom-action-support-va-release-3-2021" => Some(include_bytes!(
+            "generated_schemas_vcustom-action-support-va-release-3-2021.json.zst"
+        )),
+        "custom-action-support-va-release-4-2021" => Some(include_bytes!(
+            "generated_schemas_vcustom-action-support-va-release-4-2021.json.zst"
+        )),
+        "custom-action-support-va-release-1-2022" => Some(include_bytes!(
+            "generated_schemas_vcustom-action-support-va-release-1-2022.json.zst"
+        )),
+        "custom-action-support-va-release-2-2022" => Some(include_bytes!(
+            "generated_schemas_vcustom-action-support-va-release-2-2022.json.zst"
+        )),
+        "custom-action-support-va-release-3-2022" => Some(include_bytes!(
+            "generated_schemas_vcustom-action-support-va-release-3-2022.json.zst"
+        )),
+        "custom-action-support-va-release-1-2023-or-newer" => Some(include_bytes!(
+            "generated_schemas_vcustom-action-support-va-release-1-2023-or-newer.json.zst"
+        )),
         _ => None,
     }
 }

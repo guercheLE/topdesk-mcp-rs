@@ -428,8 +428,12 @@ async fn prompt_api_version() -> anyhow::Result<String> {
         "incident-3.8.1" => "incident-3.8.1".to_string(),
         "incident-3.8.0" => "incident-3.8.0".to_string(),
         "incident-3.7.1" => "incident-3.7.1".to_string(),
-        "knowledge-base-before-explorer-migration" => "knowledge-base-before-explorer-migration".to_string(),
-        "knowledge-base-after-explorer-migration" => "knowledge-base-after-explorer-migration".to_string(),
+        "knowledge-base-before-explorer-migration" => {
+            "knowledge-base-before-explorer-migration".to_string()
+        }
+        "knowledge-base-after-explorer-migration" => {
+            "knowledge-base-after-explorer-migration".to_string()
+        }
         "knowledgebase-graphql-1.0.0" => "knowledgebase-graphql-1.0.0".to_string(),
         "reservations-2.0.0" => "reservations-2.0.0".to_string(),
         "reservations-1.23.0" => "reservations-1.23.0".to_string(),
@@ -751,14 +755,30 @@ async fn prompt_api_version() -> anyhow::Result<String> {
         "settings-1.1.0" => "settings-1.1.0".to_string(),
         "settings-1.0.0" => "settings-1.0.0".to_string(),
         "custom-action-support-saas" => "custom-action-support-saas".to_string(),
-        "custom-action-support-va-release-1-2021" => "custom-action-support-va-release-1-2021".to_string(),
-        "custom-action-support-va-release-2-2021" => "custom-action-support-va-release-2-2021".to_string(),
-        "custom-action-support-va-release-3-2021" => "custom-action-support-va-release-3-2021".to_string(),
-        "custom-action-support-va-release-4-2021" => "custom-action-support-va-release-4-2021".to_string(),
-        "custom-action-support-va-release-1-2022" => "custom-action-support-va-release-1-2022".to_string(),
-        "custom-action-support-va-release-2-2022" => "custom-action-support-va-release-2-2022".to_string(),
-        "custom-action-support-va-release-3-2022" => "custom-action-support-va-release-3-2022".to_string(),
-        "custom-action-support-va-release-1-2023-or-newer" => "custom-action-support-va-release-1-2023-or-newer".to_string(),
+        "custom-action-support-va-release-1-2021" => {
+            "custom-action-support-va-release-1-2021".to_string()
+        }
+        "custom-action-support-va-release-2-2021" => {
+            "custom-action-support-va-release-2-2021".to_string()
+        }
+        "custom-action-support-va-release-3-2021" => {
+            "custom-action-support-va-release-3-2021".to_string()
+        }
+        "custom-action-support-va-release-4-2021" => {
+            "custom-action-support-va-release-4-2021".to_string()
+        }
+        "custom-action-support-va-release-1-2022" => {
+            "custom-action-support-va-release-1-2022".to_string()
+        }
+        "custom-action-support-va-release-2-2022" => {
+            "custom-action-support-va-release-2-2022".to_string()
+        }
+        "custom-action-support-va-release-3-2022" => {
+            "custom-action-support-va-release-3-2022".to_string()
+        }
+        "custom-action-support-va-release-1-2023-or-newer" => {
+            "custom-action-support-va-release-1-2023-or-newer".to_string()
+        }
         other => other.to_string(),
     })
 }
