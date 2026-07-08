@@ -10,23 +10,31 @@ Exposes exactly 3 tools — `search`, `get`, `call` — backed by an embedded se
 cargo build --release
 ```
 
+This builds three binaries into `target/release/`: `topdesk-mcp` (the CLI/server below), `topdesk-mcp-populate-embeddings`, and `topdesk-mcp-healthcheck`. Run `cargo install --path .` instead if you want `topdesk-mcp` on your `PATH` so the commands below work without a `target/release/` prefix.
+
 ## Setup
 
 ```bash
 cargo run -- setup
 ```
 
-Interactively collects the API URL and the credentials your chosen auth method needs, then lets you persist them as a `.env` file, a `config.json` file, or a ready-to-run CLI invocation.
+Interactively collects the API URL and the credentials your chosen auth method needs, then lets you persist them as a `.env` file, a `config.json` file, or a ready-to-run CLI invocation. See `.env.example` for the recognized `TOPDESK_MCP_*` environment variables.
+
+Currently supported auth method: `basic` (username + TOPdesk application password, not your web-interface password).
 
 ## Usage
+
+The `topdesk-mcp` binary is built to `target/release/topdesk-mcp` (or run any subcommand directly via `cargo run --`).
 
 ### Terminal Client (default)
 
 ```bash
 topdesk-mcp search "create an issue"
 topdesk-mcp get <operationId>
-topdesk-mcp call <operationId> --some-arg value
+topdesk-mcp call <operationId> --args '{"key": "value"}'
 ```
+
+`call`'s arguments are a single `--args`/`-a` flag holding a JSON object (default `{}`), validated against the operation's input schema before the request is sent — not arbitrary `--flag value` pairs.
 
 ### Harness Server
 
@@ -34,6 +42,87 @@ topdesk-mcp call <operationId> --some-arg value
 topdesk-mcp start                              # stdio transport (default)
 topdesk-mcp http --host 127.0.0.1 --port 3000  # HTTP transport
 ```
+
+### Other Commands
+
+```bash
+topdesk-mcp test-connection   # verify the configured API URL and credentials are reachable
+topdesk-mcp config            # print the resolved configuration (secrets redacted)
+topdesk-mcp version           # print the installed version
+topdesk-mcp versions          # list the API spec versions this project has a store for
+```
+
+This project bundles semantic stores for 19 TOPdesk API modules/versions (General, Incident, Change Management, Asset Management, Reservations, and more — see `docs/topdesk-api-specs.md`). Set `TOPDESK_MCP_API_VERSION` (or the `api_version` field in your config file) to select one; `topdesk-mcp versions` lists the available labels and which one is active.
+
+## Configuration
+
+Configuration is resolved through a stop-at-first-match cascade: CLI flags →
+environment variables → `./topdesk-mcp.config.yml` → `~/.topdesk-mcp/config.yml`
+→ `/etc/topdesk-mcp/config.yml` → the installed binary's directory →
+built-in defaults. `topdesk-mcp setup` is the easiest way to populate this;
+it can write a `.env` file or a `topdesk-mcp.config.yml` file for you.
+
+Environment variables (see `.env.example`) all use the `TOPDESK_MCP_` prefix, e.g. `TOPDESK_MCP_URL`, `TOPDESK_MCP_AUTH_METHOD` (currently only `basic` is supported), `TOPDESK_MCP_USERNAME`, `TOPDESK_MCP_PASSWORD`, and `TOPDESK_MCP_LOG_LEVEL`.
+
+## Docker
+
+```bash
+docker compose up topdesk-mcp        # stdio transport
+docker compose up topdesk-mcp-http   # HTTP transport on :3000
+```
+
+Both services read configuration from a local `.env` file (copy `.env.example`) and persist config under `~/.topdesk-mcp`.
+
+## Observability & Resilience
+
+### Structured logging
+
+`TOPDESK_MCP_LOG_LEVEL` (default `info`) sets the log level, using `tracing-subscriber`'s `EnvFilter` syntax (e.g. `debug`, or `topdesk_mcp=debug,info`). It's read directly from the process environment by `resolve_log_level()`/`init_logging()` (`src/core/logger.rs`) — **not** through the CLI-flags → config-file cascade above. `Config` has a `log_level` field, but nothing reads it at runtime, so setting `log_level:` in `topdesk-mcp.config.yml` has no effect; only the env var actually changes the log level.
+
+Output is JSON on stderr, automatically switching to pretty-printed text when stderr is an interactive TTY (`src/core/log_transport.rs`'s TTY check) — there's no flag to force one format or the other. Logs always go to stderr, never stdout, since stdout carries MCP JSON-RPC frames on stdio transport.
+
+Secret redaction is opt-in per call site, not a global logging hook: `core::sanitizer::sanitize()` recursively replaces any JSON object key containing `password`, `token`, `secret`, `authorization`, `apikey`/`api_key`/`api-key`, or `credential` (case-insensitive) with `"[REDACTED]"`. The concrete place this is actually used is `topdesk-mcp config`, which redacts the resolved configuration before printing it — arbitrary log lines elsewhere aren't redacted automatically.
+
+A `core::correlation_context` module exists (binds a UUID per async call tree as a `trace_id`, via `tokio::task_local!`) but isn't called anywhere outside its own unit tests — no request path currently wires a correlation ID into logs or spans, despite the module being present.
+
+### OpenTelemetry tracing
+
+Tracing export is attempted unconditionally at startup, for both `start` and `http` (`otel::build_layer("topdesk-mcp")` in `src/main.rs`). If it fails to initialize, the error is silently swallowed and the server runs without tracing — no warning is logged.
+
+It's controlled by the standard OpenTelemetry SDK environment variables, not a `TOPDESK_MCP_*` one, since spans export over OTLP/HTTP via `opentelemetry-otlp`'s `SpanExporter::builder().with_http()`:
+
+```bash
+OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318 topdesk-mcp start
+```
+
+`OTEL_EXPORTER_OTLP_ENDPOINT` defaults to `http://localhost:4318` per the OpenTelemetry SDK spec if unset. These variables aren't listed in `.env.example`. The reported service name is hardcoded to `"topdesk-mcp"` — not configurable. There's no separate OTel metrics pipeline; see Metrics below for what's actually exposed.
+
+### Metrics
+
+HTTP transport only: `GET /metrics` returns a minimal hand-rolled Prometheus-text exposition (`src/http/metrics.rs`), not backed by a metrics crate. The only counter currently incremented anywhere in the code is `http_requests_total`, bumped once per request that reaches the HTTP auth-gate middleware or the `/metrics` endpoint itself (`src/http/server.rs`). There is no per-tool, per-operation, or latency metric today.
+
+### Resilience: rate limiting, retries, circuit breaker
+
+- **Rate limiting** — `TOPDESK_MCP_RATE_LIMIT` (default `100`) caps outbound API calls in a fixed 1-second sliding window (`RateLimiter::new(config.rate_limit, Duration::from_secs(1))` in `src/services/api_client.rs`). Exceeding it fails the call immediately with a `RATE_LIMIT_EXCEEDED` error rather than queuing.
+- **Retries** — `TOPDESK_MCP_RETRY_ATTEMPTS` (default `3`) retries only connection-level failures (timeout, DNS, connection refused) from the underlying `reqwest` request. A non-2xx HTTP response is **not** retried: `dispatch()` calls `.error_for_status()?`, which propagates immediately regardless of `retry_attempts`.
+- **Timeout** — `TOPDESK_MCP_TIMEOUT_MS` (default `30000`) is the per-attempt request timeout.
+- **Circuit breaker** — every call is wrapped in a breaker (`CircuitBreaker::default()` in `ApiClient::new`) that opens after 5 consecutive failures and stays open for 30 seconds before allowing a trial call (`src/core/circuit_breaker.rs`). Both numbers are **hardcoded** — there is no env var, config key, or CLI flag to change them.
+
+### Health checks
+
+`HealthCheckManager` (`src/core/health_check_manager.rs`) polls registered checks every 30 seconds with a 5-second per-check timeout, both hardcoded and not configurable. Only one check is registered today: `"store"`, which confirms the resolved semantic-store `.db` file for the active `TOPDESK_MCP_API_VERSION` can still be opened.
+
+- HTTP transport exposes this at `GET /healthz`, returning `200` with `{"status":"Healthy","components":1}` when healthy or `503` when not.
+- stdio transport runs the same background check loop but has no endpoint to poll — use `topdesk-mcp test-connection` instead, which calls the *actual configured TOPdesk API URL* (not just the local store) and prints `connection OK` or exits non-zero.
+- Docker's `HEALTHCHECK` (`Dockerfile`: `--interval=30s --timeout=5s --retries=3`) runs the separate `topdesk-mcp-healthcheck` binary (`src/bin/healthcheck.rs`), which only checks that a file literally named `mcp_store.db` exists in the working directory. It does not respect `TOPDESK_MCP_API_VERSION` — if the container is configured to use a non-default API version, this check is still only verifying the *general* API's store file.
+
+### Credential storage
+
+`topdesk-mcp setup` and the runtime `AuthManager` persist credentials via `core::credential_storage::save_credential("active-credentials", ...)`, which tries the OS-native secret store first — macOS Keychain, Windows Credential Manager, or Linux Secret Service (D-Bus) — via the `keyring` crate, under service name `"topdesk-mcp"`.
+
+If no OS keychain backend is available (common in minimal containers with no D-Bus secret-service daemon, e.g. the Docker image built here), it transparently falls back to an AES-256-GCM-encrypted file at `~/.topdesk-mcp/credentials.enc` (file mode `0600`, directory `0700`), keyed from a SHA-256 hash of `$HOME` — so the file isn't portable to another machine. There's no env var to force one path or the other; the fallback happens automatically, logged only as a `tracing::warn!`.
+
+This only covers the stdio path's cached credentials. HTTP transport never reads from the keychain or its file fallback at request time — every HTTP request must carry its own auth header (`src/http/server.rs`'s `auth_gate`).
 
 ## Testing
 
@@ -55,6 +144,10 @@ cargo run --release --features profiling -- search "test query"   # heap profili
 ```
 
 `profile/bottleneck-report.md` combines coverage gaps with the hottest CPU functions in one small text file — paste it into an LLM (or hand it to another tool) to find and fix bottlenecks. Requires [samply](https://github.com/mstange/samply) (`cargo install samply`).
+
+## License
+
+MIT — see [LICENSE](LICENSE).
 
 ---
 
