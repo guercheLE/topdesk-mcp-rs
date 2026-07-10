@@ -12,6 +12,8 @@ cargo build --release
 
 This builds three binaries into `target/release/`: `topdesk-mcp` (the CLI/server below), `topdesk-mcp-populate-embeddings`, and `topdesk-mcp-healthcheck`. Run `cargo install --path .` instead if you want `topdesk-mcp` on your `PATH` so the commands below work without a `target/release/` prefix.
 
+Prebuilt binaries for macOS, Linux, and Windows are attached to each [GitHub Release](https://github.com/guercheLE/topdesk-mcp-rs/releases), along with a shell/PowerShell installer script.
+
 ## Setup
 
 ```bash
