@@ -17,7 +17,28 @@ RUN apt-get update \
 
 COPY Cargo.toml Cargo.lock* ./
 COPY src ./src
+# Every version's `.db`, not just the default `mcp_store.db` — `store.rs`'s
+# `VERSION_STORE_BYTES` embeds all of them via `include_bytes!`, so
+# `cargo build` fails below if any are missing from the build context.
 COPY mcp_store.db ./mcp_store.db
+COPY mcp_store_vincident-4.2.6.db ./mcp_store_vincident-4.2.6.db
+COPY mcp_store_vknowledge-base-before-explorer-migration.db ./mcp_store_vknowledge-base-before-explorer-migration.db
+COPY mcp_store_vknowledge-base-after-explorer-migration.db ./mcp_store_vknowledge-base-after-explorer-migration.db
+COPY mcp_store_vknowledgebase-graphql-1.0.0.db ./mcp_store_vknowledgebase-graphql-1.0.0.db
+COPY mcp_store_vreservations-2.0.0.db ./mcp_store_vreservations-2.0.0.db
+COPY mcp_store_vservices-1.3.7.db ./mcp_store_vservices-1.3.7.db
+COPY mcp_store_vchange-1.4.0.db ./mcp_store_vchange-1.4.0.db
+COPY mcp_store_vassets-1.91.1.db ./mcp_store_vassets-1.91.1.db
+COPY mcp_store_voperations-management-1.10.0.db ./mcp_store_voperations-management-1.10.0.db
+COPY mcp_store_vvisitors-2.0.0.db ./mcp_store_vvisitors-2.0.0.db
+COPY mcp_store_vsupporting-files-2.7.11.db ./mcp_store_vsupporting-files-2.7.11.db
+COPY mcp_store_vaccess-roles-saas.db ./mcp_store_vaccess-roles-saas.db
+COPY mcp_store_vaccess-roles-va-release-1-2026.db ./mcp_store_vaccess-roles-va-release-1-2026.db
+COPY mcp_store_vlookandfeel-1.0.0.db ./mcp_store_vlookandfeel-1.0.0.db
+COPY mcp_store_vtask-notifications-1.0.0.db ./mcp_store_vtask-notifications-1.0.0.db
+COPY mcp_store_vsettings-1.1.0.db ./mcp_store_vsettings-1.1.0.db
+COPY mcp_store_vcustom-action-support-saas.db ./mcp_store_vcustom-action-support-saas.db
+COPY mcp_store_vcustom-action-support-va-release-1-2023-or-newer.db ./mcp_store_vcustom-action-support-va-release-1-2023-or-newer.db
 
 RUN cargo build --release
 

@@ -10,8 +10,21 @@ ci = "github"
 # The installers to generate for each app
 installers = ["shell", "powershell"]
 # Target platforms to build apps for (Rust target-triple syntax)
-targets = ["aarch64-apple-darwin", "x86_64-apple-darwin", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-msvc"]
+#
+# x86_64-apple-darwin (Intel Mac) is deliberately excluded: Microsoft's
+# ONNX Runtime dropped x64 macOS support as of 1.24.1, and fastembed/ort
+# followed suit (https://github.com/pykeio/ort/issues/556) — there's no
+# prebuilt binary to link against, and self-compiling ONNX Runtime from
+# source is the only workaround, which is fragile/unofficial. Intel Mac
+# users can still build from source; this only drops prebuilt releases.
+targets = ["aarch64-apple-darwin", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-msvc"]
 # Path that installers should place binaries in
 install-path = "CARGO_HOME"
 # Whether to install an updater program
 install-updater = false
+# pyke's prebuilt ONNX Runtime binaries (fastembed/ort's
+# ort-download-binaries-rustls-tls feature) are compiled against the
+# dynamic CRT; dist's default static CRT linking on Windows makes them
+# unlinkable (`__imp_tolower`/`__imp_isdigit`/... unresolved externals —
+# see https://github.com/pykeio/ort/issues/473). Match ort's expectation.
+msvc-crt-static = false

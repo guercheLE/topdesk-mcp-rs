@@ -25,45 +25,126 @@ static REGISTER_VEC_EXTENSION: Once = Once::new();
 pub const VERSION_STORE_FILES: &[(&str, &str)] = &[
     ("general-1.2.0", "mcp_store.db"),
     ("incident-4.2.6", "mcp_store_vincident-4.2.6.db"),
-    ("knowledge-base-before-explorer-migration", "mcp_store_vknowledge-base-before-explorer-migration.db"),
-    ("knowledge-base-after-explorer-migration", "mcp_store_vknowledge-base-after-explorer-migration.db"),
-    ("knowledgebase-graphql-1.0.0", "mcp_store_vknowledgebase-graphql-1.0.0.db"),
+    (
+        "knowledge-base-before-explorer-migration",
+        "mcp_store_vknowledge-base-before-explorer-migration.db",
+    ),
+    (
+        "knowledge-base-after-explorer-migration",
+        "mcp_store_vknowledge-base-after-explorer-migration.db",
+    ),
+    (
+        "knowledgebase-graphql-1.0.0",
+        "mcp_store_vknowledgebase-graphql-1.0.0.db",
+    ),
     ("reservations-2.0.0", "mcp_store_vreservations-2.0.0.db"),
     ("services-1.3.7", "mcp_store_vservices-1.3.7.db"),
     ("change-1.4.0", "mcp_store_vchange-1.4.0.db"),
     ("assets-1.91.1", "mcp_store_vassets-1.91.1.db"),
-    ("operations-management-1.10.0", "mcp_store_voperations-management-1.10.0.db"),
+    (
+        "operations-management-1.10.0",
+        "mcp_store_voperations-management-1.10.0.db",
+    ),
     ("visitors-2.0.0", "mcp_store_vvisitors-2.0.0.db"),
-    ("supporting-files-2.7.11", "mcp_store_vsupporting-files-2.7.11.db"),
+    (
+        "supporting-files-2.7.11",
+        "mcp_store_vsupporting-files-2.7.11.db",
+    ),
     ("access-roles-saas", "mcp_store_vaccess-roles-saas.db"),
-    ("access-roles-va-release-1-2026", "mcp_store_vaccess-roles-va-release-1-2026.db"),
+    (
+        "access-roles-va-release-1-2026",
+        "mcp_store_vaccess-roles-va-release-1-2026.db",
+    ),
     ("lookandfeel-1.0.0", "mcp_store_vlookandfeel-1.0.0.db"),
-    ("task-notifications-1.0.0", "mcp_store_vtask-notifications-1.0.0.db"),
+    (
+        "task-notifications-1.0.0",
+        "mcp_store_vtask-notifications-1.0.0.db",
+    ),
     ("settings-1.1.0", "mcp_store_vsettings-1.1.0.db"),
-    ("custom-action-support-saas", "mcp_store_vcustom-action-support-saas.db"),
-    ("custom-action-support-va-release-1-2023-or-newer", "mcp_store_vcustom-action-support-va-release-1-2023-or-newer.db"),
+    (
+        "custom-action-support-saas",
+        "mcp_store_vcustom-action-support-saas.db",
+    ),
+    (
+        "custom-action-support-va-release-1-2023-or-newer",
+        "mcp_store_vcustom-action-support-va-release-1-2023-or-newer.db",
+    ),
 ];
 
 const VERSION_STORE_BYTES: &[(&str, &[u8])] = &[
     ("general-1.2.0", include_bytes!("../../mcp_store.db")),
-    ("incident-4.2.6", include_bytes!("../../mcp_store_vincident-4.2.6.db")),
-    ("knowledge-base-before-explorer-migration", include_bytes!("../../mcp_store_vknowledge-base-before-explorer-migration.db")),
-    ("knowledge-base-after-explorer-migration", include_bytes!("../../mcp_store_vknowledge-base-after-explorer-migration.db")),
-    ("knowledgebase-graphql-1.0.0", include_bytes!("../../mcp_store_vknowledgebase-graphql-1.0.0.db")),
-    ("reservations-2.0.0", include_bytes!("../../mcp_store_vreservations-2.0.0.db")),
-    ("services-1.3.7", include_bytes!("../../mcp_store_vservices-1.3.7.db")),
-    ("change-1.4.0", include_bytes!("../../mcp_store_vchange-1.4.0.db")),
-    ("assets-1.91.1", include_bytes!("../../mcp_store_vassets-1.91.1.db")),
-    ("operations-management-1.10.0", include_bytes!("../../mcp_store_voperations-management-1.10.0.db")),
-    ("visitors-2.0.0", include_bytes!("../../mcp_store_vvisitors-2.0.0.db")),
-    ("supporting-files-2.7.11", include_bytes!("../../mcp_store_vsupporting-files-2.7.11.db")),
-    ("access-roles-saas", include_bytes!("../../mcp_store_vaccess-roles-saas.db")),
-    ("access-roles-va-release-1-2026", include_bytes!("../../mcp_store_vaccess-roles-va-release-1-2026.db")),
-    ("lookandfeel-1.0.0", include_bytes!("../../mcp_store_vlookandfeel-1.0.0.db")),
-    ("task-notifications-1.0.0", include_bytes!("../../mcp_store_vtask-notifications-1.0.0.db")),
-    ("settings-1.1.0", include_bytes!("../../mcp_store_vsettings-1.1.0.db")),
-    ("custom-action-support-saas", include_bytes!("../../mcp_store_vcustom-action-support-saas.db")),
-    ("custom-action-support-va-release-1-2023-or-newer", include_bytes!("../../mcp_store_vcustom-action-support-va-release-1-2023-or-newer.db")),
+    (
+        "incident-4.2.6",
+        include_bytes!("../../mcp_store_vincident-4.2.6.db"),
+    ),
+    (
+        "knowledge-base-before-explorer-migration",
+        include_bytes!("../../mcp_store_vknowledge-base-before-explorer-migration.db"),
+    ),
+    (
+        "knowledge-base-after-explorer-migration",
+        include_bytes!("../../mcp_store_vknowledge-base-after-explorer-migration.db"),
+    ),
+    (
+        "knowledgebase-graphql-1.0.0",
+        include_bytes!("../../mcp_store_vknowledgebase-graphql-1.0.0.db"),
+    ),
+    (
+        "reservations-2.0.0",
+        include_bytes!("../../mcp_store_vreservations-2.0.0.db"),
+    ),
+    (
+        "services-1.3.7",
+        include_bytes!("../../mcp_store_vservices-1.3.7.db"),
+    ),
+    (
+        "change-1.4.0",
+        include_bytes!("../../mcp_store_vchange-1.4.0.db"),
+    ),
+    (
+        "assets-1.91.1",
+        include_bytes!("../../mcp_store_vassets-1.91.1.db"),
+    ),
+    (
+        "operations-management-1.10.0",
+        include_bytes!("../../mcp_store_voperations-management-1.10.0.db"),
+    ),
+    (
+        "visitors-2.0.0",
+        include_bytes!("../../mcp_store_vvisitors-2.0.0.db"),
+    ),
+    (
+        "supporting-files-2.7.11",
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.11.db"),
+    ),
+    (
+        "access-roles-saas",
+        include_bytes!("../../mcp_store_vaccess-roles-saas.db"),
+    ),
+    (
+        "access-roles-va-release-1-2026",
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-1-2026.db"),
+    ),
+    (
+        "lookandfeel-1.0.0",
+        include_bytes!("../../mcp_store_vlookandfeel-1.0.0.db"),
+    ),
+    (
+        "task-notifications-1.0.0",
+        include_bytes!("../../mcp_store_vtask-notifications-1.0.0.db"),
+    ),
+    (
+        "settings-1.1.0",
+        include_bytes!("../../mcp_store_vsettings-1.1.0.db"),
+    ),
+    (
+        "custom-action-support-saas",
+        include_bytes!("../../mcp_store_vcustom-action-support-saas.db"),
+    ),
+    (
+        "custom-action-support-va-release-1-2023-or-newer",
+        include_bytes!("../../mcp_store_vcustom-action-support-va-release-1-2023-or-newer.db"),
+    ),
 ];
 // mcpify:versions:end
 
@@ -302,10 +383,14 @@ mod tests {
     /// review since the two arrays are edited in different places.
     #[test]
     fn every_version_store_file_has_embedded_bytes() {
-        let file_labels: std::collections::HashSet<_> =
-            VERSION_STORE_FILES.iter().map(|(label, _)| *label).collect();
-        let byte_labels: std::collections::HashSet<_> =
-            VERSION_STORE_BYTES.iter().map(|(label, _)| *label).collect();
+        let file_labels: std::collections::HashSet<_> = VERSION_STORE_FILES
+            .iter()
+            .map(|(label, _)| *label)
+            .collect();
+        let byte_labels: std::collections::HashSet<_> = VERSION_STORE_BYTES
+            .iter()
+            .map(|(label, _)| *label)
+            .collect();
         assert_eq!(file_labels, byte_labels);
     }
 

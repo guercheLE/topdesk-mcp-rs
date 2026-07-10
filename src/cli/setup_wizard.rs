@@ -74,8 +74,12 @@ async fn prompt_api_version() -> anyhow::Result<String> {
     Ok(match selection {
         "general-1.2.0 (default/latest)" => "general-1.2.0".to_string(),
         "incident-4.2.6" => "incident-4.2.6".to_string(),
-        "knowledge-base-before-explorer-migration" => "knowledge-base-before-explorer-migration".to_string(),
-        "knowledge-base-after-explorer-migration" => "knowledge-base-after-explorer-migration".to_string(),
+        "knowledge-base-before-explorer-migration" => {
+            "knowledge-base-before-explorer-migration".to_string()
+        }
+        "knowledge-base-after-explorer-migration" => {
+            "knowledge-base-after-explorer-migration".to_string()
+        }
         "knowledgebase-graphql-1.0.0" => "knowledgebase-graphql-1.0.0".to_string(),
         "reservations-2.0.0" => "reservations-2.0.0".to_string(),
         "services-1.3.7" => "services-1.3.7".to_string(),
@@ -90,7 +94,9 @@ async fn prompt_api_version() -> anyhow::Result<String> {
         "task-notifications-1.0.0" => "task-notifications-1.0.0".to_string(),
         "settings-1.1.0" => "settings-1.1.0".to_string(),
         "custom-action-support-saas" => "custom-action-support-saas".to_string(),
-        "custom-action-support-va-release-1-2023-or-newer" => "custom-action-support-va-release-1-2023-or-newer".to_string(),
+        "custom-action-support-va-release-1-2023-or-newer" => {
+            "custom-action-support-va-release-1-2023-or-newer".to_string()
+        }
         other => other.to_string(),
     })
 }

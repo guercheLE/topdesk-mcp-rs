@@ -40,23 +40,47 @@ fn schemas_zst_for(api_version: &str) -> Option<&'static [u8]> {
     match api_version {
         "general-1.2.0" => Some(include_bytes!("generated_schemas.json.zst")),
         "incident-4.2.6" => Some(include_bytes!("generated_schemas_vincident-4.2.6.json.zst")),
-        "knowledge-base-before-explorer-migration" => Some(include_bytes!("generated_schemas_vknowledge-base-before-explorer-migration.json.zst")),
-        "knowledge-base-after-explorer-migration" => Some(include_bytes!("generated_schemas_vknowledge-base-after-explorer-migration.json.zst")),
-        "knowledgebase-graphql-1.0.0" => Some(include_bytes!("generated_schemas_vknowledgebase-graphql-1.0.0.json.zst")),
-        "reservations-2.0.0" => Some(include_bytes!("generated_schemas_vreservations-2.0.0.json.zst")),
+        "knowledge-base-before-explorer-migration" => Some(include_bytes!(
+            "generated_schemas_vknowledge-base-before-explorer-migration.json.zst"
+        )),
+        "knowledge-base-after-explorer-migration" => Some(include_bytes!(
+            "generated_schemas_vknowledge-base-after-explorer-migration.json.zst"
+        )),
+        "knowledgebase-graphql-1.0.0" => Some(include_bytes!(
+            "generated_schemas_vknowledgebase-graphql-1.0.0.json.zst"
+        )),
+        "reservations-2.0.0" => Some(include_bytes!(
+            "generated_schemas_vreservations-2.0.0.json.zst"
+        )),
         "services-1.3.7" => Some(include_bytes!("generated_schemas_vservices-1.3.7.json.zst")),
         "change-1.4.0" => Some(include_bytes!("generated_schemas_vchange-1.4.0.json.zst")),
         "assets-1.91.1" => Some(include_bytes!("generated_schemas_vassets-1.91.1.json.zst")),
-        "operations-management-1.10.0" => Some(include_bytes!("generated_schemas_voperations-management-1.10.0.json.zst")),
+        "operations-management-1.10.0" => Some(include_bytes!(
+            "generated_schemas_voperations-management-1.10.0.json.zst"
+        )),
         "visitors-2.0.0" => Some(include_bytes!("generated_schemas_vvisitors-2.0.0.json.zst")),
-        "supporting-files-2.7.11" => Some(include_bytes!("generated_schemas_vsupporting-files-2.7.11.json.zst")),
-        "access-roles-saas" => Some(include_bytes!("generated_schemas_vaccess-roles-saas.json.zst")),
-        "access-roles-va-release-1-2026" => Some(include_bytes!("generated_schemas_vaccess-roles-va-release-1-2026.json.zst")),
-        "lookandfeel-1.0.0" => Some(include_bytes!("generated_schemas_vlookandfeel-1.0.0.json.zst")),
-        "task-notifications-1.0.0" => Some(include_bytes!("generated_schemas_vtask-notifications-1.0.0.json.zst")),
+        "supporting-files-2.7.11" => Some(include_bytes!(
+            "generated_schemas_vsupporting-files-2.7.11.json.zst"
+        )),
+        "access-roles-saas" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-saas.json.zst"
+        )),
+        "access-roles-va-release-1-2026" => Some(include_bytes!(
+            "generated_schemas_vaccess-roles-va-release-1-2026.json.zst"
+        )),
+        "lookandfeel-1.0.0" => Some(include_bytes!(
+            "generated_schemas_vlookandfeel-1.0.0.json.zst"
+        )),
+        "task-notifications-1.0.0" => Some(include_bytes!(
+            "generated_schemas_vtask-notifications-1.0.0.json.zst"
+        )),
         "settings-1.1.0" => Some(include_bytes!("generated_schemas_vsettings-1.1.0.json.zst")),
-        "custom-action-support-saas" => Some(include_bytes!("generated_schemas_vcustom-action-support-saas.json.zst")),
-        "custom-action-support-va-release-1-2023-or-newer" => Some(include_bytes!("generated_schemas_vcustom-action-support-va-release-1-2023-or-newer.json.zst")),
+        "custom-action-support-saas" => Some(include_bytes!(
+            "generated_schemas_vcustom-action-support-saas.json.zst"
+        )),
+        "custom-action-support-va-release-1-2023-or-newer" => Some(include_bytes!(
+            "generated_schemas_vcustom-action-support-va-release-1-2023-or-newer.json.zst"
+        )),
         _ => None,
     }
 }
