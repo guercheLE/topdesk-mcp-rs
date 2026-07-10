@@ -28,3 +28,11 @@ install-updater = false
 # unlinkable (`__imp_tolower`/`__imp_isdigit`/... unresolved externals —
 # see https://github.com/pykeio/ort/issues/473). Match ort's expectation.
 msvc-crt-static = false
+
+# dist's default x86_64-unknown-linux-gnu runner (ubuntu-22.04, glibc
+# 2.35) is too old for pyke's prebuilt ONNX Runtime, which references
+# glibc >= 2.38 symbols (`__isoc23_strtoll` and friends) — the same
+# reason the Dockerfile builds on Debian trixie instead of bookworm.
+# ubuntu-24.04 ships glibc 2.39.
+[dist.github-custom-runners]
+x86_64-unknown-linux-gnu = "ubuntu-24.04"
