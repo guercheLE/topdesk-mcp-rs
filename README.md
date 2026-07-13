@@ -31,12 +31,20 @@ The `topdesk-mcp` binary is built to `target/release/topdesk-mcp` (or run any su
 ### Terminal Client (default)
 
 ```bash
-topdesk-mcp search "create an issue"
-topdesk-mcp get <operationId>
-topdesk-mcp call <operationId> --args '{"key": "value"}'
+# 1. Semantic search over all 14 operations in the default General API store
+topdesk-mcp search "find a service window"
+
+# 2. Operation IDs in this store include the HTTP method and must be quoted
+topdesk-mcp get 'GET /serviceWindow/lookup/{id}'
+# method: GET
+# path: /serviceWindow/lookup/{id}
+
+# 3. Path and query parameters are fields in one --args JSON object
+topdesk-mcp call 'GET /serviceWindow/lookup/{id}' --args '{"id":"123e4567-e89b-12d3-a456-426614174000"}'
+topdesk-mcp call 'GET /search' --args '{"query":"printer","index":"incidents","start":"0"}'
 ```
 
-`call`'s arguments are a single `--args`/`-a` flag holding a JSON object (default `{}`), validated against the operation's input schema before the request is sent — not arbitrary `--flag value` pairs.
+`call` accepts one JSON object through `--args` (or `-a`), not arbitrary per-operation CLI flags. The object defaults to `{}` and is validated against the operation's input schema before the request is sent; use `get <operationId>` to see the accepted field names and which ones are required.
 
 ### Harness Server
 
