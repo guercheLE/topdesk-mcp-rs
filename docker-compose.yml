@@ -2,6 +2,7 @@ services:
   topdesk-mcp:
     build: .
     image: topdesk-mcp:latest
+    command: ["start"]
     env_file:
       - .env
     volumes:
@@ -12,6 +13,7 @@ services:
   topdesk-mcp-http:
     build: .
     image: topdesk-mcp:latest
+    command: ["http", "--host", "0.0.0.0", "--port", "3000"]
     env_file:
       - .env
     environment:
