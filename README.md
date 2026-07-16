@@ -20,9 +20,11 @@ Prebuilt binaries for macOS, Linux, and Windows are attached to each [GitHub Rel
 cargo run -- setup
 ```
 
-Interactively collects the API URL and the credentials your chosen auth method needs, then lets you persist them as a `.env` file, a `config.json` file, or a ready-to-run CLI invocation. See `.env.example` for the recognized `TOPDESK_MCP_*` environment variables.
+Interactively collects the API URL and the credentials your chosen auth method needs, then lets you persist the non-secret settings (url, auth method, api version, transport) as either a **global** config file (`~/.topdesk-mcp/config.yml`) or a **local** config file (`./topdesk-mcp.config.yml`) — both are read back automatically by every subsequent run (see `load_config`'s cascade) — or print a ready-to-run CLI invocation instead. Credentials are always saved separately via the OS keychain (falling back to an encrypted local file), never written to the config file. See `.env.example` for the recognized `TOPDESK_MCP_*` environment variables.
 
 Currently supported auth method: `basic` (username + TOPdesk application password, not your web-interface password).
+
+> **Base URL note:** TOPdesk's OpenAPI spec defines its `servers[0].url` with a `/tas/api` path prefix. Set `TOPDESK_MCP_URL` (or the `url` config field) to a value ending in `/tas/api`, e.g. `https://mycompany.topdesk.net/tas/api` — otherwise requests will 404.
 
 ## Usage
 
