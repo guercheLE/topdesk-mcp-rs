@@ -73,78 +73,78 @@ pub const VERSION_STORE_FILES: &[(&str, &str)] = &[
 ];
 
 const VERSION_STORE_BYTES: &[(&str, &[u8])] = &[
-    ("general-1.2.0", include_bytes!("../../mcp_store.db")),
+    ("general-1.2.0", include_bytes!("../../mcp_store.db.zst")),
     (
         "incident-4.2.6",
-        include_bytes!("../../mcp_store_vincident-4.2.6.db"),
+        include_bytes!("../../mcp_store_vincident-4.2.6.db.zst"),
     ),
     (
         "knowledge-base-before-explorer-migration",
-        include_bytes!("../../mcp_store_vknowledge-base-before-explorer-migration.db"),
+        include_bytes!("../../mcp_store_vknowledge-base-before-explorer-migration.db.zst"),
     ),
     (
         "knowledge-base-after-explorer-migration",
-        include_bytes!("../../mcp_store_vknowledge-base-after-explorer-migration.db"),
+        include_bytes!("../../mcp_store_vknowledge-base-after-explorer-migration.db.zst"),
     ),
     (
         "knowledgebase-graphql-1.0.0",
-        include_bytes!("../../mcp_store_vknowledgebase-graphql-1.0.0.db"),
+        include_bytes!("../../mcp_store_vknowledgebase-graphql-1.0.0.db.zst"),
     ),
     (
         "reservations-2.0.0",
-        include_bytes!("../../mcp_store_vreservations-2.0.0.db"),
+        include_bytes!("../../mcp_store_vreservations-2.0.0.db.zst"),
     ),
     (
         "services-1.3.7",
-        include_bytes!("../../mcp_store_vservices-1.3.7.db"),
+        include_bytes!("../../mcp_store_vservices-1.3.7.db.zst"),
     ),
     (
         "change-1.4.0",
-        include_bytes!("../../mcp_store_vchange-1.4.0.db"),
+        include_bytes!("../../mcp_store_vchange-1.4.0.db.zst"),
     ),
     (
         "assets-1.91.1",
-        include_bytes!("../../mcp_store_vassets-1.91.1.db"),
+        include_bytes!("../../mcp_store_vassets-1.91.1.db.zst"),
     ),
     (
         "operations-management-1.10.0",
-        include_bytes!("../../mcp_store_voperations-management-1.10.0.db"),
+        include_bytes!("../../mcp_store_voperations-management-1.10.0.db.zst"),
     ),
     (
         "visitors-2.0.0",
-        include_bytes!("../../mcp_store_vvisitors-2.0.0.db"),
+        include_bytes!("../../mcp_store_vvisitors-2.0.0.db.zst"),
     ),
     (
         "supporting-files-2.7.11",
-        include_bytes!("../../mcp_store_vsupporting-files-2.7.11.db"),
+        include_bytes!("../../mcp_store_vsupporting-files-2.7.11.db.zst"),
     ),
     (
         "access-roles-saas",
-        include_bytes!("../../mcp_store_vaccess-roles-saas.db"),
+        include_bytes!("../../mcp_store_vaccess-roles-saas.db.zst"),
     ),
     (
         "access-roles-va-release-1-2026",
-        include_bytes!("../../mcp_store_vaccess-roles-va-release-1-2026.db"),
+        include_bytes!("../../mcp_store_vaccess-roles-va-release-1-2026.db.zst"),
     ),
     (
         "lookandfeel-1.0.0",
-        include_bytes!("../../mcp_store_vlookandfeel-1.0.0.db"),
+        include_bytes!("../../mcp_store_vlookandfeel-1.0.0.db.zst"),
     ),
     (
         "task-notifications-1.0.0",
-        include_bytes!("../../mcp_store_vtask-notifications-1.0.0.db"),
+        include_bytes!("../../mcp_store_vtask-notifications-1.0.0.db.zst"),
     ),
     (
         "settings-1.1.0",
-        include_bytes!("../../mcp_store_vsettings-1.1.0.db"),
+        include_bytes!("../../mcp_store_vsettings-1.1.0.db.zst"),
     ),
     (
         "custom-action-support-saas",
-        include_bytes!("../../mcp_store_vcustom-action-support-saas.db"),
+        include_bytes!("../../mcp_store_vcustom-action-support-saas.db.zst"),
     ),
     (
         "custom-action-support-va-release-1-2023-or-newer",
-        include_bytes!("../../mcp_store_vcustom-action-support-va-release-1-2023-or-newer.db"),
+        include_bytes!("../../mcp_store_vcustom-action-support-va-release-1-2023-or-newer.db.zst"),
     ),
 ];
 // mcpify:versions:end
@@ -198,13 +198,20 @@ pub fn resolve_store_path(api_version: &str) -> Result<PathBuf> {
     // the same directory is atomic on both POSIX and Windows, so every
     // reader sees either the complete previous copy or the complete new
     // one, never a partial write.
+    //
+    // `bytes` is the zstd-compressed `.db.zst` payload (see
+    // `VERSION_STORE_BYTES`), not a valid SQLite file itself — it must be
+    // decompressed before `rusqlite::Connection::open` can read it.
+    let decompressed = zstd::stream::decode_all(bytes).with_context(|| {
+        format!("failed to decompress embedded store data for api_version '{api_version}'")
+    })?;
     static UNIQUE: AtomicU64 = AtomicU64::new(0);
     let tmp_path = dir.join(format!(
         "{file}.{}.{}.tmp",
         std::process::id(),
         UNIQUE.fetch_add(1, Ordering::Relaxed)
     ));
-    std::fs::write(&tmp_path, bytes).with_context(|| {
+    std::fs::write(&tmp_path, decompressed).with_context(|| {
         format!(
             "failed to extract embedded store data to '{}'",
             tmp_path.display()
