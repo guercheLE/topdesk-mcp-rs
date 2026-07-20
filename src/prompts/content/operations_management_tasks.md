@@ -10,11 +10,19 @@ catalog).
 Every operation below is a capability to `search` for, not a fixed
 `operationId` — confirm each one with `search`/`get` before calling it.
 
-## Step 1 — Find or create the task/checklist
+## Step 1 — Find or create the operational activity
 
-`search` for "operations task" / "activity", and confirm whether it's
-linked to a parent record (a change, a project) or standalone before
-creating a new one.
+TOPdesk calls the underlying record an "operational activity" — `search`
+for that term (not just "task"), and confirm whether it's linked to a
+parent record (a change, a project) or standalone before creating a new
+one.
+
+If this activity recurs on a schedule (a routine maintenance check, a
+weekly review), it may already exist as part of an operational
+**series** rather than a one-off — `search` for "operational series"
+before creating a fresh standalone activity for something that recurs;
+creating a duplicate one-off when a series already covers it just adds
+noise to reporting.
 
 ## Step 2 — Assign an owner
 

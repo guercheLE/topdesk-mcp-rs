@@ -185,7 +185,7 @@ impl McpifyServer {
 
     #[prompt(
         name = "access-roles-assignment",
-        description = "Assign, query, and revoke TOPdesk access roles, across the SaaS and Versatile/on-prem API variants."
+        description = "Report on TOPdesk access roles and who holds them (read-only), across the SaaS and Versatile/on-prem API variants."
     )]
     async fn access_roles_assignment(
         &self,
@@ -199,6 +199,27 @@ impl McpifyServer {
             ),
             render_context_header(args.context.as_deref()),
             include_str!("content/access_roles_assignment.md"),
+            delegation_guidance(),
+        );
+        vec![PromptMessage::new_text(Role::User, body)]
+    }
+
+    #[prompt(
+        name = "self-service-portal-requests",
+        description = "Guided Self-Service Portal (SSP) requester workflows: a person creating or tracking their own incident, change, or reservation, across whichever of those catalogs is active."
+    )]
+    async fn self_service_portal_requests(
+        &self,
+        Parameters(args): Parameters<WorkflowArgs>,
+    ) -> Vec<PromptMessage> {
+        let body = format!(
+            "{}{}{}\n{}",
+            catalog_check_block(
+                self.api_version(),
+                &["incident-4.2.6", "change-1.4.0", "reservations-2.0.0"],
+            ),
+            render_context_header(args.context.as_deref()),
+            include_str!("content/self_service_portal_requests.md"),
             delegation_guidance(),
         );
         vec![PromptMessage::new_text(Role::User, body)]

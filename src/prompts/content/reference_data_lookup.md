@@ -1,7 +1,7 @@
 # Reference data lookup
 
-This is a lookup-shaped catalog (111 operations, mostly "resolve an ID
-by name"), not a step-by-step workflow — other prompts
+This is a lookup-shaped catalog (over 100 operations, mostly "resolve an
+ID by name"), not a step-by-step workflow — other prompts
 (`incident-lifecycle`, `change-management-lifecycle`,
 `asset-management-basics`, `reservations-booking`,
 `access-roles-assignment`) point here by name whenever they need to
@@ -33,6 +33,15 @@ operator/person/branch/category X". `search` for the specific entity
 type (e.g. "find operator by name", "list branches") — don't assume a
 single generic lookup operation covers every entity type, since TOPdesk
 models each as its own resource with its own search/list operation.
+
+## Permission and access assignments live here too
+
+If you were sent here from `access-roles-assignment` looking for how to
+actually grant or revoke a permission (that catalog is read-only
+reporting only): `search` for "permission groups" / "operator groups"
+scoped to an operator — real permission assignment happens on the
+operator record itself, in this catalog, not in
+`access-roles-saas`/`-va-release-1-2026`.
 
 ## Large listings
 

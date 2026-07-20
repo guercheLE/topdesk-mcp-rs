@@ -65,7 +65,7 @@ fn prompt_text(result: &rmcp::model::GetPromptResult) -> &str {
     }
 }
 
-const DOMAIN_PROMPT_NAMES: [&str; 9] = [
+const DOMAIN_PROMPT_NAMES: [&str; 10] = [
     "access-roles-assignment",
     "asset-management-basics",
     "change-management-lifecycle",
@@ -74,6 +74,7 @@ const DOMAIN_PROMPT_NAMES: [&str; 9] = [
     "operations-management-tasks",
     "reference-data-lookup",
     "reservations-booking",
+    "self-service-portal-requests",
     "visitor-registration",
 ];
 
@@ -155,6 +156,47 @@ async fn every_domain_prompt_renders_successfully_with_its_matching_catalog() {
             .unwrap()
             .unwrap();
     }
+}
+
+#[tokio::test]
+async fn self_service_portal_requests_accepts_any_of_its_three_catalogs_and_flags_others() {
+    for matching_catalog in ["incident-4.2.6", "change-1.4.0", "reservations-2.0.0"] {
+        let (client, server_task) =
+            connected_client(server_with_api_version(matching_catalog)).await;
+        let result = client
+            .get_prompt(GetPromptRequestParams::new("self-service-portal-requests"))
+            .await
+            .unwrap();
+        let text = prompt_text(&result);
+        assert!(
+            text.contains("Active catalog check\n") && !text.contains("MISMATCH"),
+            "self-service-portal-requests should accept {matching_catalog}, got:\n{text}"
+        );
+
+        drop(client);
+        tokio::time::timeout(std::time::Duration::from_secs(2), server_task)
+            .await
+            .unwrap()
+            .unwrap()
+            .unwrap();
+    }
+
+    // A catalog outside the three-way "any of" list is still a mismatch.
+    let (client, server_task) = connected_client(server_with_api_version("assets-1.91.1")).await;
+    let result = client
+        .get_prompt(GetPromptRequestParams::new("self-service-portal-requests"))
+        .await
+        .unwrap();
+    let text = prompt_text(&result);
+    assert!(text.contains("MISMATCH"));
+    assert!(text.contains("restart"));
+
+    drop(client);
+    tokio::time::timeout(std::time::Duration::from_secs(2), server_task)
+        .await
+        .unwrap()
+        .unwrap()
+        .unwrap();
 }
 
 #[tokio::test]

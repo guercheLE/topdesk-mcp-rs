@@ -31,7 +31,19 @@ purpose. `get` the schema before calling — required fields vary by
 resource type (e.g. equipment may need a return location, rooms may need
 an attendee count).
 
-## Step 4 — Recurring-booking fork
+## Step 4 — Approval gate, if this resource requires one
+
+Some reservable resources need approval before they're confirmed —
+`search` for approve/reject operations scoped to a reservation. If one
+exists and the reservation is still pending, don't call it yourself
+without the user's explicit instruction that a specific approver
+actually approved it — the same "record decisions humans made, don't
+make them" discipline `change-management-lifecycle`'s approval gate
+uses applies here too. Skip this step if the resource doesn't require
+approval; confirm via the reservation's current status rather than
+assuming.
+
+## Step 5 — Recurring-booking fork
 
 Ask the user whether this is a one-off or a recurring booking before
 creating anything. Recurring series are typically their own
@@ -39,14 +51,14 @@ operation/parameter set, not a loop of single creates — `search`
 specifically for "recurring reservation" rather than assuming a loop of
 Step 3 calls is correct.
 
-## Step 5 — Modify or cancel
+## Step 6 — Modify or cancel
 
 Confirm the reservation's current status via a read before canceling —
 a reservation that already started may need a different
 shorten/end-now operation than a full cancel. `search` for the
 update/cancel operation that matches the actual situation.
 
-## Step 6 — List upcoming reservations
+## Step 7 — List upcoming reservations
 
 A listing step for a person or resource. Large result sets are a good
 candidate for step-level delegation — see the delegation guidance at the

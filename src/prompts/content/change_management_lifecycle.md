@@ -73,12 +73,19 @@ action with real audit consequences.
 TOPdesk approvals are typically tracked as their own sub-records or
 tasks on the change (not a single boolean flag), and for an extensive
 change may need multiple approvers routed through a Change Advisory
-Board (CAB), sequentially or in parallel. Before calling anything that
-looks like an "approve"/"authorize" operation:
+Board (CAB), sequentially or in parallel. Concretely, this is usually a
+**separate facade from the one you've been using to build the change**:
+the create/edit steps above go through the operator-facing change
+surface, but authorization itself typically goes through a
+manager-scoped facade (`search` for terms like "manager authorizable
+change" / "authorization activity") reachable only with a
+manager-role credential — don't assume the same credential that created
+the change can also authorize it. Before calling anything that looks
+like an "approve"/"authorize" operation:
 
 1. `search` to see what an authorization step actually looks like in
-   this schema — a status transition? a linked approval task? a
-   decision field per approver?
+   this schema — a status transition, a linked authorization activity,
+   or a decision recorded per approver on that manager-scoped facade.
 2. Ask the user who the real approvers are and whether approval has
    already happened outside this tool (e.g. in a meeting, over email).
 3. Only call an approval-shaped operation on the user's explicit
@@ -129,4 +136,7 @@ status first.
 
 Step 7 and Step 9's cross-catalog notes point at `operations-management-tasks`
 and `incident-lifecycle` respectively — fetch those prompts by name for
-more detail rather than duplicating their content here.
+more detail rather than duplicating their content here. If the requester
+is asking about their own change through the Self-Service Portal rather
+than through you as an operator, that's `self-service-portal-requests`'s
+narrower `/requesterChanges/*` surface, not this one.

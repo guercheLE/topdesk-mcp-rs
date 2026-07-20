@@ -24,7 +24,14 @@ Available playbooks (name — needs catalog — what it's for):
 - `operations-management-tasks` — `operations-management-1.10.0` —
   operational checklists/tasks, including a change's execution checklist.
 - `access-roles-assignment` — `access-roles-saas` /
-  `access-roles-va-release-1-2026` — assign/query/revoke access roles.
+  `access-roles-va-release-1-2026` — read-only reporting on access roles
+  and who holds them (this catalog has no assign/revoke operation —
+  actual assignment is a `reference-data-lookup` cross-catalog step).
+- `self-service-portal-requests` — `incident-4.2.6` / `change-1.4.0` /
+  `reservations-2.0.0` (any one of the three) — a person creating or
+  tracking their own incident, change, or reservation through the
+  narrower Self-Service Portal surface, distinct from the operator-facing
+  workflows above.
 
 Small, non-workflow-shaped catalogs with no dedicated playbook — explore
 these directly with `search`, no guided sequence needed:

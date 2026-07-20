@@ -39,9 +39,13 @@ which.
 If many callers are affected or a whole service is down, ask the user
 to explicitly confirm major-incident classification before flagging it
 — this changes communication cadence and stakeholder visibility across
-the organization. Do not self-declare a major incident; `search` for
-how this instance links/tracks related or duplicate incidents once
-confirmed.
+the organization. Do not self-declare a major incident. TOPdesk models
+this as formal `escalate`/`deescalate` operations, each requiring a
+reason drawn from a dedicated reason-code list (`search` for
+"escalation reasons" / "deescalation reasons") — don't call escalate or
+deescalate without picking a real reason from that list, and confirm
+with the user before deescalating something they haven't agreed is
+resolved enough to step down.
 
 ## Step 5 — Communicate with the caller
 
@@ -76,9 +80,20 @@ Don't close on the assumption that resolution succeeded — verify via a
 follow-up `search`-and-`get`/`call` read of the incident's current
 status first, then close.
 
+## Step 10 — Archive, separately from closing
+
+TOPdesk models archiving as its own `archive`/`unarchive` operation,
+distinct from the closed-status set in Step 9 — a closed incident isn't
+necessarily archived. Only archive on the user's explicit instruction;
+don't treat "closed" as implying "should also be archived now".
+
 ## Composing with other workflows
 
 Step 1's caller lookup and Step 3's operator lookup both route through
 `reference-data-lookup`; Step 7's change linkage routes through
-`change-management-lifecycle`. Fetch those prompts by name for more
-detail rather than duplicating their content here.
+`change-management-lifecycle`. If the person who reported this incident
+is asking about it through the Self-Service Portal rather than through
+you as an operator, that's `self-service-portal-requests`'s
+`/requester/incidents/*` surface, not this one — fetch that prompt by
+name instead of trying to replicate its narrower, requester-facing
+operations here.

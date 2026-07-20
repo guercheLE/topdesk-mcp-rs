@@ -14,10 +14,14 @@ than the catalog check above already tells you — TOPdesk migrated its
 Knowledge Base to a new "Explorer" experience with a differently-shaped
 API, and also offers a separate GraphQL surface:
 
-- `knowledge-base-before-explorer-migration` — older REST shape.
+- `knowledge-base-before-explorer-migration` — older REST shape. A flat
+  list of "Knowledge Items" with no folder hierarchy.
 - `knowledge-base-after-explorer-migration` — REST, post-migration
-  shape; fields and operation names differ from the pre-migration one
-  even though the underlying concept (an article) is the same.
+  shape. This is a genuine **structural** difference, not just renamed
+  fields: Knowledge Items can be organized into `/folders` (which can
+  themselves be nested and moved), and items support per-language
+  `/translations` and end-user `giveFeedback` that the before-migration
+  variant doesn't have.
 - `knowledgebase-graphql-1.0.0` — GraphQL. `call` still invokes a single
   operation, but expect its arguments to look like a GraphQL
   query/variables payload rather than a REST path + body — `search` for
@@ -27,11 +31,17 @@ API, and also offers a separate GraphQL surface:
 Whichever one is active, every operation below is a capability to
 `search` for, not a fixed `operationId` — confirm each with `search`/
 `get` before calling it, since the exact field names differ by variant.
+TOPdesk calls the underlying resource a "Knowledge Item" in both REST
+variants — search for that term, not "article", if a plain search
+doesn't surface it.
 
-## Step 1 — Draft an article
+## Step 1 — Draft a Knowledge Item
 
 Capture a title, content/body, category, and target audience (internal
-staff vs. external/self-service-portal visible).
+staff vs. external/self-service-portal visible). On the after-migration
+variant, also decide which `/folders` entry it belongs under — `search`
+for the folder list before creating a new one, since an existing folder
+for this topic may already exist.
 
 ## Step 2 — Review gate
 
@@ -47,15 +57,27 @@ field from "published", not implied by it.
 
 ## Step 4 — Maintain
 
-Check via `get` whether editing an existing article's content is an
-in-place update or creates a new versioned revision — TOPdesk KB
-articles are often versioned, and treating an edit as a fresh create
-when it should be a revision (or vice versa) loses history either way.
+Check via `get` whether editing an existing item's content is an
+in-place update or creates a new versioned revision — TOPdesk KB items
+are often versioned, and treating an edit as a fresh create when it
+should be a revision (or vice versa) loses history either way. On the
+after-migration variant, translations are a separate per-language
+sub-resource (`/translations/{language}`) — updating the default
+language doesn't touch other languages' translations, and vice versa;
+don't assume editing one updates all of them.
 
-## Step 5 — Retire or archive
+## Step 5 — End-user feedback (after-migration variant only)
 
-Prefer a status change over a delete where one exists, so the article's
-history isn't silently discarded.
+If this instance supports it, end users can leave feedback on a
+published item (`giveFeedback`). Treat a pattern of negative feedback as
+a signal the item may need Step 4's maintenance, not something to act on
+automatically — surface it to the user rather than editing content on
+your own initiative.
+
+## Step 6 — Retire or archive
+
+Prefer a status change (archive/unarchive) over a delete where one
+exists, so the item's history isn't silently discarded.
 
 ## Composing with other workflows
 
