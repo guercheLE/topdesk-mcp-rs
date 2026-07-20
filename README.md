@@ -125,16 +125,16 @@ Fetch `topdesk-menu` first — any MCP client that supports `prompts/list`/`prom
 | Prompt | Catalog(s) needed | Covers |
 |---|---|---|
 | `topdesk-menu` | any | Directory of every prompt below |
-| `incident-lifecycle` | `incident-4.2.6` | Create, classify, assign, escalate/deescalate, resolve, close, archive |
-| `change-management-lifecycle` | `change-1.4.0` | RFC classification, planning/backout, CAB approval routing, implementation, closure |
-| `asset-management-basics` | `assets-1.91.1` | Register, link, query, decommission assets |
-| `knowledge-base-lifecycle` | `knowledge-base-before-explorer-migration` / `-after-explorer-migration` / `knowledgebase-graphql-1.0.0` | Draft, review, publish, maintain, retire a Knowledge Item |
-| `reservations-booking` | `reservations-2.0.0` | Book, check availability, approve, modify, cancel a reservable resource |
-| `reference-data-lookup` | `supporting-files-2.7.11` | Resolve operator/person/branch/category IDs; where permission assignment actually happens |
-| `visitor-registration` | `visitors-2.0.0` | Register, check in, check out a visitor |
-| `operations-management-tasks` | `operations-management-1.10.0` | Operational activities/checklists, including a change's execution checklist |
-| `access-roles-assignment` | `access-roles-saas` / `access-roles-va-release-1-2026` | Read-only reporting on access roles and who holds them |
-| `self-service-portal-requests` | `incident-4.2.6` / `change-1.4.0` / `reservations-2.0.0` (any one) | A person creating or tracking their own incident, change, or reservation via the narrower Self-Service Portal surface |
+| `topdesk-incident-lifecycle` | `incident-4.2.6` | Create, classify, assign, escalate/deescalate, resolve, close, archive |
+| `topdesk-change-management-lifecycle` | `change-1.4.0` | RFC classification, planning/backout, CAB approval routing, implementation, closure |
+| `topdesk-asset-management-basics` | `assets-1.91.1` | Register, link, query, decommission assets |
+| `topdesk-knowledge-base-lifecycle` | `knowledge-base-before-explorer-migration` / `-after-explorer-migration` / `knowledgebase-graphql-1.0.0` | Draft, review, publish, maintain, retire a Knowledge Item |
+| `topdesk-reservations-booking` | `reservations-2.0.0` | Book, check availability, approve, modify, cancel a reservable resource |
+| `topdesk-reference-data-lookup` | `supporting-files-2.7.11` | Resolve operator/person/branch/category IDs; where permission assignment actually happens |
+| `topdesk-visitor-registration` | `visitors-2.0.0` | Register, check in, check out a visitor |
+| `topdesk-operations-management-tasks` | `operations-management-1.10.0` | Operational activities/checklists, including a change's execution checklist |
+| `topdesk-access-roles-assignment` | `access-roles-saas` / `access-roles-va-release-1-2026` | Read-only reporting on access roles and who holds them |
+| `topdesk-self-service-portal-requests` | `incident-4.2.6` / `change-1.4.0` / `reservations-2.0.0` (any one) | A person creating or tracking their own incident, change, or reservation via the narrower Self-Service Portal surface |
 
 **Only one `api_version` catalog is active per running server instance** — this is the single most important thing to know before using these prompts. Each embedded catalog (see [`docs/SCHEMA_VERSIONS.md`](docs/SCHEMA_VERSIONS.md)) is a genuinely different TOPdesk product module, not a revision of the same API, and switching which one is active requires changing `api_version` in config (or the `TOPDESK_MCP_API_VERSION` env var) and restarting the process — it cannot change mid-session. Every prompt above opens by checking the server's actual active catalog against what it needs and says so plainly if they don't match, rather than letting `search` silently come up empty. Every operation a prompt references is described as a capability to `search` for, never a hardcoded `operationId`, so prompt content stays correct regardless of the embedded store's exact schema.
 

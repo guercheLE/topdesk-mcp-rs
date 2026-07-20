@@ -18,7 +18,7 @@ subcategory, and an urgency/impact/priority classification. `search` for
 "create incident", `get` its schema, then `call` it. If the caller is
 only known by name or email rather than an ID, resolving that is a
 **cross-catalog concern** — it needs `supporting-files-2.7.11`, not
-`incident-4.2.6`; fetch the `reference-data-lookup` prompt for that step
+`incident-4.2.6`; fetch the `topdesk-reference-data-lookup` prompt for that step
 rather than guessing an ID.
 
 ## Step 2 — Classify and prioritize
@@ -66,7 +66,7 @@ not retroactively in one batch.
 **Cross-catalog note**: linking to a request for change needs the
 `change-1.4.0` catalog, not `incident-4.2.6`. If that catalog isn't
 active, tell the user rather than guessing at an operationId that isn't
-loaded — see `change-management-lifecycle` for that workflow.
+loaded — see `topdesk-change-management-lifecycle` for that workflow.
 
 ## Step 8 — Resolve
 
@@ -90,10 +90,10 @@ don't treat "closed" as implying "should also be archived now".
 ## Composing with other workflows
 
 Step 1's caller lookup and Step 3's operator lookup both route through
-`reference-data-lookup`; Step 7's change linkage routes through
-`change-management-lifecycle`. If the person who reported this incident
+`topdesk-reference-data-lookup`; Step 7's change linkage routes through
+`topdesk-change-management-lifecycle`. If the person who reported this incident
 is asking about it through the Self-Service Portal rather than through
-you as an operator, that's `self-service-portal-requests`'s
+you as an operator, that's `topdesk-self-service-portal-requests`'s
 `/requester/incidents/*` surface, not this one — fetch that prompt by
 name instead of trying to replicate its narrower, requester-facing
 operations here.

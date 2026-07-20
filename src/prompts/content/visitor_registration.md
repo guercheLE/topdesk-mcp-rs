@@ -23,5 +23,5 @@ actually leaving rather than assuming end-of-day.
 ## Step 4 — Look up the host
 
 If the host is only known by name, resolving them to an ID is a
-cross-catalog concern — see `reference-data-lookup`'s person/operator
+cross-catalog concern — see `topdesk-reference-data-lookup`'s person/operator
 resolution rather than guessing an ID here.

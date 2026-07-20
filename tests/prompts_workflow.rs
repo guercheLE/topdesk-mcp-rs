@@ -66,16 +66,16 @@ fn prompt_text(result: &rmcp::model::GetPromptResult) -> &str {
 }
 
 const DOMAIN_PROMPT_NAMES: [&str; 10] = [
-    "access-roles-assignment",
-    "asset-management-basics",
-    "change-management-lifecycle",
-    "incident-lifecycle",
-    "knowledge-base-lifecycle",
-    "operations-management-tasks",
-    "reference-data-lookup",
-    "reservations-booking",
-    "self-service-portal-requests",
-    "visitor-registration",
+    "topdesk-access-roles-assignment",
+    "topdesk-asset-management-basics",
+    "topdesk-change-management-lifecycle",
+    "topdesk-incident-lifecycle",
+    "topdesk-knowledge-base-lifecycle",
+    "topdesk-operations-management-tasks",
+    "topdesk-reference-data-lookup",
+    "topdesk-reservations-booking",
+    "topdesk-self-service-portal-requests",
+    "topdesk-visitor-registration",
 ];
 
 #[tokio::test]
@@ -119,21 +119,21 @@ async fn prompts_list_advertises_the_expected_names_and_arguments() {
 #[tokio::test]
 async fn every_domain_prompt_renders_successfully_with_its_matching_catalog() {
     let catalogs: [(&str, &str); 9] = [
-        ("incident-lifecycle", "incident-4.2.6"),
-        ("change-management-lifecycle", "change-1.4.0"),
-        ("asset-management-basics", "assets-1.91.1"),
+        ("topdesk-incident-lifecycle", "incident-4.2.6"),
+        ("topdesk-change-management-lifecycle", "change-1.4.0"),
+        ("topdesk-asset-management-basics", "assets-1.91.1"),
         (
-            "knowledge-base-lifecycle",
+            "topdesk-knowledge-base-lifecycle",
             "knowledge-base-after-explorer-migration",
         ),
-        ("reservations-booking", "reservations-2.0.0"),
-        ("reference-data-lookup", "supporting-files-2.7.11"),
-        ("visitor-registration", "visitors-2.0.0"),
+        ("topdesk-reservations-booking", "reservations-2.0.0"),
+        ("topdesk-reference-data-lookup", "supporting-files-2.7.11"),
+        ("topdesk-visitor-registration", "visitors-2.0.0"),
         (
-            "operations-management-tasks",
+            "topdesk-operations-management-tasks",
             "operations-management-1.10.0",
         ),
-        ("access-roles-assignment", "access-roles-saas"),
+        ("topdesk-access-roles-assignment", "access-roles-saas"),
     ];
 
     for (prompt_name, matching_catalog) in catalogs {
@@ -164,13 +164,15 @@ async fn self_service_portal_requests_accepts_any_of_its_three_catalogs_and_flag
         let (client, server_task) =
             connected_client(server_with_api_version(matching_catalog)).await;
         let result = client
-            .get_prompt(GetPromptRequestParams::new("self-service-portal-requests"))
+            .get_prompt(GetPromptRequestParams::new(
+                "topdesk-self-service-portal-requests",
+            ))
             .await
             .unwrap();
         let text = prompt_text(&result);
         assert!(
             text.contains("Active catalog check\n") && !text.contains("MISMATCH"),
-            "self-service-portal-requests should accept {matching_catalog}, got:\n{text}"
+            "topdesk-self-service-portal-requests should accept {matching_catalog}, got:\n{text}"
         );
 
         drop(client);
@@ -184,7 +186,9 @@ async fn self_service_portal_requests_accepts_any_of_its_three_catalogs_and_flag
     // A catalog outside the three-way "any of" list is still a mismatch.
     let (client, server_task) = connected_client(server_with_api_version("assets-1.91.1")).await;
     let result = client
-        .get_prompt(GetPromptRequestParams::new("self-service-portal-requests"))
+        .get_prompt(GetPromptRequestParams::new(
+            "topdesk-self-service-portal-requests",
+        ))
         .await
         .unwrap();
     let text = prompt_text(&result);
@@ -227,7 +231,7 @@ async fn change_management_lifecycle_echoes_supplied_context_and_handles_omitted
 
     let with_context = client
         .get_prompt(
-            GetPromptRequestParams::new("change-management-lifecycle").with_arguments(
+            GetPromptRequestParams::new("topdesk-change-management-lifecycle").with_arguments(
                 serde_json::json!({ "context": "change CHG-123 already drafted" })
                     .as_object()
                     .unwrap()
@@ -242,7 +246,9 @@ async fn change_management_lifecycle_echoes_supplied_context_and_handles_omitted
 
     // Partial/absent-arguments case: no `arguments` object at all.
     let without_context = client
-        .get_prompt(GetPromptRequestParams::new("change-management-lifecycle"))
+        .get_prompt(GetPromptRequestParams::new(
+            "topdesk-change-management-lifecycle",
+        ))
         .await
         .unwrap();
     let without_context_text = prompt_text(&without_context);
@@ -262,7 +268,9 @@ async fn change_management_lifecycle_flags_a_catalog_mismatch() {
     let (client, server_task) = connected_client(server_with_api_version("general-1.2.0")).await;
 
     let result = client
-        .get_prompt(GetPromptRequestParams::new("change-management-lifecycle"))
+        .get_prompt(GetPromptRequestParams::new(
+            "topdesk-change-management-lifecycle",
+        ))
         .await
         .unwrap();
     let text = prompt_text(&result);

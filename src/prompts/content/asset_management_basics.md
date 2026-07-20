@@ -34,7 +34,7 @@ assigned user), or to another asset (a parent/child relationship, e.g. a
 monitor linked to a desktop). `search` for "asset link" / "asset
 relation" for the specific relationship you need — resolving a
 person/branch by name rather than ID is a cross-catalog concern, see
-`reference-data-lookup`.
+`topdesk-reference-data-lookup`.
 
 ## Bulk registration
 
@@ -62,6 +62,6 @@ exists and achieves the same outcome.
 ## Composing with other workflows
 
 Linking an asset to an incident record is a cross-catalog concern
-needing `incident-4.2.6`, not `assets-1.91.1` — see `incident-lifecycle`.
+needing `incident-4.2.6`, not `assets-1.91.1` — see `topdesk-incident-lifecycle`.
 Resolving a person/branch/operator by name routes through
-`reference-data-lookup`.
+`topdesk-reference-data-lookup`.

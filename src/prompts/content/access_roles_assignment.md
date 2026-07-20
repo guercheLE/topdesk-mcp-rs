@@ -36,7 +36,7 @@ catalog offers to "who can do X", useful for audits or answering
 This is a **cross-catalog concern** — real permission assignment in
 TOPdesk happens on the operator record itself, in the
 `supporting-files-2.7.11` catalog (`/operators/id/{id}/permissiongroups`,
-`/operatorgroups`), not here. See `reference-data-lookup` for that. If
+`/operatorgroups`), not here. See `topdesk-reference-data-lookup` for that. If
 the active catalog isn't `supporting-files-2.7.11`, tell the user this
 server needs to be restarted with that catalog active before an actual
 assignment or revocation is possible through these tools — don't

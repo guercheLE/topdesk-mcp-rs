@@ -33,7 +33,7 @@ impl McpifyServer {
     }
 
     #[prompt(
-        name = "change-management-lifecycle",
+        name = "topdesk-change-management-lifecycle",
         description = "Guided RFC lifecycle for TOPdesk Change Management: classification, planning, CAB approval routing, implementation, and closure."
     )]
     async fn change_management_lifecycle(
@@ -51,7 +51,7 @@ impl McpifyServer {
     }
 
     #[prompt(
-        name = "incident-lifecycle",
+        name = "topdesk-incident-lifecycle",
         description = "Guided TOPdesk Incident lifecycle: create, classify, assign, escalate to major incident, communicate, resolve, and close."
     )]
     async fn incident_lifecycle(
@@ -69,7 +69,7 @@ impl McpifyServer {
     }
 
     #[prompt(
-        name = "asset-management-basics",
+        name = "topdesk-asset-management-basics",
         description = "Register, link, query, and decommission TOPdesk assets."
     )]
     async fn asset_management_basics(
@@ -87,7 +87,7 @@ impl McpifyServer {
     }
 
     #[prompt(
-        name = "knowledge-base-lifecycle",
+        name = "topdesk-knowledge-base-lifecycle",
         description = "Guided Knowledge Base article lifecycle: draft, review, publish, maintain, and retire, across TOPdesk's REST and GraphQL KB variants."
     )]
     async fn knowledge_base_lifecycle(
@@ -112,7 +112,7 @@ impl McpifyServer {
     }
 
     #[prompt(
-        name = "reservations-booking",
+        name = "topdesk-reservations-booking",
         description = "Book, check availability, modify, and cancel TOPdesk reservable resources (rooms, equipment, and more)."
     )]
     async fn reservations_booking(
@@ -130,7 +130,7 @@ impl McpifyServer {
     }
 
     #[prompt(
-        name = "reference-data-lookup",
+        name = "topdesk-reference-data-lookup",
         description = "Resolve TOPdesk operator/person/branch/category IDs by name — a lookup catalog referenced by other guided workflows."
     )]
     async fn reference_data_lookup(
@@ -148,7 +148,7 @@ impl McpifyServer {
     }
 
     #[prompt(
-        name = "visitor-registration",
+        name = "topdesk-visitor-registration",
         description = "Register, check in, and check out a TOPdesk visitor."
     )]
     async fn visitor_registration(
@@ -166,7 +166,7 @@ impl McpifyServer {
     }
 
     #[prompt(
-        name = "operations-management-tasks",
+        name = "topdesk-operations-management-tasks",
         description = "Operational checklists and tasks in TOPdesk Operations Management, including a change's execution checklist."
     )]
     async fn operations_management_tasks(
@@ -184,7 +184,7 @@ impl McpifyServer {
     }
 
     #[prompt(
-        name = "access-roles-assignment",
+        name = "topdesk-access-roles-assignment",
         description = "Report on TOPdesk access roles and who holds them (read-only), across the SaaS and Versatile/on-prem API variants."
     )]
     async fn access_roles_assignment(
@@ -205,7 +205,7 @@ impl McpifyServer {
     }
 
     #[prompt(
-        name = "self-service-portal-requests",
+        name = "topdesk-self-service-portal-requests",
         description = "Guided Self-Service Portal (SSP) requester workflows: a person creating or tracking their own incident, change, or reservation, across whichever of those catalogs is active."
     )]
     async fn self_service_portal_requests(

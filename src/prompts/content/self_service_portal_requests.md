@@ -5,8 +5,8 @@ This prompt is unusual among the guided workflows: it applies to
 `reservations-2.0.0` — because each of those already-covered domains
 exposes a *second*, parallel API surface for the end-user/requester
 perspective, separate from the operator-facing one
-`incident-lifecycle` / `change-management-lifecycle` /
-`reservations-booking` cover. Only one catalog is ever active at a
+`topdesk-incident-lifecycle` / `topdesk-change-management-lifecycle` /
+`topdesk-reservations-booking` cover. Only one catalog is ever active at a
 time, so only one of the three requester surfaces below is actually
 reachable in any given session — the catalog check above tells you
 which.
@@ -19,8 +19,8 @@ Every operation below is a capability to `search` for, not a fixed
 This facade exists for a person acting on their **own** incident,
 change, or reservation — not an operator working a queue on someone
 else's behalf. If the user is actually an operator doing operator work,
-stop and redirect them to `incident-lifecycle`,
-`change-management-lifecycle`, or `reservations-booking` instead; those
+stop and redirect them to `topdesk-incident-lifecycle`,
+`topdesk-change-management-lifecycle`, or `topdesk-reservations-booking` instead; those
 cover the fuller operator-facing surface and this narrower one isn't the
 right tool for that job.
 
@@ -54,7 +54,7 @@ searching repeatedly for an operation that isn't in this facade.
 ## Composing with other workflows
 
 Once an operator needs to act on what a requester submitted here, hand
-off to `incident-lifecycle`, `change-management-lifecycle`, or
-`reservations-booking` by name for the rest of that record's lifecycle
+off to `topdesk-incident-lifecycle`, `topdesk-change-management-lifecycle`, or
+`topdesk-reservations-booking` by name for the rest of that record's lifecycle
 — they cover the same underlying incident/change/reservation from the
 operator's side.

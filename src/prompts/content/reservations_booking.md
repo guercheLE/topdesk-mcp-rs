@@ -38,7 +38,7 @@ Some reservable resources need approval before they're confirmed —
 exists and the reservation is still pending, don't call it yourself
 without the user's explicit instruction that a specific approver
 actually approved it — the same "record decisions humans made, don't
-make them" discipline `change-management-lifecycle`'s approval gate
+make them" discipline `topdesk-change-management-lifecycle`'s approval gate
 uses applies here too. Skip this step if the resource doesn't require
 approval; confirm via the reservation's current status rather than
 assuming.
@@ -68,4 +68,4 @@ conversation.
 ## Composing with other workflows
 
 Resolving a requester by name rather than ID is a cross-catalog concern
-— see `reference-data-lookup`.
+— see `topdesk-reference-data-lookup`.

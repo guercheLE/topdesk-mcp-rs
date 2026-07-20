@@ -81,6 +81,6 @@ exists, so the item's history isn't silently discarded.
 
 ## Composing with other workflows
 
-`incident-lifecycle` often links a resolved incident to a KB article as
+`topdesk-incident-lifecycle` often links a resolved incident to a KB article as
 its resolution reference — that's a cross-catalog concern needing
 `incident-4.2.6`, not whichever KB catalog is active here.

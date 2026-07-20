@@ -134,9 +134,9 @@ status first.
 
 ## Composing with other workflows
 
-Step 7 and Step 9's cross-catalog notes point at `operations-management-tasks`
-and `incident-lifecycle` respectively — fetch those prompts by name for
+Step 7 and Step 9's cross-catalog notes point at `topdesk-operations-management-tasks`
+and `topdesk-incident-lifecycle` respectively — fetch those prompts by name for
 more detail rather than duplicating their content here. If the requester
 is asking about their own change through the Self-Service Portal rather
-than through you as an operator, that's `self-service-portal-requests`'s
+than through you as an operator, that's `topdesk-self-service-portal-requests`'s
 narrower `/requesterChanges/*` surface, not this one.

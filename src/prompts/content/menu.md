@@ -6,28 +6,28 @@ playbooks that sequence those 3 tools for specific TOPdesk workflows.
 
 Available playbooks (name — needs catalog — what it's for):
 
-- `incident-lifecycle` — `incident-4.2.6` — create/classify/assign/
+- `topdesk-incident-lifecycle` — `incident-4.2.6` — create/classify/assign/
   escalate/resolve/close an incident, including the major-incident fork.
-- `change-management-lifecycle` — `change-1.4.0` — RFC classification,
+- `topdesk-change-management-lifecycle` — `change-1.4.0` — RFC classification,
   planning/backout, CAB approval routing, implementation, and closure.
-- `asset-management-basics` — `assets-1.91.1` — register/link/query/
+- `topdesk-asset-management-basics` — `assets-1.91.1` — register/link/query/
   decommission assets.
-- `knowledge-base-lifecycle` — `knowledge-base-before-explorer-migration`
+- `topdesk-knowledge-base-lifecycle` — `knowledge-base-before-explorer-migration`
   / `knowledge-base-after-explorer-migration` / `knowledgebase-graphql-1.0.0`
   — draft → review → publish → maintain → retire a KB article.
-- `reservations-booking` — `reservations-2.0.0` — book/check availability/
+- `topdesk-reservations-booking` — `reservations-2.0.0` — book/check availability/
   modify/cancel a reservable resource.
-- `reference-data-lookup` — `supporting-files-2.7.11` — resolve operator/
+- `topdesk-reference-data-lookup` — `supporting-files-2.7.11` — resolve operator/
   person/branch/category IDs by name; referenced by the workflows above.
-- `visitor-registration` — `visitors-2.0.0` — register/check-in/check-out
+- `topdesk-visitor-registration` — `visitors-2.0.0` — register/check-in/check-out
   a visitor.
-- `operations-management-tasks` — `operations-management-1.10.0` —
+- `topdesk-operations-management-tasks` — `operations-management-1.10.0` —
   operational checklists/tasks, including a change's execution checklist.
-- `access-roles-assignment` — `access-roles-saas` /
+- `topdesk-access-roles-assignment` — `access-roles-saas` /
   `access-roles-va-release-1-2026` — read-only reporting on access roles
   and who holds them (this catalog has no assign/revoke operation —
-  actual assignment is a `reference-data-lookup` cross-catalog step).
-- `self-service-portal-requests` — `incident-4.2.6` / `change-1.4.0` /
+  actual assignment is a `topdesk-reference-data-lookup` cross-catalog step).
+- `topdesk-self-service-portal-requests` — `incident-4.2.6` / `change-1.4.0` /
   `reservations-2.0.0` (any one of the three) — a person creating or
   tracking their own incident, change, or reservation through the
   narrower Self-Service Portal surface, distinct from the operator-facing

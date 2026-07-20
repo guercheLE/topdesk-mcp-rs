@@ -1,6 +1,6 @@
 # Operations Management tasks
 
-This catalog is the landing spot `change-management-lifecycle`'s Step 7
+This catalog is the landing spot `topdesk-change-management-lifecycle`'s Step 7
 points to for a change's actual execution checklist. If you were sent
 here from that prompt, the record you're operating on is a
 task/activity tied to a change or a standalone operational checklist
@@ -50,10 +50,10 @@ silently.
 
 A checklist with open items is not done just because most of it is —
 confirm every item's status via a read before signaling completion back
-to whatever workflow sent you here (e.g. `change-management-lifecycle`).
+to whatever workflow sent you here (e.g. `topdesk-change-management-lifecycle`).
 
 ## Composing with other workflows
 
 This catalog is a common cross-catalog target from
-`change-management-lifecycle` (Step 7), and can also stand alone for
+`topdesk-change-management-lifecycle` (Step 7), and can also stand alone for
 routine operational work with no change attached.

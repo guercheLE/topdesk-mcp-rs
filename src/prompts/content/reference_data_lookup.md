@@ -2,9 +2,9 @@
 
 This is a lookup-shaped catalog (over 100 operations, mostly "resolve an
 ID by name"), not a step-by-step workflow — other prompts
-(`incident-lifecycle`, `change-management-lifecycle`,
-`asset-management-basics`, `reservations-booking`,
-`access-roles-assignment`) point here by name whenever they need to
+(`topdesk-incident-lifecycle`, `topdesk-change-management-lifecycle`,
+`topdesk-asset-management-basics`, `topdesk-reservations-booking`,
+`topdesk-access-roles-assignment`) point here by name whenever they need to
 resolve a person, operator, branch, or category rather than duplicating
 this content.
 
@@ -36,7 +36,7 @@ models each as its own resource with its own search/list operation.
 
 ## Permission and access assignments live here too
 
-If you were sent here from `access-roles-assignment` looking for how to
+If you were sent here from `topdesk-access-roles-assignment` looking for how to
 actually grant or revoke a permission (that catalog is read-only
 reporting only): `search` for "permission groups" / "operator groups"
 scoped to an operator — real permission assignment happens on the
