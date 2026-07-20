@@ -2,6 +2,7 @@
 
 use std::sync::Arc;
 
+use rmcp::handler::server::router::prompt::PromptRouter;
 use rmcp::handler::server::router::tool::ToolRouter;
 use rmcp::handler::server::wrapper::Parameters;
 use rmcp::model::{
@@ -10,8 +11,8 @@ use rmcp::model::{
 use rmcp::service::RequestContext;
 use rmcp::transport::stdio;
 use rmcp::{
-    ErrorData as McpError, RoleServer, ServerHandler, ServiceExt, schemars, tool, tool_handler,
-    tool_router,
+    ErrorData as McpError, RoleServer, ServerHandler, ServiceExt, prompt_handler, schemars, tool,
+    tool_handler, tool_router,
 };
 use serde::Deserialize;
 use tokio::sync::Mutex;
@@ -71,6 +72,7 @@ pub struct McpifyServer {
     config: Config,
     auth_manager: Arc<Mutex<AuthManager>>,
     tool_router: ToolRouter<McpifyServer>,
+    prompt_router: PromptRouter<McpifyServer>,
 }
 
 #[tool_router]
@@ -88,6 +90,7 @@ impl McpifyServer {
             config,
             auth_manager,
             tool_router: Self::tool_router(),
+            prompt_router: Self::prompt_router(),
         }
     }
 
@@ -173,6 +176,15 @@ impl McpifyServer {
 }
 
 impl McpifyServer {
+    /// Exposes the active per-process API-version catalog label to
+    /// `prompts::router` (a separate module, so this private field needs a
+    /// `pub(crate)` accessor) — every guided workflow prompt opens with a
+    /// ground-truth check of this value against the one or more catalogs
+    /// it needs, since only one is ever loaded at a time.
+    pub(crate) fn api_version(&self) -> &str {
+        &self.api_version
+    }
+
     /// Wraps a tool's core logic with consistent MCP response formatting
     /// and error handling, so `search`/`get`/`call` each only implement
     /// their own business logic, not the MCP content-envelope
@@ -202,16 +214,27 @@ impl McpifyServer {
 // `call_tool` request, rebuilding the router instead of reusing the one
 // `new()` already built into this instance's `tool_router` field.
 #[tool_handler(router = self.tool_router.clone())]
+#[prompt_handler(router = self.prompt_router.clone())]
 impl ServerHandler for McpifyServer {
     fn get_info(&self) -> ServerInfo {
-        ServerInfo::new(ServerCapabilities::builder().enable_tools().build())
-            .with_server_info(Implementation::from_build_env())
-            .with_protocol_version(ProtocolVersion::V_2024_11_05)
-            .with_instructions(
-                "Exposes exactly 3 tools -- search, get, call -- backed by an embedded \
-                 semantic database, so you never need the full API surface in context."
-                    .to_string(),
-            )
+        ServerInfo::new(
+            ServerCapabilities::builder()
+                .enable_tools()
+                .enable_prompts()
+                .build(),
+        )
+        .with_server_info(Implementation::from_build_env())
+        .with_protocol_version(ProtocolVersion::V_2024_11_05)
+        .with_instructions(
+            "Exposes exactly 3 tools -- search, get, call -- backed by an embedded \
+             semantic database, so you never need the full API surface in context. \
+             Also exposes guided MCP prompts (start with `topdesk-menu`) that turn \
+             TOPdesk domain workflows into step-by-step playbooks over those 3 \
+             tools -- only one TOPdesk API-version catalog is active per running \
+             server instance; each prompt tells you how to check and what to do \
+             if the one you need isn't loaded."
+                .to_string(),
+        )
     }
 }
 
@@ -321,6 +344,7 @@ mod tests {
         let info = server().get_info();
         assert_eq!(info.protocol_version, ProtocolVersion::V_2024_11_05);
         assert!(info.capabilities.tools.is_some());
+        assert!(info.capabilities.prompts.is_some());
         assert!(info.instructions.unwrap().contains("search, get, call"));
     }
 
